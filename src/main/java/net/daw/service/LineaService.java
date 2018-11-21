@@ -1,24 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.daw.service;
 
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.LineaBean;
 import net.daw.bean.ReplyBean;
-import net.daw.bean.TipousuarioBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
 import net.daw.dao.LineaDao;
-import net.daw.dao.TipousuarioDao;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
+import net.daw.helper.ParameterCook;
 
+/**
+ *
+ * @author a044531896d
+ */
 public class LineaService {
     HttpServletRequest oRequest;
 	String ob = null;
@@ -38,11 +37,12 @@ public class LineaService {
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
-			LineaBean oLineaBean = oLineaDao.get(id);
+			LineaBean oLineaBean = oLineaDao.get(id, 1);
 			Gson oGson = new Gson();
-			oReplyBean = new ReplyBean(200, oGson.toJson(oLineaDao));
+			oReplyBean = new ReplyBean(200, oGson.toJson(oLineaBean));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: get method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -63,7 +63,8 @@ public class LineaService {
 			int iRes = oLineaDao.remove(id);
 			oReplyBean = new ReplyBean(200, Integer.toString(iRes));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: remove method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -83,7 +84,8 @@ public class LineaService {
 			Gson oGson = new Gson();
 			oReplyBean = new ReplyBean(200, oGson.toJson(registros));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: getcount method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -107,7 +109,8 @@ public class LineaService {
 			oLineaBean = oLineaDao.create(oLineaBean);
 			oReplyBean = new ReplyBean(200, oGson.toJson(oLineaBean));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: create method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -128,10 +131,10 @@ public class LineaService {
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
 			iRes = oLineaDao.update(oLineaBean);
-			oReplyBean.setStatus(200);
-			oReplyBean.setJson(Integer.toString(iRes));
+			oReplyBean = new ReplyBean(200, Integer.toString(iRes));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: update method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -145,14 +148,16 @@ public class LineaService {
 		try {
 			Integer iRpp = Integer.parseInt(oRequest.getParameter("rpp"));
 			Integer iPage = Integer.parseInt(oRequest.getParameter("page"));
+                        HashMap<String, String> hmOrder = ParameterCook.getOrderParams(oRequest.getParameter("order"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
-			ArrayList<LineaBean> alLineaBean = oLineaDao.getpage(iRpp, iPage);
+			ArrayList<LineaBean> alLineaBean = oLineaDao.getpage(iRpp, iPage,hmOrder,1);
 			Gson oGson = new Gson();
 			oReplyBean = new ReplyBean(200, oGson.toJson(alLineaBean));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: getpage method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}

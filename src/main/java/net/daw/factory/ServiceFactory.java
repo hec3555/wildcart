@@ -6,7 +6,6 @@ import net.daw.bean.ReplyBean;
 import net.daw.service.FacturaService;
 import net.daw.service.LineaService;
 import net.daw.service.ProductoService;
-import net.daw.service.RellenarService;
 import net.daw.service.TipoproductoService;
 import net.daw.service.TipousuarioService;
 import net.daw.service.UsuarioService;
@@ -17,7 +16,7 @@ public class ServiceFactory {
 
         String ob = oRequest.getParameter("ob");
         String op = oRequest.getParameter("op");
-        ReplyBean oReplyBean = null;
+        ReplyBean oReplyBean;
 
         switch (ob) {
             case "tipousuario":
@@ -68,7 +67,7 @@ public class ServiceFactory {
                         oReplyBean = oUsuarioService.getpage();
                         break;
                     case "fill":
-                        oReplyBean = oUsuarioService.fill();
+                        oReplyBean = oUsuarioService.cargarUsuarios();
                         break;
                     case "login":
                         oReplyBean = oUsuarioService.login();
@@ -158,8 +157,8 @@ public class ServiceFactory {
                     case "getpage":
                         oReplyBean = oProductoService.getpage();
                         break;
-                    case "loaddata":
-                        oReplyBean = oProductoService.loaddata();
+                    case "fill":
+                        oReplyBean = oProductoService.cargarProductos();
                         break;
                     default:
                         oReplyBean = new ReplyBean(500, "Operation doesn't exist");

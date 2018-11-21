@@ -2,10 +2,6 @@ package net.daw.helper;
 
 public class EncodingHelper {
 
-    public static String quotate(String strCadena) {
-    	return "\"" + strCadena + "\"";
-    }
-	
     public static String escapeQuotes(String str) {
         char[] chars = str.toCharArray();
         String strFinal = "";
@@ -33,7 +29,9 @@ public class EncodingHelper {
         }
         return String.valueOf(strFinal);
     }
-    
 
+    public static String quotate(String strCadena) {
+        return "\"" + strCadena + "\"";
+    }
 
 }

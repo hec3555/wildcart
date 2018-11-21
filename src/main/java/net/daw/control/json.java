@@ -1,17 +1,24 @@
 package net.daw.control;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.daw.bean.ReplyBean;
+import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConfigurationConstants;
 import net.daw.constant.ConfigurationConstants.EnvironmentConstans;
+import net.daw.constant.ConnectionConstants;
+import net.daw.factory.ConnectionFactory;
 import net.daw.factory.ServiceFactory;
+import net.daw.helper.EncodingHelper;
 import net.daw.helper.JsonHelper;
 
 /**
@@ -26,13 +33,9 @@ public class json extends HttpServlet {
      */
     public json() {
         super();
-        // TODO Auto-generated constructor stub
+        //TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     * response)
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,17 +50,16 @@ public class json extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
-
+        
         response.setContentType("application/json;charset=UTF-8");
-
+        
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         response.setHeader("Access-Control-Allow-Methods", "GET,POST");
         response.setHeader("Access-Control-Max-Age", "86400");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Headers", "Origin, Accept, x-requested-with, Content-Type");
-
-        String strJson = "";
+        
+        String strJson;
         JsonHelper json = new JsonHelper();
 
         try {
@@ -68,6 +70,7 @@ public class json extends HttpServlet {
         try {
             ReplyBean oReplyBean = ServiceFactory.executeService(request);
             strJson = json.strJson(oReplyBean.getStatus(), oReplyBean.getJson());
+            
         } catch (Exception e) {
             response.setStatus(500);
             strJson = json.strJson(500, "Server Error");
@@ -77,6 +80,8 @@ public class json extends HttpServlet {
                 e.printStackTrace(out);
             }
         }
-        response.getWriter().append(strJson).close();
+        response.getWriter().append(strJson);
     }
 }
+        
+

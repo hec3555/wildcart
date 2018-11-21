@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.daw.service;
 
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.FacturaBean;
 import net.daw.bean.ReplyBean;
@@ -18,8 +14,12 @@ import net.daw.dao.FacturaDao;
 import net.daw.dao.TipousuarioDao;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
+import net.daw.helper.ParameterCook;
 
-
+/**
+ *
+ * @author a044531896d
+ */
 public class FacturaService {
     HttpServletRequest oRequest;
 	String ob = null;
@@ -39,11 +39,12 @@ public class FacturaService {
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
-			FacturaBean oFacturaBean = oFacturaDao.get(id);
+			FacturaBean oFacturaBean = oFacturaDao.get(id,1);
 			Gson oGson = new Gson();
 			oReplyBean = new ReplyBean(200, oGson.toJson(oFacturaBean));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: get method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -64,7 +65,8 @@ public class FacturaService {
 			int iRes = oFacturaDao.remove(id);
 			oReplyBean = new ReplyBean(200, Integer.toString(iRes));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: remove method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -84,7 +86,8 @@ public class FacturaService {
 			Gson oGson = new Gson();
 			oReplyBean = new ReplyBean(200, oGson.toJson(registros));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: getcount method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -108,7 +111,8 @@ public class FacturaService {
 			oFacturaBean = oFacturaDao.create(oFacturaBean);
 			oReplyBean = new ReplyBean(200, oGson.toJson(oFacturaBean));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: create method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -129,10 +133,10 @@ public class FacturaService {
 			oConnection = oConnectionPool.newConnection();
 			FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
 			iRes = oFacturaDao.update(oFacturaBean);
-			oReplyBean.setStatus(200);
-			oReplyBean.setJson(Integer.toString(iRes));
+                        oReplyBean = new ReplyBean(200, Integer.toString(iRes));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: update method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
@@ -146,14 +150,16 @@ public class FacturaService {
 		try {
 			Integer iRpp = Integer.parseInt(oRequest.getParameter("rpp"));
 			Integer iPage = Integer.parseInt(oRequest.getParameter("page"));
+                        HashMap<String, String> hmOrder = ParameterCook.getOrderParams(oRequest.getParameter("order"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
-			ArrayList<FacturaBean> alFacturaBean = oFacturaDao.getpage(iRpp, iPage);
+			ArrayList<FacturaBean> alFacturaBean = oFacturaDao.getpage(iRpp, iPage,hmOrder,1);
 			Gson oGson = new Gson();
 			oReplyBean = new ReplyBean(200, oGson.toJson(alFacturaBean));
 		} catch (Exception ex) {
-			throw new Exception("ERROR: Service level: getpage method: " + ob + " object", ex);
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}

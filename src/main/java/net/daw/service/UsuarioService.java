@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.daw.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.ReplyBean;
 import net.daw.bean.UsuarioBean;
@@ -24,7 +17,7 @@ import net.daw.helper.ParameterCook;
 
 /**
  *
- * @author Ramón
+ * @author jesus
  */
 public class UsuarioService {
 
@@ -38,13 +31,12 @@ public class UsuarioService {
     }
 
     protected Boolean checkPermission(String strMethodName) {
-//        UsuarioBean oUsuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("user");
-//        if (oUsuarioBean != null) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-        return true;
+        UsuarioBean oUsuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("user");
+        if (oUsuarioBean != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public ReplyBean get() throws Exception {
@@ -58,11 +50,11 @@ public class UsuarioService {
                 oConnection = oConnectionPool.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob);
                 UsuarioBean oUsuarioBean = oUsuarioDao.get(id, 1);
-                // Gson oGson = new Gson();
                 Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
                 oReplyBean = new ReplyBean(200, oGson.toJson(oUsuarioBean));
             } catch (Exception ex) {
-                throw new Exception("ERROR: Service level: get method: " + ob + " object", ex);
+                oReplyBean = new ReplyBean(500,
+                        "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
             } finally {
                 oConnectionPool.disposeConnection();
             }
@@ -70,6 +62,7 @@ public class UsuarioService {
             oReplyBean = new ReplyBean(401, "Unauthorized");
         }
         return oReplyBean;
+
     }
 
     public ReplyBean remove() throws Exception {
@@ -85,14 +78,17 @@ public class UsuarioService {
                 int iRes = oUsuarioDao.remove(id);
                 oReplyBean = new ReplyBean(200, Integer.toString(iRes));
             } catch (Exception ex) {
-                throw new Exception("ERROR: Service level: remove method: " + ob + " object", ex);
+                oReplyBean = new ReplyBean(500,
+                        "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
             } finally {
                 oConnectionPool.disposeConnection();
             }
         } else {
             oReplyBean = new ReplyBean(401, "Unauthorized");
         }
+
         return oReplyBean;
+
     }
 
     public ReplyBean getcount() throws Exception {
@@ -108,15 +104,17 @@ public class UsuarioService {
                 Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
                 oReplyBean = new ReplyBean(200, oGson.toJson(registros));
             } catch (Exception ex) {
-                throw new Exception("ERROR: Service level: getcount method: " + ob + " object", ex);
+                oReplyBean = new ReplyBean(500,
+                        "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
             } finally {
                 oConnectionPool.disposeConnection();
             }
-
         } else {
             oReplyBean = new ReplyBean(401, "Unauthorized");
         }
+
         return oReplyBean;
+
     }
 
     public ReplyBean create() throws Exception {
@@ -125,6 +123,11 @@ public class UsuarioService {
         Connection oConnection;
         if (this.checkPermission("create")) {
             try {
+//            BufferedReader br = new BufferedReader(new InputStreamReader(oRequest.getInputStream()));
+//            String json = "";
+//            if (br != null) {
+//                json = br.readLine();
+//            }
                 String strJsonFromClient = oRequest.getParameter("json");
                 Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
                 UsuarioBean oUsuarioBean = new UsuarioBean();
@@ -135,7 +138,8 @@ public class UsuarioService {
                 oUsuarioBean = oUsuarioDao.create(oUsuarioBean);
                 oReplyBean = new ReplyBean(200, oGson.toJson(oUsuarioBean));
             } catch (Exception ex) {
-                throw new Exception("ERROR: Service level: create method: " + ob + " object", ex);
+                oReplyBean = new ReplyBean(500,
+                        "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
             } finally {
                 oConnectionPool.disposeConnection();
             }
@@ -162,7 +166,8 @@ public class UsuarioService {
                 iRes = oUsuarioDao.update(oUsuarioBean);
                 oReplyBean = new ReplyBean(200, Integer.toString(iRes));
             } catch (Exception ex) {
-                throw new Exception("ERROR: Service level: update method: " + ob + " object", ex);
+                oReplyBean = new ReplyBean(500,
+                        "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
             } finally {
                 oConnectionPool.disposeConnection();
             }
@@ -188,42 +193,40 @@ public class UsuarioService {
                 Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
                 oReplyBean = new ReplyBean(200, oGson.toJson(alUsuarioBean));
             } catch (Exception ex) {
-                throw new Exception("ERROR: Service level: get page: " + ob + " object", ex);
+                oReplyBean = new ReplyBean(500,
+                        "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
             } finally {
                 oConnectionPool.disposeConnection();
             }
-
         } else {
             oReplyBean = new ReplyBean(401, "Unauthorized");
         }
+
         return oReplyBean;
+
     }
 
-    public ReplyBean fill() throws Exception {
+    public ReplyBean cargarUsuarios() throws Exception {
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
         Connection oConnection;
+        RellenarService rellenar = new RellenarService();
         if (this.checkPermission("fill")) {
             try {
-                Integer number = Integer.parseInt(oRequest.getParameter("number"));
-                Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
+                Integer numero = Integer.parseInt(oRequest.getParameter("numero"));
                 oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
                 oConnection = oConnectionPool.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob);
-                UsuarioBean oUsuarioBean = new UsuarioBean();
-                for (int i = 1; i <= number; i++) {
-                    oUsuarioBean.setDni("765934875A");
-                    oUsuarioBean.setNombre("Rigoberto");
-                    oUsuarioBean.setApe1("Pérez");
-                    oUsuarioBean.setApe2("Gómez");
-                    oUsuarioBean.setLogin("ripego");
-                    oUsuarioBean.setPass("hola");
-                    oUsuarioBean.setId_tipoUsuario(2);
-                    oUsuarioBean = oUsuarioDao.create(oUsuarioBean);
+                ArrayList<UsuarioBean> alUsuarioBean = rellenar.fillUsuario(numero);
+
+                for (UsuarioBean usuarios : alUsuarioBean) {
+                    oUsuarioDao.create(usuarios);
                 }
-                oReplyBean = new ReplyBean(200, oGson.toJson(number));
+                Gson oGson = new Gson();
+                oReplyBean = new ReplyBean(200, oGson.toJson(alUsuarioBean));
             } catch (Exception ex) {
-                throw new Exception("ERROR: Service level: create method: " + ob + " object", ex);
+                oReplyBean = new ReplyBean(500,
+                        "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
             } finally {
                 oConnectionPool.disposeConnection();
             }
@@ -239,25 +242,27 @@ public class UsuarioService {
         Connection oConnection;
         String strLogin = oRequest.getParameter("user");
         String strPassword = oRequest.getParameter("pass");
+
         try {
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob);
 
             UsuarioBean oUsuarioBean = oUsuarioDao.login(strLogin, strPassword);
-            if (oUsuarioBean.getId() > 0) {
+            if (oUsuarioBean != null) {
                 oRequest.getSession().setAttribute("user", oUsuarioBean);
                 Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
                 oReplyBean = new ReplyBean(200, oGson.toJson(oUsuarioBean));
             } else {
-                //throw new Exception("ERROR Bad Authentication: Service level: get page: " + ob + " object");
-                oReplyBean = new ReplyBean(401, "Bad Authentication");
+//            throw new Exception("ERROR Bad Authentication: Service level: get page: " + ob + " object");
+                oReplyBean = new ReplyBean(401, EncodingHelper.quotate("Bad Authentication"));
             }
         } catch (Exception ex) {
-            throw new Exception("ERROR: Service level: login method: " + ob + " object", ex);
+            throw new Exception("ERROR Bad Authentication: Service level: login: " + ob + " object");
         } finally {
             oConnectionPool.disposeConnection();
         }
+
         return oReplyBean;
     }
 
