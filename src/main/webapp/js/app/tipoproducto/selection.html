@@ -1,7 +1,7 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Seleccionar un tipo de usuario</h3>
+            <h3 class="modal-title" id="exampleModalLabel">Seleccionar un tipo de prodcuto</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -50,7 +50,7 @@
                             Selección
                         </th>
                     </tr>
-                    <tr ng-repeat="fila in c.data track by $index">
+                    <tr ng-repeat="fila in c.data">
                         <td>{{fila.id}}</td>
                         <td>{{fila.desc}}</td>
                         <td>

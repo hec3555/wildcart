@@ -7,6 +7,10 @@ package net.daw.helper;
 
 import java.util.HashMap;
 
+/**
+ *
+ * @author kevin
+ */
 public class ParameterCook {
 
     public static HashMap<String, String> getOrderParams(String strUrlOrder) {

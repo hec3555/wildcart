@@ -7,7 +7,16 @@ moduleCommon.controller('homeController', ['$scope', '$location', 'toolService',
         if (sessionService.getUserName() !== "") {
             $scope.usuariologeado = sessionService.getUserName();
             $scope.loginH = true;
-        };
+        }
+        ;
+//        if (sessionService) {
+//            $scope.usuariologeado = sessionService.getUserName();
+//            if ($scope.usuariologeado === "") {
+//                $scope.loginH = false;                
+//            } else {
+//                $scope.loginH = true;                
+//            }
+//        }
 
 
         $scope.ruta = $location.path();

@@ -7,6 +7,6 @@ moduleService.service('toolService', ['$location', function ($location) {
             isActive: function (p) {
                 return $location.path().startsWith(p);
             }
-        };
+        }
 
     }]);

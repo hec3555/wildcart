@@ -16,7 +16,7 @@ public class ServiceFactory {
 
         String ob = oRequest.getParameter("ob");
         String op = oRequest.getParameter("op");
-        ReplyBean oReplyBean;
+        ReplyBean oReplyBean = null;
 
         switch (ob) {
             case "tipousuario":
