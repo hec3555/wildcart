@@ -2,9 +2,9 @@
 
 moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, sessionService) {
-        $scope.id = $routeParams.id;
+        
         $scope.ob = "usuario";
-
+        
 
 
         if (sessionService) {
@@ -37,7 +37,7 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
             });
         };
         $scope.isActive = toolService.isActive;
-
+ 
         $scope.tipoUsuarioRefresh = function (quiensoy, consulta) {
             var form = quiensoy;
             if (consulta) {
