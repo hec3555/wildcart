@@ -58,9 +58,13 @@
         <div class="form-group row">
             <label for="precio" class="col-2 col-form-label">Precio</label>
             <div class="col-10">
-                <input type="text" class="form-control" id="precio" name="precio" ng-model="ajaxDatoProducto.precio" ng-required="true"/>
-                <div ng-show="!userForm.precio.$valid" class="alert alert-danger" role="alert">
+                <input type="text" class="form-control" id="precio" name="precio" ng-model="ajaxDatoProducto.precio" 
+                       ng-required="true" ng-pattern="/^[0-9]+([.][0-9])?[0-9]*$/"/>
+                <div ng-show="userForm.precio.$invalid && !userForm.precio.$pristine && !userForm.precio.$dirty" class="alert alert-danger" role="alert">
                     Precio obligatorio
+                </div>
+                <div ng-show="userForm.precio.$invalid && !userForm.precio.$pristine && userForm.precio.$dirty" class="alert alert-danger" role="alert">
+                    Precio no valido (nota: los decimales se separan con '.', no con ',')
                 </div>
             </div>
         </div>
