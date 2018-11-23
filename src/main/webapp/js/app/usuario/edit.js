@@ -23,10 +23,11 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
 
 
         $scope.guardar = function () {
-            var passAux= "";
-            if($scope.ajaxDatoUsuario.pass2client != ""){
-                    var passAux = forge_sha256($scope.ajaxDatoUsuario.pass2client).toUpperCase();
-                };
+            var passAux = "";
+            if ($scope.ajaxDatoUsuario.pass2client != "") {
+                var passAux = forge_sha256($scope.ajaxDatoUsuario.pass2client).toUpperCase();
+            }
+            ;
             var json = {
                 id: $scope.ajaxDatoUsuario.id,
                 dni: $scope.ajaxDatoUsuario.dni,
@@ -65,8 +66,13 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
                     //withCredentials: true,
                     url: 'json?ob=tipousuario&op=get&id=' + $scope.ajaxDatoUsuario.obj_tipoUsuario.id
                 }).then(function (response) {
-                    form.userForm.obj_tipousuario.$setValidity('valid', true);
-                    $scope.ajaxDatoUsuario.obj_tipoUsuario = response.data.message;
+                    if (response.data.message != null) {
+                        form.userForm.obj_tipousuario.$setValidity('valid', true);
+                        $scope.ajaxDatoUsuario.obj_tipoUsuario = response.data.message;
+                    } else {
+                        form.userForm.obj_tipousuario.$setValidity('valid', false);
+                        $scope.ajaxDatoUsuario.obj_tipoUsuario.desc = "Error al acceder al tipo de usuario";
+                    }
                 }, function (response) {
                     form.userForm.obj_tipousuario.$setValidity('valid', false);
                     $scope.ajaxDatoUsuario.obj_tipoUsuario.desc = "Error al acceder al tipo de usuario";

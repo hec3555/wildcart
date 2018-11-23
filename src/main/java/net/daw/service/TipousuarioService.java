@@ -44,7 +44,7 @@ public class TipousuarioService {
 			throw new Exception("Error en Service get de " + ob, ex);
 			
 			
-			//oReplyBean = new ReplyBean(500,					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
+			//oReplyBean = new ReplyBean(500,"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
 		} finally {
 			oConnectionPool.disposeConnection();
 		}
