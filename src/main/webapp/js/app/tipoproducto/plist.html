@@ -1,9 +1,9 @@
 <header-component></header-component>
-<div class="container">
+<div class="container" style="margin-bottom: 100px;">
     <div class="row">
         <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Tipo Producto</h1>
+                <h1 class="h2"><i class="fas fa-boxes"></i> Tipos de Producto</h1>
                 <div class="btn-group" style="width:400px;">
                     <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
                     <select class="form-control" 
@@ -37,14 +37,15 @@
             </nav>
         </div>
         <div class="col-3">
-            <button type="button" class="btn btn-danger btn-sm" style="width: 100px; height:30px;" ng-click="resetOrder()">
-                <i class="fa fa-broom"> Limpiar</i>
-            </button>
             <a  href="{{ob}}/create/"> 
-                <button type="button" class="btn btn-warning btn-sm" style="width: 100px; height:30px;">
-                    <i class="fa fa-plus"> Crear</i>
+                <button type="button" class="btn btn-info btn-sm" style="width: 100px; height:30px;">
+                    <i class="fas fa-boxes"> Crear</i>
                 </button>
             </a>
+            <button type="button" class="btn btn-danger btn-sm" style="width: auto; height:30px;" ng-click="resetOrder()">
+                <i class="fas fa-toilet-paper"> Reset</i>
+            </button>
+            
         </div>
     </div>
 
