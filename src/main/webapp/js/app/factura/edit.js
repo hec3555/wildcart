@@ -1,15 +1,11 @@
 'use strict';
 
-moduleFactura.controller('facturaEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleFactura.controller('facturaEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.myDate = new Date();
         $scope.ob = "factura";
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-
+        
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
@@ -43,21 +39,5 @@ moduleFactura.controller('facturaEditController', ['$scope', '$http', '$location
             });
         };
 
-
-//        $scope.oModal = function () {
-//        // Debes proveer un controlador y una plantilla.
-//        ModalService.showModal({
-//            template: 'js/app/tipousuario/selection.html',
-//            controller: 'tipousuarioSelectionController'
-//        }).then(function (modal) {
-//            modal.close.then(function (result) {
-//                // Una vez que el modal sea cerrado, la libreria invoca esta función
-//                // y en result tienes el resultado.
-//                $scope.resultadoModal = result;
-//            });
-//        });
-//
-//        };
-        $scope.isActive = toolService.isActive;
 
     }]);

@@ -1,7 +1,7 @@
 'use strict';
 
-moduleFactura.controller('facturaViewController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
-    function ($scope, $http, $location, toolService, $routeParams,sessionService) {
+moduleFactura.controller('facturaViewController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "factura";
         

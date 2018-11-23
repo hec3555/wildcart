@@ -1,17 +1,10 @@
 'use strict';
 
-moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
         
         $scope.ob = "usuario";
         
-
-
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-
         $scope.guardar = function () {
             var json = {
                 id: null,
@@ -54,7 +47,7 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
             } else {
                 form.userForm.id_tipoUsuario.$setValidity('valid', true);
             }
-        }
+        };
 
 
     }]);

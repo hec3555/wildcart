@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+    function ($scope, $http, $location, toolService, $routeParams) {
 
         $scope.ob = "tipousuario";
         $scope.totalPages = 1;
@@ -29,13 +29,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
                 $scope.page = 1;
             }
         }
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-            $scope.usuariologeadoID = sessionService.getId();
-        }
-
-
+        
         $scope.resetOrder = function () {
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
             $scope.activar = "false";

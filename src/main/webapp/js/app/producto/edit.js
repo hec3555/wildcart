@@ -39,7 +39,7 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', '$locati
                 $scope.status = response.status;
             });
         };
-        $scope.isActive = toolService.isActive;
+
 
         $scope.tipoProductoRefresh = function (quiensoy, consulta) {
             var form = quiensoy;
@@ -57,5 +57,5 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', '$locati
             } else {
                 form.userForm.obj_tipoProducto.$setValidity('valid', true);
             }
-        }
+        };
     }]);

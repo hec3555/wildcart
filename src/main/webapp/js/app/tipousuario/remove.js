@@ -1,13 +1,10 @@
 'use strict';
 
-moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
-    function ($scope, $http, $location, toolService, $routeParams,sessionService) {
+moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "tipousuario";
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
+        
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
@@ -45,6 +42,5 @@ moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 
             }
 
         };
-        $scope.isActive = toolService.isActive;
 
     }]);

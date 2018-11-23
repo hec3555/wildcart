@@ -1,4 +1,4 @@
-<header ng-include="'js/app/header.html'"></header>
+<header-component></header-component>
 <main role="main" class="container" style="margin-bottom: 100px;">
 
     <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
@@ -30,12 +30,12 @@
         <div class="form-group row">
             <label for="nombre" class="col-2 col-form-label">Nombre</label>
             <div class="col-10">
-                <input type="text" class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.nombre.$invalid && !userForm.nombre.$pristine }" id="nombre" name="nombre" ng-model="ajaxDatoUsuario.nombre" ng-required="true" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/"/>
+                <input type="text" class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.nombre.$invalid && !userForm.nombre.$pristine }" id="nombre" name="nombre" ng-model="ajaxDatoUsuario.nombre" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/"/>
                 <div ng-show="userForm.nombre.$invalid && !userForm.nombre.$pristine && !userForm.nombre.$error.pattern" class="alert alert-danger" role="alert">
                     Nombre obligatorio
                 </div>
                 <div ng-show="userForm.nombre.$error.pattern" class="alert alert-danger" role="alert">
-                    Nombre no válido
+                    Nombre no vÃ¡lido
                 </div>
             </div>
         </div>
@@ -43,24 +43,24 @@
         <div class="form-group row">
             <label for="ape1" class="col-2 col-form-label">Primer apellido</label>
             <div class="col-10">
-                <input type="text"  class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.ape1.$invalid && !userForm.ape1.$pristine }" id="ape1" name="ape1" ng-model="ajaxDatoUsuario.ape1" ng-required="true" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/"/>
+                <input type="text"  class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.ape1.$invalid && !userForm.ape1.$pristine }" id="ape1" name="ape1" ng-model="ajaxDatoUsuario.ape1" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/"/>
                 <div ng-show="userForm.ape1.$invalid && !userForm.ape1.$pristine && !userForm.ape1.$error.pattern" class="alert alert-danger" role="alert">
                     Primer apellido obligatorio
                 </div>
                 <div ng-show="userForm.ape1.$error.pattern" class="alert alert-danger" role="alert">
-                    Primer apellido no válido
+                    Primer apellido no vÃ¡lido
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="ape2" class="col-2 col-form-label">Segundo apellido</label>
             <div class="col-10">
-                <input type="text"  class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.ape2.$invalid && !userForm.ape2.$pristine }" id="ape2" name="ape2" ng-model="ajaxDatoUsuario.ape2" ng-required="true"  ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/" />
+                <input type="text"  class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.ape2.$invalid && !userForm.ape2.$pristine }" id="ape2" name="ape2" ng-model="ajaxDatoUsuario.ape2" ng-required="true"  ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/" />
                 <div ng-show="userForm.ape2.$invalid && !userForm.ape2.$pristine && !userForm.ape2.$error.pattern" class="alert alert-danger" role="alert">
                     Segundo apellido obligatorio
                 </div>
                 <div ng-show="userForm.ape2.$error.pattern" class="alert alert-danger" role="alert">
-                    Segundo apellido no válido
+                    Segundo apellido no vÃ¡lido
                 </div>
             </div>
         </div>
@@ -134,14 +134,14 @@
         </div>
 
         <!--            <div class="form-group row">
-                        <label for="pass" class="col-2 col-form-label">>Contraseña</label>
+                        <label for="pass" class="col-2 col-form-label">>ContraseÃ±a</label>
                         <input type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}"
                                id="pass" name="pass" ng-model="ajaxDatoUsuario.pass" ng-minlength="6" ng-required="true"/>
                         <div ng-show="userForm.pass.$error.minlength" class="alert alert-danger" role="alert">
-                            La longitud de la constraseña es demasiado corta
+                            La longitud de la constraseÃ±a es demasiado corta
                         </div>
                         <div ng-show="!userForm.pass.$valid" class="alert alert-danger" role="alert">
-                            Contraseña obligatorio
+                            ContraseÃ±a obligatorio
                         </div>
                     </div>-->
         <button ng-click="guardar()" type="button" class="btn btn-primary" ng-disabled="userForm.$invalid">Guardar</button>

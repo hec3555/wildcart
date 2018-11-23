@@ -1,7 +1,7 @@
 'use strict';
 
-moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
 
         $scope.id = $routeParams.id;
         $scope.ob = "usuario";
@@ -9,10 +9,6 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
         $scope.mensajeError = false;
 
 
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
@@ -36,7 +32,7 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
                 login: $scope.ajaxDatoUsuario.login,
 //                pass: forge_sha256($scope.jaxDatoUsuario.pass),
                 id_tipoUsuario: $scope.ajaxDatoUsuario.obj_tipoUsuario.id
-            }
+            };
             $http({
                 method: 'GET',
                 header: {
@@ -74,20 +70,7 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
             } else {
                 form.userForm.obj_tipousuario.$setValidity('valid', true);
             }
-        }
+        };
 
 
-//        $scope.openModal = function (size) {
-//            $uibModal.open({
-//                animation: true,
-//                ariaLabelledBy: 'modal-title',
-//                ariaDescribedBy: 'modal-body',
-//                templateUrl: '/trolleyes-client/public_html/js/app/tipousuario/selection.html',
-//                controller: 'tipousuarioSelectionController',
-//                size: size
-////                resolve: {
-////                    ajaxDatoUsuario.obj_tipoUsuario.id = id;             
-////                }               
-//            })
-//        };
     }]);

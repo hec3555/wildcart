@@ -5,13 +5,6 @@ moduleProducto.controller('productoCreateController', ['$scope', '$http', '$loca
         $scope.id = $routeParams.id;
         $scope.ob = "producto";
         
-        
-                
-        if(sessionService){
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-        
         $scope.guardar = function () {
             var json = {
                 id: null,

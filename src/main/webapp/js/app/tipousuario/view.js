@@ -1,13 +1,9 @@
 'use strict';
 
-moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
-    function ($scope, $http, $location, toolService, $routeParams,sessionService) {
+moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-
+        
         $scope.ob = "tipousuario";
         $http({
             method: 'GET',

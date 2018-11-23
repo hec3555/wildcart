@@ -1,20 +1,16 @@
 'use strict';
 
-moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "tipousuario";
 
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-
+      
         $scope.guardar = function () {
             var json = {
                 id: null,
                 desc: $scope.desc
-            }
+            };
             $http({
                 method: 'GET',
                 withCredentials: true,

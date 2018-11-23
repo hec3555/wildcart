@@ -1,7 +1,7 @@
 'use strict';
 
-moduleFactura.controller('facturaRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleFactura.controller('facturaRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.ob = "factura";
         $scope.id = $routeParams.id;
 

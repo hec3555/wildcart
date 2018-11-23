@@ -1,13 +1,10 @@
 'use strict';
 
-moduleTipoproducto.controller('tipoproductoEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
-    function ($scope, $http, $location, toolService, $routeParams,sessionService) {
+moduleTipoproducto.controller('tipoproductoEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "tipoproducto";
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
+        
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
@@ -24,7 +21,7 @@ moduleTipoproducto.controller('tipoproductoEditController', ['$scope', '$http', 
             var json = {
                 id: $scope.ajaxDatoTipoproducto.id,
                 desc: $scope.ajaxDatoTipoproducto.desc
-            }
+            };
             $http({
                 method: 'GET',
                 withCredentials: true,

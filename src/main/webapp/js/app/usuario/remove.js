@@ -1,13 +1,10 @@
-'use strict'
+'use strict';
 
-moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
-    function ($scope, $http, $location, toolService, $routeParams,sessionService) {
+moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.ob = "usuario";
         $scope.id = $routeParams.id;
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
+        
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
@@ -45,6 +42,5 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$locati
             }
 
         };
-        $scope.isActive = toolService.isActive;
 
     }]);

@@ -1,7 +1,7 @@
 'use strict';
 
-moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+    function ($scope, $http, $location, toolService, $routeParams) {
 
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
@@ -30,12 +30,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-
-
+        
         $scope.resetOrder = function () {
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
         };

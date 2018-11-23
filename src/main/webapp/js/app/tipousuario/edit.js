@@ -1,13 +1,10 @@
 'use strict';
 
-moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
-    function ($scope, $http, $location, toolService, $routeParams,sessionService) {
+moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "tipousuario";
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
+       
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
@@ -24,7 +21,7 @@ moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$
             var json = {
                 id: $scope.ajaxDatoTipousuario.id,
                 desc: $scope.ajaxDatoTipousuario.desc
-            }
+            };
             $http({
                 method: 'GET',
                 withCredentials: true,
@@ -38,6 +35,5 @@ moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$
                 $scope.status = response.status;
             });
         };
-        $scope.isActive = toolService.isActive;
 
     }]);

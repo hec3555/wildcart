@@ -1,14 +1,10 @@
 'use strict';
 
-moduleLinea.controller('lineaEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, sessionService) {
+moduleLinea.controller('lineaEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "linea";
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-
+        
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
@@ -42,21 +38,5 @@ moduleLinea.controller('lineaEditController', ['$scope', '$http', '$location', '
             });
         };
 
-
-//        $scope.oModal = function () {
-//        // Debes proveer un controlador y una plantilla.
-//        ModalService.showModal({
-//            template: 'js/app/tipousuario/selection.html',
-//            controller: 'tipousuarioSelectionController'
-//        }).then(function (modal) {
-//            modal.close.then(function (result) {
-//                // Una vez que el modal sea cerrado, la libreria invoca esta función
-//                // y en result tienes el resultado.
-//                $scope.resultadoModal = result;
-//            });
-//        });
-//
-//        };
-        $scope.isActive = toolService.isActive;
 
     }]);

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 moduleProducto.controller('productoRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {

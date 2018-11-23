@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',"sessionService",
-    function ($scope, $http, $location, toolService, $routeParams,sessionService) {
+moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
 
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
@@ -31,13 +31,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             }
         }
         
-        if(sessionService){
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-            $scope.usuariologeadoID = sessionService.getId();
-        }
         
-
         $scope.resetOrder = function () {
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
             $scope.activar = "false";

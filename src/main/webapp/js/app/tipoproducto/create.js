@@ -1,14 +1,9 @@
 'use strict';
 
-moduleTipoproducto.controller('tipoproductoCreateController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, toolService, $routeParams, sessionService) {
+moduleTipoproducto.controller('tipoproductoCreateController', ['$scope', '$http', 'toolService', '$routeParams', 
+    function ($scope, $http, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "tipoproducto";
-
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
 
         $scope.guardar = function () {
             var json = {

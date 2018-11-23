@@ -1,4 +1,4 @@
-<header ng-include="'js/app/header.html'"></header>
+<header-component></header-component>
 <main role="main" class="container">
 
     <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
@@ -16,14 +16,14 @@
         </div>
 
         <div class="form-group row">
-            <label for="descripcion" class="col-2 col-form-label">Descripción</label>
+            <label for="descripcion" class="col-2 col-form-label">DescripciÃ³n</label>
             <div class="col-10">
-                <input type="text" class="form-control " id="descripcion" name="descripcion" ng-model="descripcion" ng-required="true" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/" />
+                <input type="text" class="form-control " id="descripcion" name="descripcion" ng-model="descripcion" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/" />
                 <div ng-show="userForm.descripcion.$invalid && !userForm.descripcion.$pristine && !userForm.descripcion.$error.pattern" class="alert alert-danger" role="alert">
-                    Descripción obligatoria
+                    DescripciÃ³n obligatoria
                 </div>
                 <div ng-show="userForm.descripcion.$error.pattern" class="alert alert-danger" role="alert">
-                    Descripción no válida
+                    DescripciÃ³n no vÃ¡lida
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     Existencias obligatorio
                 </div>
                 <div ng-show="userForm.existencias.$error.pattern" class="alert alert-danger" role="alert">
-                    Existencias no válido
+                    Existencias no vÃ¡lido
                 </div>
             </div>
         </div>
