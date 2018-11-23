@@ -5,12 +5,6 @@ moduleFactura.controller('facturaRemoveController', ['$scope', '$http', '$locati
         $scope.ob = "factura";
         $scope.id = $routeParams.id;
 
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
-
-
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id

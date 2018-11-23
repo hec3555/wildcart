@@ -4,11 +4,7 @@ moduleFactura.controller('facturaViewController', ['$scope', '$http', '$location
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "factura";
-        
-        if (sessionService) {
-            $scope.usuariologeado = sessionService.getUserName();
-            $scope.loginH = true;
-        }
+       
 
         $http({
             method: 'GET',
