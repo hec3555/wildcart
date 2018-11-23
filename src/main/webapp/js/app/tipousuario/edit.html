@@ -1,9 +1,16 @@
 <header-component></header-component>
-<main role="main" class="container">
+<main role="main" class="container" style="margin-bottom: 100px;">
 
     <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
     <div class="primeraParte"></div>
-    <a href="javascript:window.history.back();"> <button class="btn btn-success">Volver</button> </a>    
+    <div class="row">
+        <div class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+            <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2"><i class="fas fa-user-cog"></i> Tipos de usuario</h1>
+                <a href="javascript:window.history.back();"> <button class="btn btn-success">Volver</button> </a> 
+            </div>     
+        </div>
+    </div> 
     <form name="userForm" style="margin-bottom: 50px;" ng-show="!mensaje">
         <h3 style="text-align: center">Editar Tipo Usuario</h3>
         <div class="form-group row">            
@@ -15,14 +22,14 @@
 
 
         <div class="form-group row">
-            <label for="descripcion" class="col-2 col-form-label">DescripciÃ³n</label>
+            <label for="descripcion" class="col-2 col-form-label">Descripcion</label>
             <div class="col-8">
                 <input type="text" class="form-control" id="descripcion" name="descripcion" ng-model="ajaxDatoTipousuario.desc" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/"/>
                 <div ng-show="userForm.descripcion.$error.pattern" class="alert alert-danger" role="alert">
-                    Descripcion no vÃ¡lida
+                    Descripcion no valida
                 </div>
                 <div ng-show="userForm.descripcion.$invalid && !userForm.descripcion.$pristine && !userForm.descripcion.$error.pattern" class="alert alert-danger" role="alert">
-                    DescripciÃ³n obligatorio
+                    Descripcion obligatorio
                 </div>
             </div>
         </div>            
