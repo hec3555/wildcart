@@ -4,7 +4,10 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
     function ($scope, $http, $location, toolService, $routeParams) {
         
         $scope.ob = "usuario";
-        
+        $scope.ajaxDatoUsuario = {
+            id: null,
+            desc: null
+        }
         $scope.guardar = function () {
             var json = {
                 id: null,
@@ -14,7 +17,7 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
                 ape2: $scope.ape2,
                 login: $scope.login,
                 pass: forge_sha256($scope.pass),
-                id_tipoUsuario: $scope.id_tipoUsuario
+                id_tipoUsuario: $scope.ajaxDatoUsuario.id
             };
             $http({
                 method: 'GET',
@@ -24,7 +27,10 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.mensaje = true;
+                $scope.error = false;
             }, function (response) {
+                $scope.mensaje = false;
+                $scope.error = true;
                 $scope.ajaxDatoUsuario = response.data.message || 'Request failed';
                 $scope.status = response.status;
             });

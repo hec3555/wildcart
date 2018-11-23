@@ -3,12 +3,14 @@
 
     <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
     <div class="primeraParte"></div>
-    <a href="javascript:window.history.back();"> <button class="btn btn-success">Volver</button> </a>    
-    <form name="userForm" style="margin-bottom: 50px;" ng-show="!mensaje">
-        <h3 style="text-align: center">Crear Tipo Usuario</h3>
+    
+    <h3 style="text-align: center; margin-bottom: 50px;">Crear Tipo Usuario</h3>
+    
+    <form name="userForm" style="margin-bottom: 50px; width: 60%; margin: 0 auto;" ng-show="!mensaje">
+        
         <div class="form-group row">
-            <label for="dni" class="col-2 col-form-label">DNI</label>
-            <div class="col-10">
+            <label for="dni" class="col-3 col-form-label">DNI</label>
+            <div class="col-8">
                 <input type="text" class="form-control" id="dni" name="dni" ng-model="dni" ng-required="true" ng-pattern="/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/"
                        />
                 <div ng-show="userForm.dni.$invalid && !userForm.dni.$pristine && !userForm.dni.$error.pattern" class="alert alert-danger" >DNI requerido.</div>
@@ -20,21 +22,21 @@
         </div>
 
         <div class="form-group row">
-            <label for="nombre" class="col-2 col-form-label">Nombre</label>
-            <div class="col-10">
+            <label for="nombre" class="col-3 col-form-label">Nombre</label>
+            <div class="col-8">
                 <input type="text" class="form-control " id="nombre" name="nombre" ng-model="nombre" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/" />
                 <div ng-show="userForm.nombre.$invalid && !userForm.nombre.$pristine && !userForm.nombre.$error.pattern" class="alert alert-danger" role="alert">
                     Nombre obligatorio
                 </div>
                 <div ng-show="userForm.nombre.$error.pattern" class="alert alert-danger" role="alert">
-                    Nombre no vÃ¡lido
+                    Nombre no valido
                 </div>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="ape1" class="col-2 col-form-label">Primer apellido</label>
-            <div class="col-10">
+            <label for="ape1" class="col-3 col-form-label">Primer apellido</label>
+            <div class="col-8">
                 <input type="text" class="form-control" id="ape1" name="ape1" ng-model="ape1" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/" />
                 <div ng-show="userForm.ape1.$invalid && !userForm.ape1.$pristine && !userForm.ape1.$error.pattern" class="alert alert-danger" role="alert">
                     Primer apellido obligatorio
@@ -45,8 +47,8 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="ape2" class="col-2 col-form-label">Segundo apellido</label>
-            <div class="col-10">
+            <label for="ape2" class="col-3 col-form-label">Segundo apellido</label>
+            <div class="col-8">
                 <input type="text" class="form-control" id="ape2" name="ape2" ng-model="ape2" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/" />
                 <div ng-show="userForm.ape2.$invalid && !userForm.ape2.$pristine && !userForm.ape2.$error.pattern" class="alert alert-danger" role="alert">
                     Segundo apellido obligatorio
@@ -57,8 +59,8 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="login" class="col-2 col-form-label">Login</label>
-            <div class="col-10">
+            <label for="login" class="col-3 col-form-label">Login</label>
+            <div class="col-8">
                 <input type="text" class="form-control" id="login" name="login" ng-model="login" ng-required="true" />
                 <div ng-show="!userForm.login.$valid && !userForm.login.$pristine" class="alert alert-danger" role="alert">
                     Login obligatorio
@@ -66,14 +68,14 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="pass" class="col-2 col-form-label">ContraseÃ±a</label>
+            <label for="pass" class="col-3 col-form-label">Password</label>
             <div class="col-8">
                 <input type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}" id="pass" name="pass" ng-model="pass" ng-minlength="6" ng-required="true" />
                 <div ng-show="userForm.pass.$error.minlength" class="alert alert-danger" role="alert">
-                    La longitud de la constraseÃ±a es demasiado corta
+                    La longitud del password es demasiado corta
                 </div>
                 <div ng-show="!userForm.pass.$valid && !userForm.pass.$pristine && !userForm.pass.$error.minlength" class="alert alert-danger" role="alert">
-                    ContraseÃ±a obligatorio
+                    Password obligatorio
                 </div>
             </div>
         </div>
@@ -82,7 +84,7 @@
                                on-tipousuario-set="tipoUsuarioRefresh(this,false)"></tipousuario-selection>
 
         <div class="form-group row">
-            <label for="id_tipoUsuario" class="col-2 col-form-label">Tipo Usuario</label>
+            <label for="id_tipoUsuario" class="col-3 col-form-label">Tipo Usuario</label>
             <div class="col-2">          
                 <div class="input-group">
                     <input ng-model="ajaxDatoUsuario.id"
@@ -120,9 +122,19 @@
         </div>
 
         <button ng-click="guardar()" type="button" class="btn btn-primary" ng-disabled="userForm.$invalid">Crear</button>
-    </form>    
-    <div class="alert alert-success" ng-show="mensaje">
-        Se ha creado el tipo {{ob}} con el id  {{id}} llamado "{{nombre}}"
+        
+    </form>
+    <div style="width: 60%; margin: 0 auto;">
+        <a href="javascript:window.history.back();" class="btn btn-success" style="margin-top: 10px;">Volver </a>
     </div>
+    
+    
+    <div class="alert alert-success" ng-show="mensaje">
+        Se ha creado el {{ob}} llamado "{{nombre}}"
+    </div>
+    <div class="alert alert-danger" ng-show="error">
+        {{ajaxDatoUsuario}}
+    </div>
+    
 </main>
 <!--<footer class="footer" ng-include="'js/app/footer.html'"></footer>-->
