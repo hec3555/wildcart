@@ -35,8 +35,11 @@ public class UsuarioBean {
     @Expose
     private String login;
 
-    @Expose
+    @Expose(serialize = false)
     private String pass;
+
+    @Expose(deserialize = false)
+    private String pass2client = "";
 
     @Expose(serialize = false)
     private int id_tipoUsuario;
@@ -66,6 +69,14 @@ public class UsuarioBean {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public String getPass2client() {
+        return pass2client;
+    }
+
+    public void setPass2client(String pass2client) {
+        this.pass2client = pass2client;
     }
 
     public String getNombre() {
@@ -125,7 +136,7 @@ public class UsuarioBean {
         this.setApe2(oResultSet.getString("ape2"));
         this.setLogin(oResultSet.getString("login"));
         this.setPass(oResultSet.getString("pass"));
-
+        
         if (expand > 0) {
             TipousuarioDao otipousuarioDao = new TipousuarioDao(oConnection, "tipousuario");
             this.setObj_tipoUsuario(otipousuarioDao.get(oResultSet.getInt("id_tipoUsuario"), expand - 1));
@@ -159,7 +170,7 @@ public class UsuarioBean {
         strColumns += EncodingHelper.quotate(pass) + ",";
         strColumns += id_tipoUsuario;
         return strColumns;
-    }    
+    }
 
     public String getPairs(String ob) {
         String strPairs = "";
@@ -168,9 +179,11 @@ public class UsuarioBean {
         strPairs += "ape1 =" + EncodingHelper.quotate(ape1) + ",";
         strPairs += "ape2 =" + EncodingHelper.quotate(ape2) + ",";
         strPairs += "login =" + EncodingHelper.quotate(login) + ",";
-        strPairs += "pass =" + EncodingHelper.quotate(pass) + ",";
+        if (pass != null && !pass.equals("")) {
+            strPairs += "pass =" + EncodingHelper.quotate(pass) + ",";
+        }
         strPairs += "id_tipoUsuario =" + id_tipoUsuario;
-        strPairs += " WHERE id=" + id ;
+        strPairs += " WHERE id=" + id;
         return strPairs;
 
     }

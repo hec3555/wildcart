@@ -7,7 +7,7 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
         $scope.ajaxDatoUsuario = {
             id: null,
             desc: null
-        }
+        };
         $scope.guardar = function () {
             var json = {
                 id: null,
@@ -16,7 +16,7 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
                 login: $scope.login,
-                pass: forge_sha256($scope.pass),
+                pass: forge_sha256($scope.pass).toUpperCase(),
                 id_tipoUsuario: $scope.ajaxDatoUsuario.id
             };
             $http({

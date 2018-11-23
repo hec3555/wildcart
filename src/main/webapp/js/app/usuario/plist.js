@@ -33,6 +33,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         
         
         $scope.resetOrder = function () {
+            $scope.rpp = "10";
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
             $scope.activar = "false";
         };

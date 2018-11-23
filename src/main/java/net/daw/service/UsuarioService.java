@@ -128,15 +128,10 @@ public class UsuarioService {
         Connection oConnection;
         if (this.checkPermission("create")) {
             try {
-//            BufferedReader br = new BufferedReader(new InputStreamReader(oRequest.getInputStream()));
-//            String json = "";
-//            if (br != null) {
-//                json = br.readLine();
-//            }
+
                 String strJsonFromClient = oRequest.getParameter("json");
                 Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-                UsuarioBean oUsuarioBean = new UsuarioBean();
-                oUsuarioBean = oGson.fromJson(strJsonFromClient, UsuarioBean.class);
+                UsuarioBean oUsuarioBean = oGson.fromJson(strJsonFromClient, UsuarioBean.class);
                 oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
                 oConnection = oConnectionPool.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob);
@@ -163,8 +158,7 @@ public class UsuarioService {
             try {
                 String strJsonFromClient = oRequest.getParameter("json");
                 Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-                UsuarioBean oUsuarioBean = new UsuarioBean();
-                oUsuarioBean = oGson.fromJson(strJsonFromClient, UsuarioBean.class);
+                UsuarioBean oUsuarioBean = oGson.fromJson(strJsonFromClient, UsuarioBean.class);
                 oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
                 oConnection = oConnectionPool.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob);
