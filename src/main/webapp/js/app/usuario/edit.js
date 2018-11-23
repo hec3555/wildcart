@@ -23,6 +23,10 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
 
 
         $scope.guardar = function () {
+            var passAux= "";
+            if($scope.ajaxDatoUsuario.pass2client != ""){
+                    var passAux = forge_sha256($scope.ajaxDatoUsuario.pass2client).toUpperCase();
+                };
             var json = {
                 id: $scope.ajaxDatoUsuario.id,
                 dni: $scope.ajaxDatoUsuario.dni,
@@ -30,7 +34,7 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
                 ape1: $scope.ajaxDatoUsuario.ape1,
                 ape2: $scope.ajaxDatoUsuario.ape2,
                 login: $scope.ajaxDatoUsuario.login,
-                pass: forge_sha256($scope.ajaxDatoUsuario.pass2client).toUpperCase(),
+                pass: passAux,
                 id_tipoUsuario: $scope.ajaxDatoUsuario.obj_tipoUsuario.id
             };
             $http({
