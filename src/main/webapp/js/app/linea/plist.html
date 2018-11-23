@@ -51,7 +51,7 @@
 
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-            <tr class="thead-dark">
+            <tr class="table-success">
                 <th>
                     ID
                     <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id', 'asc')">
@@ -114,6 +114,29 @@
                 </td>                                  
             </tr>
         </table>
+    </div>
+    <div class="row" style="margin-bottom: 55px;">
+        <div class="col-10">
+            <nav aria-label="paginacion">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                    </li>
+                    <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
+                        <a class="page-link" href="{{ob}}/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
+                    </li>                    
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

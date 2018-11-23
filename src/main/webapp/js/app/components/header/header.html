@@ -7,24 +7,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" ng-class="{'active': c.isActive('/home')}">
-                    <a class="nav-link" href="/home">Home</a>
+                <li class="nav-item glyphicon glyphicon-home" ng-class="{'active': c.isActive('/home')}">
+                    <a class="nav-link" href="/home"><i class="fas fa-home"></i> Home</a>
                 </li>
     
                 <li ng-show="c.logged" class="nav-item" ng-class="{'active': c.isActive('/usuario')}">
-                    <a class="nav-link" href="usuario/plist">Usuario</a>
+                    <a class="nav-link" href="usuario/plist"><i class="fas fa-user-tie"></i> Usuario</a>
                 </li>
                 <li ng-show="c.logged" class="nav-item" ng-class="{'active': c.isActive('/tipousuario')}">
-                    <a class="nav-link" href="tipousuario/plist">Tipousuario</a>
+                    <a class="nav-link" href="tipousuario/plist"><i class="fas fa-users-cog"></i> Tipousuario</a>
                 </li>
                 <li ng-show="c.logged" class="nav-item" ng-class="{'active': c.isActive('/producto')}">
-                    <a class="nav-link" href="producto/plist">Producto</a>
+                    <a class="nav-link" href="producto/plist"><i class="fas fa-box"></i> Producto</a>
                 </li>
                 <li ng-show="c.logged" class="nav-item" ng-class="{'active': c.isActive('/tipoproducto')}">
-                    <a class="nav-link" href="tipoproducto/plist">Tipoproducto</a>
+                    <a class="nav-link" href="tipoproducto/plist"><i class="fas fa-boxes"></i> Tipoproducto</a>
                 </li>
                 <li ng-show="c.logged" class="nav-item" ng-class="{'active': c.isActive('/factura')}">
-                    <a class="nav-link" href="factura/plist">Factura</a>
+                    <a class="nav-link" href="factura/plist"><i class="fas fa-file-invoice"></i> Factura</a>
                 </li>
                 <li ng-show="c.logged" class="nav-item" ng-class="{'active': c.isActive('/linea')}">
                     <a class="nav-link" href="linea/plist">Linea</a>
