@@ -9,7 +9,7 @@ body {
     margin-bottom: 60px;
 }
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
@@ -33,37 +33,6 @@ body > .container {
 /*    margin-top: 100px;*/
 }
 
-code {
-    font-size: 80%;
-}
-
-.id{
-    width: 80px;
-}
-
-.codigo {
-    width: 140px;
-}
-.descripcion {
-    width: 175px;
-}
-
-
-.existencias {
-    width: 172px;
-}
-
-.precio {
-    width: 125px;
-}
-
-.foto {
-    width: 110px;
-}
-
-.idProducto {
-    width: 195px;
-}
 
 .css .pagination>li>a,
 .css .pagination>li>span {

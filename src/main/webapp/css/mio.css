@@ -18,3 +18,29 @@
     margin:15px;
 }
 
+.acciones{
+    max-width: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+        'ver editar borrar';
+    grid-gap: 10px;
+}
+
+#ver{
+    grid-area: ver;
+}
+
+#editar{
+    grid-area: editar;
+}
+
+#borrar{
+    grid-area: borrar;
+}
+
+.accion{
+    text-align: center;
+}
+
+
