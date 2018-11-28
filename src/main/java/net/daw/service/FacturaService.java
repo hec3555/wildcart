@@ -12,19 +12,14 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.FacturaBean;
 import net.daw.bean.ReplyBean;
-import net.daw.bean.TipousuarioBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
 import net.daw.dao.FacturaDao;
-import net.daw.dao.TipousuarioDao;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
 import net.daw.helper.ParameterCook;
 
-/**
- *
- * @author a044531896d
- */
+
 public class FacturaService {
     HttpServletRequest oRequest;
 	String ob = null;
@@ -172,4 +167,56 @@ public class FacturaService {
 		return oReplyBean;
 
 	}
+        
+        
+        public ReplyBean getcountXusuario() throws Exception {
+		ReplyBean oReplyBean;
+		ConnectionInterface oConnectionPool = null;
+		Connection oConnection;
+		try {
+                    Integer idUsu = Integer.parseInt(oRequest.getParameter("idUsu"));
+                    oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
+                    oConnection = oConnectionPool.newConnection();
+                    FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
+                    int registros = oFacturaDao.getcountXusuario(idUsu);
+                    Gson oGson = new Gson();
+                    oReplyBean = new ReplyBean(200, oGson.toJson(registros));
+		} catch (Exception ex) {
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
+		} finally {
+			oConnectionPool.disposeConnection();
+		}
+
+		return oReplyBean;
+	}
+        
+        
+        public ReplyBean getpageXusuario() throws Exception {
+		ReplyBean oReplyBean;
+		ConnectionInterface oConnectionPool = null;
+		Connection oConnection;
+		try {
+			Integer iRpp = Integer.parseInt(oRequest.getParameter("rpp"));
+			Integer iPage = Integer.parseInt(oRequest.getParameter("page"));
+                        HashMap<String, String> hmOrder = ParameterCook.getOrderParams(oRequest.getParameter("order"));
+                        Integer idUsu = Integer.parseInt(oRequest.getParameter("idUsu"));
+			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
+			oConnection = oConnectionPool.newConnection();
+			FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
+			ArrayList<FacturaBean> alFacturaBean = oFacturaDao.getpageXusuario(iRpp, iPage,hmOrder,1,idUsu);
+			Gson oGson = new Gson();
+			oReplyBean = new ReplyBean(200, oGson.toJson(alFacturaBean));
+		} catch (Exception ex) {
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
+		} finally {
+			oConnectionPool.disposeConnection();
+		}
+
+		return oReplyBean;
+
+	}
+        
+        
 }

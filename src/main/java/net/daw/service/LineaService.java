@@ -170,4 +170,55 @@ public class LineaService {
 		return oReplyBean;
 
 	}
+        
+        
+        public ReplyBean getcountXfactura() throws Exception {
+		ReplyBean oReplyBean;
+		ConnectionInterface oConnectionPool = null;
+		Connection oConnection;
+		try {
+                        Integer idFact = Integer.parseInt(oRequest.getParameter("idUsu"));
+			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
+			oConnection = oConnectionPool.newConnection();
+			LineaDao oLineaDao = new LineaDao(oConnection, ob);
+			int registros = oLineaDao.getcountXfactura(idFact);
+			Gson oGson = new Gson();
+			oReplyBean = new ReplyBean(200, oGson.toJson(registros));
+		} catch (Exception ex) {
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
+		} finally {
+			oConnectionPool.disposeConnection();
+		}
+
+		return oReplyBean;
+
+	}
+        
+        
+        public ReplyBean getpageXfactura() throws Exception {
+		ReplyBean oReplyBean;
+		ConnectionInterface oConnectionPool = null;
+		Connection oConnection;
+		try {
+			Integer iRpp = Integer.parseInt(oRequest.getParameter("rpp"));
+			Integer iPage = Integer.parseInt(oRequest.getParameter("page"));
+                        HashMap<String, String> hmOrder = ParameterCook.getOrderParams(oRequest.getParameter("order"));
+                        Integer idFact = Integer.parseInt(oRequest.getParameter("idUsu"));
+			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
+			oConnection = oConnectionPool.newConnection();
+			LineaDao oLineaDao = new LineaDao(oConnection, ob);
+			ArrayList<LineaBean> alLineaBean = oLineaDao.getpageXfactura(iRpp, iPage,hmOrder,1,idFact);
+			Gson oGson = new Gson();
+			oReplyBean = new ReplyBean(200, oGson.toJson(alLineaBean));
+		} catch (Exception ex) {
+			oReplyBean = new ReplyBean(500,
+					"ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
+		} finally {
+			oConnectionPool.disposeConnection();
+		}
+
+		return oReplyBean;
+
+	}
 }
