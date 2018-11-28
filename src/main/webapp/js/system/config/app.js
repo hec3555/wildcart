@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var wildcart = angular.module('MyApp', [
     'ngRoute',

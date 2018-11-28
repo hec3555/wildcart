@@ -125,15 +125,15 @@
                 <td>                    
                     <a href="tipoproducto/view/{{fila.obj_tipoProducto.id}}">{{fila.obj_tipoProducto.desc}}</a>
                 </td>  
-                <td> 
+                <td class="acciones"> 
                     <a  href="{{ob}}/view/{{fila.id}}"> 
-                        <button style="font-size:15px" class="btn btn-info"><i class="fa fa-eye"></i></button>
+                        <button class="btn btn-info accion"  id="ver"><i class="fa fa-eye"></i></button>
                     </a> 
                     <a  href="{{ob}}/edit/{{fila.id}}"> 
-                        <button style="font-size:15px" class="btn btn-success"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-success accion"  id="editar"><i class="fa fa-edit"></i></button>
                     </a> 
                     <a  href="{{ob}}/remove/{{fila.id}}"> 
-                        <button style="font-size:15px" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                        <button class="btn btn-danger accion"  id="borrar"><i class="fa fa-trash-alt"></i></button>
                     </a> 
                 </td>                                  
             </tr>
