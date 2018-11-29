@@ -30,6 +30,7 @@ public class FacturaBean {
     @Expose(deserialize = false)
     private UsuarioBean obj_Usuario;
 
+    
     public UsuarioBean getObj_Usuario() {
         return obj_Usuario;
     }
