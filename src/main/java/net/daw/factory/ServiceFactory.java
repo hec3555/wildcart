@@ -104,10 +104,10 @@ public class ServiceFactory {
                     case "getpage":
                         oReplyBean = oFacturaService.getpage();
                         break;
-                    case "getcountXusuario":
+                    case "getcountxusuario":
                         oReplyBean = oFacturaService.getcountXusuario();
                         break;
-                    case "getpageXusuario":
+                    case "getpagexusuario":
                         oReplyBean = oFacturaService.getpageXusuario();
                         break;
                     default:
@@ -136,10 +136,10 @@ public class ServiceFactory {
                     case "getpage":
                         oReplyBean = oLineaService.getpage();
                         break;
-                    case "getcountXfactura":
+                    case "getcountxfactura":
                         oReplyBean = oLineaService.getcountXfactura();
                         break;
-                    case "getpageXfactura":
+                    case "getpagexfactura":
                         oReplyBean = oLineaService.getpageXfactura();
                         break;
                     default:

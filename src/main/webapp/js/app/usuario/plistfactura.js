@@ -1,11 +1,11 @@
- 'use strict';
+'use strict';
 
-moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+moduleUsuario.controller('usuarioPlistFacturaController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
     function ($scope, $http, $location, toolService, $routeParams) {
 
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
-        $scope.ob = "usuario";
+        $scope.ob = "factura";
 
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -31,11 +31,8 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             }
         }
         
-        
         $scope.resetOrder = function () {
-            $scope.rpp = "10";
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
-            $scope.activar = "false";
         };
 
 
@@ -59,30 +56,27 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             url: '/json?ob=' + $scope.ob + '&op=getcount'
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataUsuariosNumber = response.data.message;
-            $scope.totalPages = Math.ceil($scope.ajaxDataUsuariosNumber / $scope.rpp);
+            $scope.ajaxDataFacturasNumber = response.data.message;
+            $scope.totalPages = Math.ceil($scope.ajaxDataFacturasNumber / $scope.rpp);
             if ($scope.page > $scope.totalPages) {
                 $scope.page = $scope.totalPages;
                 $scope.update();
             }
             pagination2();
         }, function (response) {
-            $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
+            $scope.ajaxDataFacturasNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
 
         $http({
             method: 'GET',
-            header: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
             url: '/json?ob=' + $scope.ob + '&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataUsuarios = response.data.message;
+            $scope.ajaxDataFacturas = response.data.message;
         }, function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+            $scope.ajaxDataFacturas = response.data.message || 'Request failed';
         });
 
 
@@ -113,11 +107,9 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 }
             }
         }
-        ;
+
 
         $scope.isActive = toolService.isActive;
+
     }
-
-
-
 ]);
