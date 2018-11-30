@@ -33,7 +33,7 @@ moduleFactura.controller('facturaPlistLineaController', ['$scope', '$http', '$lo
         }
 
         $scope.resetOrder = function () {
-            $location.url($scope.ob + "/plistlinea/"+ $scope.id + $scope.rpp + "/1");
+            $location.url($scope.ob + "/plistlinea/"+ $scope.id +"/"+ $scope.rpp + "/1");
         };
 
 
@@ -46,7 +46,7 @@ moduleFactura.controller('facturaPlistLineaController', ['$scope', '$http', '$lo
                 $scope.orderURLCliente += "-" + order + "," + align;
             }
             ;
-            $location.url($scope.ob + "/plist/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
+            $location.url($scope.ob + "/plistlinea/"+ $scope.id +"/"+ $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
         };
 
         //getcount
