@@ -54,37 +54,64 @@
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <tr class="table-success">
+                <th>
+                    ID
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id', 'asc')">
+                        <i class="fas fa-long-arrow-alt-up"></i>
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id', 'desc')">
+                        <i class="fas fa-long-arrow-alt-down"></i>
+                    </button>
+                </th>
+                <th>
+                    Cantidad
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('cantidad', 'asc')">
+                        <i class="fas fa-long-arrow-alt-up"></i>
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('cantidad', 'desc')">
+                        <i class="fas fa-long-arrow-alt-down"></i>
+                    </button>
+                </th>
+                <th>
+                    Tipo Producto
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_producto', 'asc')">
+                        <a class="fas fa-long-arrow-alt-up" ></a>
 
-                <th>Id</th>
-                <th>Fecha</th>
-                <th>IVA</th>                        
-                <th>Lineas</th>
-                <th>Acciones</th>
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_producto', 'desc')">
+                        <i class="fas fa-long-arrow-alt-down"></i>
+                    </button>
+                </th>
+                <th>
+                    Tipo Factura
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'asc')">
+                        <i class="fas fa-long-arrow-alt-up"></i>
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'desc')">
+                        <i class="fas fa-long-arrow-alt-down"></i>
+                    </button>
+                </th>               
+                <th>
+                    Acciones                
+                </th>
             </tr>
-
-
-            <tr ng-repeat="fila in ajaxDataUsuarios track by $index">
-                <th>{{fila.id}}</th>
-                <td>{{fila.fecha| date:'d-M-y'}}</td>
-                <td>{{fila.iva}}</td>                                                
-                <td>
-                    <a href="factura/plistlinea/{{fila.id}}/10/1" class="btn table-warning" ng-class="{'disabled': fila.link_linea == 0}">
-                        <i>{{fila.numLinea}}</i>
-                    </a>
-                </td>
+            <tr ng-repeat="fila in ajaxDataLineas">
+                <td>{{fila.id}}</td>
+                <td>{{fila.cantidad}}</td>
+                <td><a href="producto/view/{{fila.obj_Producto.id}}">{{fila.obj_Producto.desc}}</a></td>
+                <td>{{fila.obj_Factura.id}}</td>
                 <td class="acciones"> 
-                        <a  href="factura/view/{{fila.id}}"> 
-                            <button class="btn btn-info accion"  id="ver"><i class="fa fa-eye"></i></button>
-                        </a> 
-                        <a  href="factura/edit/{{fila.id}}"> 
-                            <button class="btn btn-success accion" id="editar"><i class="fa fa-edit"></i></button>
-                        </a> 
-                        <a  href="factura/remove/{{fila.id}}"> 
-                            <button class="btn btn-danger accion" id="borrar"><i class="fa fa-trash-alt"></i></button>
-                        </a> 
-                    </td>                        
+                    <a  href="linea/view/{{fila.id}}"> 
+                        <button class="btn btn-info accion"  id="ver"><i class="fa fa-eye"></i></button>
+                    </a> 
+                    <a  href="linea/edit/{{fila.id}}"> 
+                        <button class="btn btn-success accion" id="editar"><i class="fa fa-edit"></i></button>
+                    </a> 
+                    <a  href="linea/remove/{{fila.id}}"> 
+                        <button class="btn btn-danger accion" id="borrar"><i class="fa fa-trash-alt"></i></button>
+                    </a> 
+                </td>                                  
             </tr>
-
         </table>
     </div>
     <div class="row" style="margin-bottom: 55px;">

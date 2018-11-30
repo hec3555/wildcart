@@ -9,6 +9,7 @@ import com.google.gson.annotations.Expose;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Date;
+import net.daw.dao.LineaDao;
 import net.daw.dao.UsuarioDao;
 
 /**
@@ -30,7 +31,17 @@ public class FacturaBean {
     @Expose(deserialize = false)
     private UsuarioBean obj_Usuario;
 
-    
+    @Expose
+    private int numLinea;
+
+    public int getNumLinea() {
+        return numLinea;
+    }
+
+    public void setNumLinea(int numLinea) {
+        this.numLinea = numLinea;
+    }
+
     public UsuarioBean getObj_Usuario() {
         return obj_Usuario;
     }
@@ -76,7 +87,8 @@ public class FacturaBean {
         this.setId(oResultSet.getInt("id"));
         this.setFecha(oResultSet.getDate("fecha"));
         this.setIva(oResultSet.getFloat("iva"));
-
+        LineaDao oLineaDao = new LineaDao(oConnection, "linea");
+        this.setNumLinea(oLineaDao.getcountXfactura(this.id));
         if (expand > 0) {
             UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, "usuario");
             this.setObj_Usuario(oUsuarioDao.get(oResultSet.getInt("id_usuario"), expand - 1));

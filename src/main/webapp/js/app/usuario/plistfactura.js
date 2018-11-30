@@ -92,17 +92,6 @@ moduleUsuario.controller('usuarioPlistFacturaController', ['$scope', 'toolServic
             $scope.ajaxDatosUsuarios = response.data.message || 'Request failed';
         });
         
-        $scope.logout = function () {
-            $http({
-                method: 'GET',
-                url: '/json?ob=usuario&op=logout'
-            }).then(function (response) {
-                if (response.status === 200) {
-                    sessionService.setSessionInactive();
-                    sessionService.setUserName("");
-                }
-            });
-        };
 
         $scope.update = function () {
             $location.url(`usuario/plistfactura/`+$scope.id+`/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);

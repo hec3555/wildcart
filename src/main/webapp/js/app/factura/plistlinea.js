@@ -1,11 +1,12 @@
 'use strict';
 
-moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+moduleFactura.controller('facturaPlistLineaController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
 
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
-        $scope.ob = "linea";
+        $scope.ob = "factura";
+        $scope.id = $routeParams.id;
         
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -32,7 +33,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         }
 
         $scope.resetOrder = function () {
-            $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
+            $location.url($scope.ob + "/plistlinea/"+ $scope.id + $scope.rpp + "/1");
         };
 
 
@@ -68,7 +69,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
 
         $http({
             method: 'GET',
-            url: '/json?ob=' + $scope.ob + '&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+            url: '/json?ob=linea&op=getpagexfactura&idfact='+$scope.id+'&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataLineas = response.data.message;
@@ -76,11 +77,23 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             $scope.status = response.status;
             $scope.ajaxDataLineas = response.data.message || 'Request failed';
         });
+        
+        //INFORMACION DE FACTURA
+        $http({
+            method: 'GET',
+            url: '/json?ob=factura&op=get&id=' + $routeParams.id
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDatosFactura = response.data.message;
 
+        }, function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDatosFactura = response.data.message || 'Request failed';
+        });
 
 
         $scope.update = function () {
-            $location.url($scope.ob + "/plist/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
+            $location.url($scope.ob + "/plistlinea/"+$scope.id + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
         };
 
         //paginacion neighbourhood
