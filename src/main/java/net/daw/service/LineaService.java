@@ -177,7 +177,7 @@ public class LineaService {
 		ConnectionInterface oConnectionPool = null;
 		Connection oConnection;
 		try {
-                        Integer idFact = Integer.parseInt(oRequest.getParameter("idUsu"));
+                        Integer idFact = Integer.parseInt(oRequest.getParameter("idfact"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
@@ -204,7 +204,7 @@ public class LineaService {
 			Integer iRpp = Integer.parseInt(oRequest.getParameter("rpp"));
 			Integer iPage = Integer.parseInt(oRequest.getParameter("page"));
                         HashMap<String, String> hmOrder = ParameterCook.getOrderParams(oRequest.getParameter("order"));
-                        Integer idFact = Integer.parseInt(oRequest.getParameter("idUsu"));
+                        Integer idFact = Integer.parseInt(oRequest.getParameter("idfact"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);

@@ -174,7 +174,7 @@ public class FacturaService {
 		ConnectionInterface oConnectionPool = null;
 		Connection oConnection;
 		try {
-                    Integer idUsu = Integer.parseInt(oRequest.getParameter("idUsu"));
+                    Integer idUsu = Integer.parseInt(oRequest.getParameter("idusu"));
                     oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
                     oConnection = oConnectionPool.newConnection();
                     FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
@@ -200,7 +200,7 @@ public class FacturaService {
 			Integer iRpp = Integer.parseInt(oRequest.getParameter("rpp"));
 			Integer iPage = Integer.parseInt(oRequest.getParameter("page"));
                         HashMap<String, String> hmOrder = ParameterCook.getOrderParams(oRequest.getParameter("order"));
-                        Integer idUsu = Integer.parseInt(oRequest.getParameter("idUsu"));
+                        Integer idUsu = Integer.parseInt(oRequest.getParameter("idusu"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);

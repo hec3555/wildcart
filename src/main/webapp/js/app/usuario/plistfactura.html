@@ -3,7 +3,8 @@
     <div class="row">
         <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><i class="fas fa-file-invoice"></i> Facturas</h1>
+                <h1 class="h2"><i class="fas fa-file-invoice"></i> Facturas del usuario 
+                <a href="{{ob}}/view/{{ajaxDatosUsuarios.id}}">{{ajaxDatosUsuarios.nombre}} {{ajaxDatosUsuarios.ape1}}</a></h1>
                 <div class="btn-group" style="width:400px;">
                     <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
                     <select class="form-control" 
@@ -19,19 +20,19 @@
             <nav aria-label="paginacion">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
+                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/1/{{orderURLCliente}}">1</a>
                     </li>
                     <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                        <a class="page-link" href="{{ob}}/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
+                        <a class="page-link" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plistfactura/{{idUsu}}/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
+                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
                     </li>                    
                 </ul>
             </nav>
@@ -51,67 +52,42 @@
 
 
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <tr class="table-success">
-                <th>
-                    ID
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id', 'asc')">
-                        <i class="fas fa-long-arrow-alt-up"></i>
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id', 'desc')">
-                        <i class="fas fa-long-arrow-alt-down"></i>
-                    </button>
-                </th>
-                <th>
-                    FECHA
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('fecha', 'asc')">
-                        <i class="fas fa-long-arrow-alt-up"></i>
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('fecha', 'desc')">
-                        <i class="fas fa-long-arrow-alt-down"></i>
-                    </button>
-                </th>
-                <th>
-                    IVA
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('iva', 'asc')">
-                        <a class="fas fa-long-arrow-alt-up" ></a>
+        <table class="table table-striped table-sm" style="text-align: center;">
+                <thead>
+                    <tr class="thead-dark"> 
+                        <th>Id</th>
+                        <th>Fecha</th>
+                        <th>IVA</th>                        
+                        <th>Lineas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="fila in ajaxDataUsuarios track by $index">
+                        <th>{{fila.id}}</th>
+                        <td>{{fila.fecha| date:'d-M-y'}}</td>
+                        <td>{{fila.iva}}</td>                                                
+                        <td>
+                            <a href="factura/plistlinea/{{fila.id}}/10/1" class="btn table-warning" ng-class="{'disabled': fila.link_linea == 0}">
+                                <i>{{fila.link_linea}}</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="factura/view/{{fila.id}}">
+                                <button style="font-size:15px" class="btn btn-info"><i class="fa fa-eye"></i></button>
+                            </a>
 
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('iva', 'desc')">
-                        <i class="fas fa-long-arrow-alt-down"></i>
-                    </button>
-                </th>
-                <th>
-                    USUARIO
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'asc')">
-                        <i class="fas fa-long-arrow-alt-up"></i>
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'desc')">
-                        <i class="fas fa-long-arrow-alt-down"></i>
-                    </button>
-                </th>               
-                <th>
-                    Acciones                
-                </th>
-            </tr>
-            <tr ng-repeat="fila in ajaxDataFacturas">
-                <td>{{fila.id}}</td>
-                <td>{{fila.fecha}}</td>
-                <td>{{fila.iva}}</td>
-                <td><a href="usuario/view/{{fila.obj_Usuario.id}}">{{fila.obj_Usuario.nombre}} {{fila.obj_Usuario.ape1}} {{fila.obj_Usuario.ape2}}</a></td>             
-                <td class="acciones"> 
-                    <a  href="{{ob}}/view/{{fila.id}}"> 
-                        <button class="btn btn-info accion"  id="ver"><i class="fa fa-eye"></i></button>
-                    </a> 
-                    <a  href="{{ob}}/edit/{{fila.id}}"> 
-                        <button class="btn btn-success accion"  id="editar"><i class="fa fa-edit"></i></button>
-                    </a> 
-                    <a  href="{{ob}}/remove/{{fila.id}}"> 
-                        <button class="btn btn-danger accion"  id="borrar"><i class="fa fa-trash-alt"></i></button>
-                    </a> 
-                </td>                                  
-            </tr>
-        </table>
+                            <a href="factura/edit/{{fila.id}}">
+                                <button style="font-size:15px" class="btn btn-success"><i class="fa fa-edit"></i></button>
+                            </a>
+
+                            <a href="factura/remove/{{fila.id}}">
+                                <button style="font-size:15px" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </a>
+                        </td>                        
+                    </tr>
+                </tbody>
+            </table>
     </div>
     <div class="row" style="margin-bottom: 55px;">
         <div class="col-10">
@@ -136,5 +112,6 @@
             </nav>
         </div>
     </div>
+    <a href="javascript:window.history.back();"> <button class="btn btn-success" style="margin-bottom: 10px;"> Volver</button> </a>
 </div>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>
