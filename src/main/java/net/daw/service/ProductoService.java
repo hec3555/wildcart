@@ -108,8 +108,7 @@ public class ProductoService {
         try {
             String strJsonFromClient = oRequest.getParameter("json");
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-            ProductoBean oProductoBean = new ProductoBean();
-            oProductoBean = oGson.fromJson(strJsonFromClient, ProductoBean.class);
+            ProductoBean oProductoBean = oGson.fromJson(strJsonFromClient, ProductoBean.class);
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             ProductoDao oProductoDao = new ProductoDao(oConnection, ob);
@@ -125,15 +124,14 @@ public class ProductoService {
     }
 
     public ReplyBean update() throws Exception {
-        int iRes = 0;
+        int iRes;
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
         Connection oConnection;
         try {
             String strJsonFromClient = oRequest.getParameter("json");
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-            ProductoBean oProductoBean = new ProductoBean();
-            oProductoBean = oGson.fromJson(strJsonFromClient, ProductoBean.class);
+            ProductoBean oProductoBean = oGson.fromJson(strJsonFromClient, ProductoBean.class);
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             ProductoDao oProductoDao = new ProductoDao(oConnection, ob);
@@ -187,7 +185,7 @@ public class ProductoService {
             for(ProductoBean productos : alProductoBean){
                 oProductoDao.create(productos);
             }            
-            Gson oGson = new Gson();
+            Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(alProductoBean));
         } catch (Exception ex) {
             oReplyBean = new ReplyBean(500,

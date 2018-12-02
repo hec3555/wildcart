@@ -6,6 +6,7 @@
 package net.daw.service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class LineaService {
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
 			LineaBean oLineaBean = oLineaDao.get(id, 1);
-			Gson oGson = new Gson();
+			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(oLineaBean));
 		} catch (Exception ex) {
 			oReplyBean = new ReplyBean(500,
@@ -86,7 +87,7 @@ public class LineaService {
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
 			int registros = oLineaDao.getcount();
-			Gson oGson = new Gson();
+			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(registros));
 		} catch (Exception ex) {
 			oReplyBean = new ReplyBean(500,
@@ -105,7 +106,7 @@ public class LineaService {
 		Connection oConnection;
 		try {
 			String strJsonFromClient = oRequest.getParameter("json");
-			Gson oGson = new Gson();
+			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			LineaBean oLineaBean = new LineaBean();
 			oLineaBean = oGson.fromJson(strJsonFromClient, LineaBean.class);
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
@@ -123,15 +124,14 @@ public class LineaService {
 	}
 
 	public ReplyBean update() throws Exception {
-		int iRes = 0;
+		int iRes;
 		ReplyBean oReplyBean = null;
 		ConnectionInterface oConnectionPool = null;
 		Connection oConnection;
 		try {
 			String strJsonFromClient = oRequest.getParameter("json");
-			Gson oGson = new Gson();
-			LineaBean oLineaBean = new LineaBean();
-			oLineaBean = oGson.fromJson(strJsonFromClient, LineaBean.class);
+			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
+			LineaBean oLineaBean = oGson.fromJson(strJsonFromClient, LineaBean.class);
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
@@ -158,7 +158,7 @@ public class LineaService {
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
 			ArrayList<LineaBean> alLineaBean = oLineaDao.getpage(iRpp, iPage,hmOrder,1);
-			Gson oGson = new Gson();
+			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(alLineaBean));
 		} catch (Exception ex) {
 			oReplyBean = new ReplyBean(500,
@@ -182,7 +182,7 @@ public class LineaService {
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
 			int registros = oLineaDao.getcountXfactura(idFact);
-			Gson oGson = new Gson();
+			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(registros));
 		} catch (Exception ex) {
 			oReplyBean = new ReplyBean(500,
@@ -209,7 +209,7 @@ public class LineaService {
 			oConnection = oConnectionPool.newConnection();
 			LineaDao oLineaDao = new LineaDao(oConnection, ob);
 			ArrayList<LineaBean> alLineaBean = oLineaDao.getpageXfactura(iRpp, iPage,hmOrder,1,idFact);
-			Gson oGson = new Gson();
+			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(alLineaBean));
 		} catch (Exception ex) {
 			oReplyBean = new ReplyBean(500,

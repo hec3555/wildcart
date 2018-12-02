@@ -104,8 +104,7 @@ public class FacturaService {
 		try {
 			String strJsonFromClient = oRequest.getParameter("json");
 			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-			FacturaBean oFacturaBean = new FacturaBean();
-			oFacturaBean = oGson.fromJson(strJsonFromClient, FacturaBean.class);
+			FacturaBean oFacturaBean = oGson.fromJson(strJsonFromClient, FacturaBean.class);
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
 			FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
@@ -121,7 +120,7 @@ public class FacturaService {
 	}
 
 	public ReplyBean update() throws Exception {
-		int iRes = 0;
+		int iRes;
 		ReplyBean oReplyBean = null;
 		ConnectionInterface oConnectionPool = null;
 		Connection oConnection;
