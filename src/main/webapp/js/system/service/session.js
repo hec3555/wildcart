@@ -26,6 +26,6 @@ moduleService.service('sessionService', ['$location', function ($location) {
             setSessionInactive: function () {
                 isSessionActive = false;
             }
-        }
+        };
 
     }]);
