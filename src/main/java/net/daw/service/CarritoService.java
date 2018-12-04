@@ -7,8 +7,6 @@ package net.daw.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,7 +62,7 @@ public class CarritoService{
                 carrito = (ArrayList<ItemBean>) sesion.getAttribute("carrito");
             }
 
-            //Obtenemos el producto que deseamos añadir al carrito 
+            //Obtenemos el producto que deseamos aï¿½adir al carrito 
             Integer id = Integer.parseInt(oRequest.getParameter("producto"));
             // y la cantidad
             Integer cant = Integer.parseInt(oRequest.getParameter("cantidad"));
@@ -83,7 +81,7 @@ public class CarritoService{
             for (int i = 0; i < carrito.size(); i++) {
                 if (oProductoBean.getId() == carrito.get(i).getObj_Producto().getId()) {
                     //Si el producto ya esta en el carrito, obtengo el indice para
-                    // no añadir dos iguales, y en su lugar aumentar la cantidad
+                    // no aï¿½adir dos iguales, y en su lugar aumentar la cantidad
                     indice = i;
                     break;
                 }
@@ -163,7 +161,7 @@ public class CarritoService{
             //obtemos el carrito 
             carrito = (ArrayList<ItemBean>) sesion.getAttribute("carrito");
 
-            //Obtenemos el producto que deseamos añadir al carrito
+            //Obtenemos el producto que deseamos aï¿½adir al carrito
             Integer id = Integer.parseInt(oRequest.getParameter("producto"));
             Integer cantidad = Integer.parseInt(oRequest.getParameter("cantidad"));
             Integer contenedor;
@@ -281,7 +279,7 @@ public class CarritoService{
 
             for (ItemBean ib : carrito) { // por cada item del carrito, generamos una linea
 
-                //CREAMOS LA LÍNEA
+                //CREAMOS LA Lï¿½NEA
                 int cant = ib.getCantidad();
                 
                 // instanciamos el bean de linea para que se vacie 
@@ -319,7 +317,7 @@ public class CarritoService{
             // si quiero que le llegue al cliente el id factura para luego hacerle
             // un view al crearla:
             // oReplyBean = new ReplyBean(200, oGson.toJson(id_factura));
-            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nº " + id_factura + " creada con éxito"));
+            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nï¿½ " + id_factura + " creada con ï¿½xito"));
 
         } catch (Exception e) {
 
