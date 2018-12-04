@@ -1,7 +1,8 @@
 'use strict';
 
-moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        $scope.idUsu = oSessionService.getId();
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
         $scope.ob = "carrito";
