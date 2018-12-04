@@ -316,8 +316,10 @@ public class CarritoService{
             // vaciamos el carrito tras la compra
             carrito.clear();
             sesion.setAttribute("carrito", carrito);
-            
-            oReplyBean = new ReplyBean(200, oGson.toJson(id_factura));
+            // si quiero que le llegue al cliente el id factura para luego hacerle
+            // un view al crearla:
+            // oReplyBean = new ReplyBean(200, oGson.toJson(id_factura));
+            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nº " + id_factura + " creada con éxito"));
 
         } catch (Exception e) {
 

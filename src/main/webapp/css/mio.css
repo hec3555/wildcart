@@ -64,3 +64,37 @@
     // animacion de que se mueva.
 }
 
+
+.items{
+    display: grid;
+    grid-template-rows: auto;     
+    grid-auto-columns: 1fr;
+    grid-gap: 50px 10%;
+    padding: 10px;    
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.item{
+    padding: 30px;
+    border: 2px solid black;
+    border-radius: 25px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows:1fr 1fr 1fr;
+    grid-template-areas: 
+        "img desc add"
+        "img cant red"
+        "img prec del"
+}
+
+#itemImagen{grid-area: img;}
+#itemDesc{grid-area: desc;}
+#itemCant{grid-area: cant;}
+#itemPrecio{grid-area: prec;}
+#itemAdd{grid-area: add;}
+#itemRed{grid-area: red;}
+#itemDel{grid-area: del;}

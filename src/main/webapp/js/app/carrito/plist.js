@@ -65,7 +65,7 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 $scope.carritoVacio = false;
                 $scope.carritoVacioTabla = true;
                 for (var i = 0; i < response.data.message.length; i++) {
-                    $scope.precioProducto += response.data.message[i].obj_Producto.precio;
+                    $scope.precioProducto += (response.data.message[i].obj_Producto.precio * response.data.message[i].cantidad);
                     $scope.cantidadProducto += response.data.message[i].cantidad;
                 }
             }
@@ -91,15 +91,15 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 } else {
                     if (operacion === "add") {
                         for (var i = 0; i < response.data.message.length; i++) {
-                            $scope.precioProducto += response.data.message[i].obj_Producto.precio;
                             $scope.cantidadProducto += response.data.message[i].cantidad;
+                            $scope.precioProducto += (response.data.message[i].obj_Producto.precio * response.data.message[i].cantidad);
                         }
                     }
 
                     if (operacion === "reduce") {
                         for (var j = 0; j < response.data.message.length; j++) {
-                            $scope.precioProducto += response.data.message[j].obj_Producto.precio;
                             $scope.cantidadProducto += response.data.message[j].cantidad;
+                            $scope.precioProducto += (response.data.message[j].obj_Producto.precio * response.data.message[j].cantidad);
                         }
                     }
                 }
