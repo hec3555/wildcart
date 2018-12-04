@@ -8,9 +8,13 @@ package net.daw.bean;
 import com.google.gson.annotations.Expose;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import net.daw.dao.LineaDao;
 import net.daw.dao.UsuarioDao;
+import net.daw.helper.EncodingHelper;
 
 /**
  *
@@ -96,6 +100,54 @@ public class FacturaBean {
             this.setId_usuario(oResultSet.getInt("id_usuario"));
         }
         return this;
+    }
+    
+    public String getPairs(String ob) {
+
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        Instant instant = fecha.toInstant();
+
+        LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+        System.out.println("Local Date is: " + localDate);
+
+        String strPairs = "";
+        strPairs += "id=" + id + ",";
+        strPairs += "fecha=" + EncodingHelper.quotate(fecha.toInstant().toString()) + ",";
+        strPairs += "iva=" + iva + ",";
+        strPairs += "id_usuario=" + getObj_Usuario().getId();
+        strPairs += " WHERE id=" + id;
+        return strPairs;
+
+    }
+
+    public String getColumns() {
+        String strColumns = "";
+        strColumns += "id,";
+        strColumns += "fecha,";
+        strColumns += "iva,";
+        strColumns += "id_usuario";
+        return strColumns;
+    }
+
+    public String getValues() {
+
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        Instant instant = fecha.toInstant();
+
+        LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+        System.out.println("Local Date is: " + localDate);
+        String strColumns = "";
+        strColumns += "null,";
+        strColumns += EncodingHelper.quotate(localDate.toString()) + ",";
+        strColumns += iva + ",";        
+        if (getObj_Usuario() != null) {
+            strColumns += this.getObj_Usuario().getId();
+        } else {
+            strColumns += this.getId_usuario();
+        }
+        return strColumns;
     }
 
 }

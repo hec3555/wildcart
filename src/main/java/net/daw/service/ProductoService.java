@@ -124,14 +124,15 @@ public class ProductoService {
     }
 
     public ReplyBean update() throws Exception {
-        int iRes;
+        int iRes = 0;
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
         Connection oConnection;
         try {
             String strJsonFromClient = oRequest.getParameter("json");
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-            ProductoBean oProductoBean = oGson.fromJson(strJsonFromClient, ProductoBean.class);
+            ProductoBean oProductoBean = new ProductoBean();
+            oProductoBean = oGson.fromJson(strJsonFromClient, ProductoBean.class);
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             ProductoDao oProductoDao = new ProductoDao(oConnection, ob);

@@ -7,7 +7,7 @@ public class ItemBean {
     @Expose
     private int cantidad;
     @Expose
-    private ProductoBean producto;
+    private ProductoBean obj_Producto;
 
     public int getCantidad() {
         return cantidad;
@@ -17,12 +17,12 @@ public class ItemBean {
         this.cantidad = cantidad;
     }
 
-    public ProductoBean getProducto() {
-        return producto;
+    public ProductoBean getObj_Producto() {
+        return obj_Producto;
     }
 
-    public void setProducto(ProductoBean producto) {
-        this.producto = producto;
+    public void setObj_Producto(ProductoBean obj_Producto) {
+        this.obj_Producto = obj_Producto;
     }
     
 }
