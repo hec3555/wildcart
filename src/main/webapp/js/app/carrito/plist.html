@@ -1,0 +1,63 @@
+<header-component></header-component>
+<div class="container" style="margin-bottom: 100px;">
+    <div class="row">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+            <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1><i class="fas fa-shopping-cart"></i> Productos</h1>
+                <span id="precioTotal">Precio total: {{precioProducto}}</span>
+                <span id="cantidadTotal">Cantidad de productos: {{cantidadProducto}}</span>
+            </div>     
+        </main>
+    </div>
+
+    <div ng-show="carritoVacioTabla">
+        <div>
+            <div class="items">
+                <div class="item" ng-repeat="item in ajaxDataCarritoShow track by $index">
+                    <div id="itemImagen"><i class="fas fa-cookie-bite" style="font-size: 200px;"><!--aqui iria la foto {{item.obj_Producto.foto}}--></i></div>
+                    <div id="itemDesc">{{item.obj_Producto.desc}}</div>
+                    <div id="itemPrecio">{{item.obj_Producto.precio}}$</div>
+                    <div id="itemCant">cantidad: {{item.cantidad}}</div>
+                    <div id="itemAcciones">
+                        <a class="btn btn-success"  ng-click="carrito('add', item.obj_Producto.id, '1')">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <a class="btn btn-warning"  ng-click="carrito('reduce', item.obj_Producto.id, '1')">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                        <a class="btn btn-danger"  ng-click="carrito('reduce', item.obj_Producto.id, item.cantidad)">
+                            <i class="fas fa-eraser"></i>
+                        </a>
+                        
+                    </div>                
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-end" style="margin-top: 30px;">
+            <div class="col-auto">   
+                <a class="btn btn-danger" ng-click="empty()">
+                        <i class="fas fa-trash-alt" > Vaciar carrito</i>
+                </a>
+            </div>
+            <div class="col-auto">                
+                <a class="btn comprar" ng-click="buy()">
+                        <i class="fas fa-shopping-cart" > Comprar</i>
+                </a>
+            </div>            
+        </div>
+    </div>
+
+    <div ng-show="carritoVacio" class="row justify-content-md-center">        
+        <div class="col-5" style="text-align: center">
+            No hay ningun producto en el carrito. <a href="producto/plist_carrito" class="btn btn-info"> Agrega algo a tu carrito! </a>
+        </div>
+    </div>    
+    <div ng-show="productoComprado" class="row justify-content-md-center">        
+        <div class="alert alert-success col-5" style="text-align: center">
+            Se ha creado la factura correctamente <!--<a href="usuario/plistfactura/{{usuarioLogeado}}"> VER FACTURA </a> == NO VA AUN -->
+        </div>
+    </div>    
+</div>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

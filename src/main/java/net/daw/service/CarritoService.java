@@ -316,8 +316,8 @@ public class CarritoService{
             // vaciamos el carrito tras la compra
             carrito.clear();
             sesion.setAttribute("carrito", carrito);
-
-            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nº " + id_factura + " creada con éxito"));
+            
+            oReplyBean = new ReplyBean(200, oGson.toJson(id_factura));
 
         } catch (Exception e) {
 
