@@ -10,10 +10,6 @@ function js(toolService,sessionService){
     self.logged = sessionService.isSessionActive();
     self.name = sessionService.getUserName();
     self.idUserLogged = sessionService.getId();
-
-    self.name = sessionService.getUserName();
-    self.idUserLogged = sessionService.getId();
-
     self.isActive = toolService.isActive;
-    console.log(self.isActive);
+
 }

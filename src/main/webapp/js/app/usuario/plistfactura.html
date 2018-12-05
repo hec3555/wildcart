@@ -38,10 +38,8 @@
             </nav>
         </div>
         <div class="col-3">
-            <a  href="{{ob}}/create/"> 
-                <button type="button" class="btn btn-info btn-sm" style="width: 100px; height:30px;">
+            <a  href="{{ob}}/create/" class="btn btn-info btn-sm" style="width: 100px; height:30px;"> 
                     <i class="fas fa-file-invoice"> Crear</i>
-                </button>
             </a>
             <button type="button" class="btn btn-danger btn-sm" style="width: auto; height:30px;" ng-click="resetOrder()">
                 <i class="fas fa-toilet-paper"> Reset</i>
@@ -68,19 +66,19 @@
                 <td>{{fila.fecha| date:'d-M-y'}}</td>
                 <td>{{fila.iva}}</td>                                                
                 <td>
-                    <a href="factura/plistlinea/{{fila.id}}/10/1" class="btn table-warning" ng-class="{'disabled': fila.numLinea == 0}">
+                    <a href="factura/plistlinea/{{fila.id}}/10/1" class="btn" ng-class="{'disabled': fila.numLinea == 0}">
                         <i>{{fila.numLinea}}</i>
                     </a>
                 </td>
                 <td class="acciones"> 
-                        <a  href="factura/view/{{fila.id}}"> 
-                            <button class="btn btn-info accion"  id="ver"><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-info accion"  id="ver" href="factura/view/{{fila.id}}"> 
+                            <i class="fa fa-eye"></i>
                         </a> 
-                        <a  href="factura/edit/{{fila.id}}"> 
-                            <button class="btn btn-success accion" id="editar"><i class="fa fa-edit"></i></button>
+                        <a class="btn btn-success accion" id="editar" href="factura/edit/{{fila.id}}"> 
+                            <i class="fa fa-edit"></i>
                         </a> 
-                        <a  href="factura/remove/{{fila.id}}"> 
-                            <button class="btn btn-danger accion" id="borrar"><i class="fa fa-trash-alt"></i></button>
+                        <a class="btn btn-danger accion" id="borrar" href="factura/remove/{{fila.id}}"> 
+                            <i class="fa fa-trash-alt"></i>
                         </a> 
                     </td>                        
             </tr>
