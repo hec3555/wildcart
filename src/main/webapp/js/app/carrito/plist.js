@@ -1,7 +1,7 @@
 'use strict';
 
-moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService', 'countcartService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService, countcartService) {
         $scope.idUsu = oSessionService.getId();
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
@@ -30,7 +30,7 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
-       
+
         $scope.resetOrder = function () {
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
             $scope.activar = "false";
@@ -50,7 +50,7 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
             ;
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
         };
-        
+
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=show'
@@ -104,6 +104,7 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                         }
                     }
                 }
+                countcartService.updateCarrito();
             }, function (response) {
                 $scope.status = response.status;
                 $scope.error = $scope.status + " " + response.message || 'Request failed';
@@ -121,7 +122,7 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                     $scope.carritoVacio = true;
                     $scope.carritoVacioTabla = false;
                 }
-
+                countcartService.updateCarrito();
             }, function (response) {
                 $scope.status = response.status;
                 $scope.error += $scope.status + " " + response.message || 'Request failed';
@@ -140,15 +141,12 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 $scope.carritoVacioTabla = false;
                 $scope.carritoVacio = false;
                 console.log($scope.ajaxDataCarritoShow);
+                countcartService.updateCarrito();
             }, function (response) {
                 $scope.status = response.status;
                 $scope.error += $scope.status + " " + response.data.message || 'Request failed';
                 console.log($scope.error);
             });
-        };
-
-        $scope.update = function () {
-            $location.url($scope.ob + "/plist/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
         };
 
 

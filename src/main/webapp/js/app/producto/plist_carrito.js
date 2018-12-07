@@ -1,7 +1,7 @@
 'use strict';
 
-moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http', '$location', 'toolService', '$routeParams',"countcartService",
+    function ($scope, $http, $location, toolService, $routeParams, countcartService) {
 
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
@@ -63,12 +63,13 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
                         $scope.ajaxDataDesc = response.data.message[i].obj_Producto.desc;
                         $scope.ajaxDataExistencias = response.data.message[i].obj_Producto.existencias;
                         if ($scope.ajaxDataCantidad === response.data.message[i].obj_Producto.existencias) {
-                            alert("Has elegido el máximo de existencias del producto: " + $scope.ajaxDataDesc);
+                            alert("Has elegido el maximo de existencias del producto: " + $scope.ajaxDataDesc);
                         } //else {
-                           // alert("Has añadido el producto: " + $scope.ajaxDataDesc + " a tu carrito.");
+                           // alert("Has aï¿½adido el producto: " + $scope.ajaxDataDesc + " a tu carrito.");
                         //}
                     }
                 }
+                countcartService.updateCarrito();
 
             }, function (response) {
                 $scope.status = response.status;

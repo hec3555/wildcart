@@ -56,8 +56,12 @@
 }
 
 .carritoIcon{
-    color: rgba(241,121,3,0.71);
-    font-size: 20px;
+    color: rgba(255,176,30,1);
+    font-size: 19px;
+}
+
+.carritoNum{
+    color: rgba(255,176,30,1);
 }
 
 .carritoIcon:hover{

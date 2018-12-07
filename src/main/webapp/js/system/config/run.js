@@ -1,5 +1,5 @@
-wildcart.run(['$rootScope', 'sessionService', '$location', '$http',
-    function ($rootScope, oSessionService, $location, $http) {
+wildcart.run(['$rootScope', 'sessionService', '$location', '$http', 'countcartService',
+    function ($rootScope, oSessionService, $location, $http, countcartService) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
 
             var nextUrl = next.$$route.originalPath;
@@ -18,6 +18,7 @@ wildcart.run(['$rootScope', 'sessionService', '$location', '$http',
                         $location.path("/home");
                     }
                 }
+                countcartService.updateCarrito();
             }, function (response) {
                 oSessionService.setSessionInactive();
                 if (nextUrl != '/' && nextUrl != '/home' && nextUrl != '/usuario/login') {

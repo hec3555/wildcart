@@ -10,6 +10,13 @@ function js(toolService,sessionService){
     self.logged = sessionService.isSessionActive();
     self.name = sessionService.getUserName();
     self.idUserLogged = sessionService.getId();
+    
     self.isActive = toolService.isActive;
+    
+    self.carrito = sessionService.getCountCart();
+
+    sessionService.registerObserverCallback( function (){
+        self.carrito = sessionService.getCountCart();
+    });
 
 }
