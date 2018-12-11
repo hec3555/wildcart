@@ -1,6 +1,6 @@
 'use strict';
 
-moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.myDate = new Date();
@@ -22,7 +22,7 @@ moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$locati
                 $scope.status = response.status;
                 $scope.mensaje = true;
             }, function (response) {
-                $scope.ajaxDatoFactura = response.data.message || 'Request failed';
+                $scope.ajaxDatoLinea = response.data.message || 'Request failed';
                 $scope.status = response.status;
             });
         };

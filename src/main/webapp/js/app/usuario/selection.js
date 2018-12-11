@@ -6,7 +6,7 @@ moduleComponent.component('usuarioSelection', {
     bindings: {
         obj: '=',
         onUsuarioSet: '&'
-    },
+    }
 });
 
 function cController($http) {
@@ -54,8 +54,9 @@ function cController($http) {
 
 
     self.save = function (id, nombre) {
-        self.obj.id = id;
-        self.obj.nombre = nombre;
+//        self.obj.id = id;
+//        self.obj.nombre = nombre;
+        self.obj = {id: id, nombre: nombre}
         self.onUsuarioSet();
     };
     

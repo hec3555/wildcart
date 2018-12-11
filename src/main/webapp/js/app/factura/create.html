@@ -1,54 +1,91 @@
 <header-component></header-component>
 <main role="main" class="container" style="margin-bottom: 100px;">
+
+    <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
     <div class="primeraParte"></div>
     <div class="row">
         <div class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><i class="fas fa-file-invoice"></i> Tipos de Factura</h1>
+                <h1 class="h2"><i class="fas fa-file-invoice"></i> Facturas</h1>
                 <h3 style="text-align: center">Crear</h3>
                 <a href="javascript:window.history.back();"> <button class="btn btn-success">Volver</button> </a> 
             </div>     
         </div>
     </div>
+       
+    <ng-form id="userForm" name="userForm" style="margin-bottom: 50px;" ng-show="!mensajeOK && !mensajeError">
+       
         <div class="form-group row">
-            <label for="fecha" class="col-2 col-form-label">Fecha</label>
+            <label for="fecha" class="col-3 col-form-label">Fecha</label>
             <div class="col-8">
-                <input type="text" class="form-control" id="fecha" name="fecha" ng-model="fecha" ng-required="true" />
+                <input type="text" class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.fecha.$invalid && !userForm.fecha.$pristine }" id="fecha" name="fecha" ng-model="ajaxDatoFactura.fecha" ng-required="true"/>
+                <div ng-show="userForm.fecha.$invalid && !userForm.fecha.$pristine" class="alert alert-danger" >Fecha requerida.</div>
             </div>
-            <div class="form-control col-2" style="border: 0px;" >
-                <button class="btn btn-primary" ng-click="oModal()" ><i class="fas fa-calendar"></i></button>                
-            </div>           
-            <md-datepicker ng-model="myDate" md-placeholder="Fecha"></md-datepicker>
         </div>
 
         <div class="form-group row">
-            <label for="iva" class="col-2 col-form-label">IVA</label>
-            <div class="col-10">
-                <input type="text" class="form-control " id="iva" name="iva" ng-model="iva" ng-required="true" />
-                <div ng-show="!userForm.iva.$valid" class="alert alert-danger" role="alert">
+            <label for="nombre" class="col-3 col-form-label">Iva</label>
+            <div class="col-8">
+                <input type="text" class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.iva.$invalid && !userForm.iva.$pristine }" id="iva" name="iva" ng-model="ajaxDatoFactura.iva" ng-required="true" ng-pattern="/^[0-9]+$/"/>
+                <div ng-show="userForm.iva.$invalid && !userForm.iva.$pristine && !userForm.iva.$error.pattern" class="alert alert-danger" role="alert">
                     Iva obligatorio
+                </div>
+                <div ng-show="userForm.iva.$error.pattern" class="alert alert-danger" role="alert">
+                    Iva no valido
                 </div>
             </div>
         </div>
 
+        <!--        MODAL-->
+        <usuario-selection class="modal fade" id="cadd-location-modal" obj="ajaxDatoFactura.obj_Usuario" 
+                               on-usuario-set="usuarioRefresh(this,false)"></usuario-selection>
+
         <div class="form-group row">
-            <label for="id_usuario" class="col-2 col-form-label">Usuario</label>
-            <div class="col-8">
-                <input type="text" class="form-control" id="login" name="id_usuario" ng-model="id_usuario" ng-required="true" />                                                   
-                <div ng-show="!userForm.id_usuario.$valid" class="alert alert-danger" role="alert">
-                    Usuario obligatorio
-                </div>                
+            <label for="obj_usuario" class="col-3 col-form-label">Usuario</label>
+            <div class="col-2">          
+                <div class="input-group">
+                    <input ng-model="ajaxDatoFactura.obj_Usuario.id"
+                           ng-change="usuarioRefresh(this, true)"
+                           aria-describedby="basic-addon2"
+                           id="obj_usuario"
+                           name="obj_usuario"
+                           type="text"
+                           size="5"
+                           ng-model-options="{debounce: 1000}"
+                           maxlength="5" ng-required="true"  class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.obj_usuario.$invalid && !userForm.obj_usuario.$pristine }" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fas fa-search"
+                              data-toggle="modal"
+                              data-target="#cadd-location-modal">                                  
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="form-control col-2" style="border: 0px;" >
-                <button class="btn btn-primary" ng-click="oModal()" ><i class="fas fa-search"></i></button>                
+
+
+            <div class="form-group " style="width: auto;" >
+                <a href="usuario/view/{{ajaxDatoFactura.obj_Usuario.id}}" class="input-group-text" ng-disabled="link">
+                    <span >Usuario: {{ajaxDatoFactura.obj_Usuario.nombre}} {{ajaxDatoFactura.obj_Usuario.ape1}}</span>
+                </a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="obj_usuario" class="col-3 col-form-label"></label>
+            <div class="col-8">
+                <div ng-show="!userForm.obj_usuario.$valid && !userForm.obj_usuario.$pristine" class="alert alert-danger" style="width: auto;" role="alert">
+                    El usuario es incorrecto.
+                </div>
             </div>
         </div>
 
         <button ng-click="guardar()" type="button" class="btn btn-primary" ng-disabled="userForm.$invalid">Guardar</button>
-    </form>
-
-    <div class="alert alert-success" ng-show="mensaje">
-        Se ha creadola {{ob}} .
+    </ng-form>    
+    <div class="alert alert-success" ng-show="mensajeOK">
+        Datos actualizados correctamente del {{ob}} {{ajaxDatoFactura.id}}
     </div>
+    <div class="alert alert-success" ng-show="mensajeError">
+        Error de servidor al grabar el {{ob}} {{ajaxDatoFactura.id}}
+    </div>
+
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

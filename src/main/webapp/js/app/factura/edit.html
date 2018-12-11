@@ -45,10 +45,10 @@
 
         <!--        MODAL-->
         <usuario-selection class="modal fade" id="cadd-location-modal" obj="ajaxDatoFactura.obj_Usuario" 
-                               on-tipousuario-set="usuarioRefresh(this,false)"></usuario-selection>
+                               on-usuario-set="usuarioRefresh(this,false)"></usuario-selection>
 
         <div class="form-group row">
-            <label for="obj_tipousuario" class="col-3 col-form-label">Usuario</label>
+            <label for="obj_usuario" class="col-3 col-form-label">Usuario</label>
             <div class="col-2">          
                 <div class="input-group">
                     <input ng-model="ajaxDatoFactura.obj_Usuario.id"
@@ -77,29 +77,16 @@
             </div>
         </div>
 
-        <!--        ---{{userForm.obj_tipousuario.$valid|json}}-->
-
 
         <div class="form-group row">
-            <label for="obj_tipousuario" class="col-3 col-form-label"></label>
+            <label for="obj_usuario" class="col-3 col-form-label"></label>
             <div class="col-8">
-                <div ng-show="!userForm.obj_usuario.$valid" class="alert alert-danger" style="width: auto;" role="alert">
+                <div ng-show="!userForm.obj_usuario.$valid && !userForm.obj_usuario.$pristine" class="alert alert-danger" style="width: auto;" role="alert">
                     El usuario es incorrecto.
                 </div>
             </div>
         </div>
 
-        <!--            <div class="form-group row">
-                        <label for="pass" class="col-2 col-form-label">>ContraseÃ±a</label>
-                        <input type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}"
-                               id="pass" name="pass" ng-model="ajaxDatoUsuario.pass" ng-minlength="6" ng-required="true"/>
-                        <div ng-show="userForm.pass.$error.minlength" class="alert alert-danger" role="alert">
-                            La longitud de la constraseÃ±a es demasiado corta
-                        </div>
-                        <div ng-show="!userForm.pass.$valid" class="alert alert-danger" role="alert">
-                            ContraseÃ±a obligatorio
-                        </div>
-                    </div>-->
         <button ng-click="guardar()" type="button" class="btn btn-primary" ng-disabled="userForm.$invalid">Guardar</button>
     </ng-form>    
     <div class="alert alert-success" ng-show="mensajeOK">
