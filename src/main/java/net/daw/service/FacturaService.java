@@ -120,22 +120,22 @@ public class FacturaService {
     }
 
     public ReplyBean update() throws Exception {
-        int iRes;
+        int iRes = 0;
         ReplyBean oReplyBean = null;
         ConnectionInterface oConnectionPool = null;
         Connection oConnection;
         try {
             String strJsonFromClient = oRequest.getParameter("json");
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-            FacturaBean oFacturaBean = oGson.fromJson(strJsonFromClient, FacturaBean.class);
+            FacturaBean oFacturaBean = new FacturaBean();
+            oFacturaBean = oGson.fromJson(strJsonFromClient, FacturaBean.class);
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
             iRes = oFacturaDao.update(oFacturaBean);
             oReplyBean = new ReplyBean(200, Integer.toString(iRes));
         } catch (Exception ex) {
-            oReplyBean = new ReplyBean(500,
-                    "ERROR: " + EncodingHelper.escapeQuotes(EncodingHelper.escapeLine(ex.getMessage())));
+            throw new Exception("ERROR: Service level: update method: " + ob + " object", ex);
         } finally {
             oConnectionPool.disposeConnection();
         }

@@ -1,7 +1,7 @@
 'use strict';
 
-moduleFactura.controller('facturaEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleFactura.controller('facturaEditController', ['$scope', '$http', '$routeParams',
+    function ($scope, $http, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.myDate = new Date();
         $scope.ob = "factura";
@@ -12,6 +12,27 @@ moduleFactura.controller('facturaEditController', ['$scope', '$http', '$location
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDatoFactura = response.data.message;
+            $scope.ajaxDatoFacturaFecha = response.data.message.fecha;
+            $scope.resultado = $scope.ajaxDatoFacturaFecha.slice(0, 3);
+
+            switch ($scope.resultado) {
+                case "ene":
+                    $scope.fecha = $scope.ajaxDatoFacturaFecha.replace("ene", "jan");
+                    break;
+                case "abr":
+                    $scope.fecha = $scope.ajaxDatoFacturaFecha.replace("abr", "apr");
+                    break;
+                case "ago":
+                    $scope.fecha = $scope.ajaxDatoFacturaFecha.replace("ago", "aug");
+                    break;
+                case "dic":
+                    $scope.fecha = $scope.ajaxDatoFacturaFecha.replace("dic", "dec");
+                    break;
+                default:
+                    $scope.fecha = $scope.ajaxDatoFacturaFecha;
+                    break;
+            }
+            $scope.dt = new Date($scope.fecha);
         }, function (response) {
             $scope.ajaxDatoFactura = response.data.message || 'Request failed';
             $scope.status = response.status;
@@ -21,7 +42,7 @@ moduleFactura.controller('facturaEditController', ['$scope', '$http', '$location
         $scope.guardar = function () {
             var json = {
                 id: $scope.ajaxDatoFactura.id,
-                fecha: null,
+                fecha: $scope.dt,
                 iva: $scope.ajaxDatoFactura.iva,
                 id_usuario: $scope.ajaxDatoFactura.obj_Usuario.id
             };
@@ -66,5 +87,18 @@ moduleFactura.controller('facturaEditController', ['$scope', '$http', '$location
                 form.userForm.obj_usuario.$setValidity('valid', true);
             }
         };
+
+
+        //CALENDARIO        
+        $scope.myDate = new Date();
+        $scope.minDate = new Date(
+                $scope.myDate.getFullYear(),
+                $scope.myDate.getMonth() - 2,
+                $scope.myDate.getDate());
+
+        $scope.maxDate = new Date(
+                $scope.myDate.getFullYear(),
+                $scope.myDate.getMonth() + 2,
+                $scope.myDate.getDate());
 
     }]);

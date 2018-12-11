@@ -95,7 +95,7 @@ public class FacturaDao {
     }
 
     public FacturaBean create(FacturaBean oFacturaBean) throws Exception {
-         String strSQL = "INSERT INTO " + ob;
+        String strSQL = "INSERT INTO " + ob;
         strSQL += "(" + oFacturaBean.getColumns() + ")";
         strSQL += " VALUES ";
         strSQL += "(" + oFacturaBean.getValues() + ")";
@@ -124,16 +124,12 @@ public class FacturaDao {
     }
 
     public int update(FacturaBean oFacturaBean) throws Exception {
-        int iResult = 0;
-        String strSQL = "UPDATE " + ob + " SET fecha = ?, iva = ?, id_usuario = ? WHERE " + ob + ".id= ?;";
-
+       int iResult = 0;
+        String strSQL = "UPDATE " + ob + " SET ";
+        strSQL += oFacturaBean.getPairs(ob);
         PreparedStatement oPreparedStatement = null;
         try {
-            oPreparedStatement = oConnection.prepareStatement(strSQL);
-            oPreparedStatement.setDate(1, (Date) oFacturaBean.getFecha());
-            oPreparedStatement.setFloat(2, (float) oFacturaBean.getIva());
-            oPreparedStatement.setInt(3, oFacturaBean.getId_usuario());
-            oPreparedStatement.setInt(4, oFacturaBean.getId());
+            oPreparedStatement = oConnection.prepareStatement(strSQL);            
             iResult = oPreparedStatement.executeUpdate();
 
         } catch (SQLException e) {
