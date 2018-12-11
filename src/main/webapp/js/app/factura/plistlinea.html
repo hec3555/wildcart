@@ -20,19 +20,19 @@
             <nav aria-label="paginacion">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
+                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/1/{{orderURLCliente}}">1</a>
                     </li>
                     <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                        <a class="page-link" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
+                        <a class="page-link" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plistfactura/{{idUsu}}/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plistfactura/{{id}}/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
+                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
                     </li>                    
                 </ul>
             </nav>
@@ -81,16 +81,7 @@
                     <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_producto', 'desc')">
                         <i class="fas fa-long-arrow-alt-down"></i>
                     </button>
-                </th>
-                <th>
-                    Numero de Factura
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'asc')">
-                        <i class="fas fa-long-arrow-alt-up"></i>
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'desc')">
-                        <i class="fas fa-long-arrow-alt-down"></i>
-                    </button>
-                </th>               
+                </th>    
                 <th>
                     Acciones                
                 </th>
@@ -99,7 +90,6 @@
                 <td>{{fila.id}}</td>
                 <td>{{fila.cantidad}}</td>
                 <td><a href="producto/view/{{fila.obj_Producto.id}}">{{fila.obj_Producto.desc}}</a></td>
-                <td>{{fila.obj_Factura.id}}</td>
                 <td class="acciones"> 
                     <a  href="linea/view/{{fila.id}}"> 
                         <button class="btn btn-info accion"  id="ver"><i class="fa fa-eye"></i></button>
@@ -115,23 +105,23 @@
         </table>
     </div>
     <div class="row" style="margin-bottom: 55px;">
-        <div class="col-10">
+        <div class="col-9">
             <nav aria-label="paginacion">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
+                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/1/{{orderURLCliente}}">1</a>
                     </li>
                     <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                        <a class="page-link" href="{{ob}}/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
+                        <a class="page-link" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
+                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plistlinea/{{id}}/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
                     </li>                    
                 </ul>
             </nav>

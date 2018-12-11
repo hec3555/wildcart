@@ -52,7 +52,7 @@ moduleFactura.controller('facturaPlistLineaController', ['$scope', '$http', '$lo
         //getcount
         $http({
             method: 'GET',
-            url: '/json?ob=' + $scope.ob + '&op=getcount'
+            url: '/json?ob=linea&op=getcountxfactura&idfact='+$scope.id
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataLineasNumber = response.data.message;
@@ -93,7 +93,7 @@ moduleFactura.controller('facturaPlistLineaController', ['$scope', '$http', '$lo
 
 
         $scope.update = function () {
-            $location.url($scope.ob + "/plistlinea/"+$scope.id + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
+            $location.url($scope.ob + "/plistlinea/"+$scope.id +"/"+ $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
         };
 
         //paginacion neighbourhood
