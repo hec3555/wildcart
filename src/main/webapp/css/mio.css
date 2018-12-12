@@ -26,19 +26,20 @@
     display: grid;
     grid-template-columns: repeat(auto-fill,220px);     
     grid-auto-rows: 1fr;
-    grid-gap: 50px 10%;
+    grid-gap: 50px 8%;
     padding: 10px;    
     justify-content: center;
     margin-bottom: 30px;
     margin-top: 30px;
     background: rgba(108,158,237,0.4);
     border-radius: 50px;
-    padding: 20px;
+    padding: 30px;
 }
 .producto{
     border: 1px solid black;   
     display: grid;
-    grid-template-rows: 200px 30px 30px 35px; 
+    grid-template-rows: 200px auto-fill; 
+    grid-gap: 15px 5%;
     border-radius: 10px 50px 10px 50px;
     box-shadow: 5px 0px 20px grey;
     padding: 10px;
@@ -90,13 +91,15 @@
     grid-template-columns: repeat(3,1fr);
     grid-template-rows:1fr 1fr 1fr;
     grid-template-areas: 
-        "img desc add"
+        "img desc ."
+        "img exis add"
         "img cant red"
         "img prec del"
 }
 
 #itemImagen{grid-area: img;}
 #itemDesc{grid-area: desc;}
+#itemExis{grid-area: exis;}
 #itemCant{grid-area: cant;}
 #itemPrecio{grid-area: prec;}
 #itemAdd{grid-area: add;}

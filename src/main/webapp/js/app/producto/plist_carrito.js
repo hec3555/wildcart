@@ -1,7 +1,7 @@
 'use strict';
 
-moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http', '$location', 'toolService', '$routeParams',"countcartService",
-    function ($scope, $http, $location, toolService, $routeParams, countcartService) {
+moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http', '$location', 'toolService', '$routeParams', "countcartService", '$mdDialog',
+    function ($scope, $http, $location, toolService, $routeParams, countcartService, $mdDialog) {
 
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
@@ -30,7 +30,7 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
                 $scope.page = 1;
             }
         }
-       
+
         $scope.resetOrder = function () {
             $location.url($scope.ob + "/plist_1/" + $scope.rpp + "/1");
             $scope.activar = "false";
@@ -50,7 +50,7 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
             ;
             $location.url($scope.ob + "/plist_1/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
         };
-        
+
         $scope.add = function (id) {
             $http({
                 method: 'GET',
@@ -60,13 +60,10 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
                 for (var i = 0; i < response.data.message.length; i++) {
                     if (id === response.data.message[i].obj_Producto.id) {
                         $scope.ajaxDataCantidad = response.data.message[i].cantidad;
-                        $scope.ajaxDataDesc = response.data.message[i].obj_Producto.desc;
-                        $scope.ajaxDataExistencias = response.data.message[i].obj_Producto.existencias;
+
                         if ($scope.ajaxDataCantidad === response.data.message[i].obj_Producto.existencias) {
-                            alert("Has elegido el maximo de existencias del producto: " + $scope.ajaxDataDesc);
-                        } //else {
-                           // alert("Has a�adido el producto: " + $scope.ajaxDataDesc + " a tu carrito.");
-                        //}
+                            showAlert('Cuidado:', 'Ha agregado al carrito la cantidad de productos existentes');
+                        }
                     }
                 }
                 countcartService.updateCarrito();
@@ -76,7 +73,17 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
                 $scope.error = $scope.status + " " + response.message || 'Request failed';
             });
         };
-        
+        function showAlert(titulo, texto) {
+            alert = $mdDialog.alert({
+                title: titulo,
+                textContent: texto,
+                ok: 'Close'
+            });
+
+            $mdDialog.show(alert).finally(function () {
+                alert = undefined;
+            });
+        }
         //getcount
         $http({
             method: 'GET',

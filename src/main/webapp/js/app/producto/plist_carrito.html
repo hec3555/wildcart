@@ -43,10 +43,11 @@
             <div class="producto" ng-repeat="producto in ajaxDataProductos">
                 <div><i class="fas fa-cookie-bite" style="font-size: 200px;"></i></div>
                 <div>{{producto.desc}}</div>
+                <div>Existencias: {{producto.existencias}}</div>
                 <div>Precio: {{producto.precio}}€</div>
                 <div>
                     <a class="btn comprar" ng-class="{'disabled': producto.existencias == 0}"  ng-click="add(producto.id)"  style="margin-left: 10px;" data-toggle="modal"
-                              data-target="#cadd-location-modal">
+                       data-target="#cadd-location-modal">
                         <i class="fas fa-cart-plus" > Comprar</i>
                     </a>
                 </div>                
