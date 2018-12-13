@@ -13,7 +13,7 @@ moduleUsuario.controller("usuarioLoginController", ["$scope", "$http", "$routePa
                 },
                 url: '/json?ob=usuario&op=login&user=' + $scope.login + '&pass=' + forge_sha256($scope.pass)
             }).then(function (response) {
-                if (response.status === 200) {
+                if (response.data.status === 200) {
                     sessionService.setSessionActive();
                     sessionService.setUserName(response.data.message.nombre + " " + response.data.message.ape1);
                     sessionService.setId(response.data.message.id);
@@ -24,12 +24,15 @@ moduleUsuario.controller("usuarioLoginController", ["$scope", "$http", "$routePa
                     $scope.loginH = true;
                     $scope.formulario = false;
                     $location.url('/home');
+                }else{
+                    $scope.errorLogin = true;
+                    $scope.mensajeError = response.data.message;
                 }
 
                 $scope.ajaxDatoLogin = response.data.message;
             }, function (response) {
                 $scope.errorLogin = true;
-                $scope.ajaxDatoLogin = response.data.message || 'Request Failed';
+                $scope.ajaxDatoLogin = response.message;
             });
         };
         $scope.isActive = toolService.isActive;

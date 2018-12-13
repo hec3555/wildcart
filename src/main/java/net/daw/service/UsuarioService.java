@@ -250,7 +250,7 @@ public class UsuarioService {
                 oReplyBean = new ReplyBean(200, oGson.toJson(oUsuarioBean));
             } else {
 //            throw new Exception("ERROR Bad Authentication: Service level: get page: " + ob + " object");
-                oReplyBean = new ReplyBean(401, EncodingHelper.quotate("Bad Authentication"));
+                oReplyBean = new ReplyBean(401, "Bad Authentication");
             }
         } catch (Exception ex) {
             throw new Exception("ERROR Bad Authentication: Service level: login: " + ob + " object");
