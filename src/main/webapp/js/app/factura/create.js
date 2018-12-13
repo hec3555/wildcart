@@ -2,17 +2,40 @@
 
 moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
     function ($scope, $http, $location, toolService, $routeParams) {
-        $scope.id = $routeParams.id;
-
+        
         $scope.ob = "factura";
+
+        $scope.idUsu = $routeParams.id;
 
         $scope.ajaxDatoFactura = {
             id: null,
             fecha: null,
-            iva: null
+            iva: null,
+            obj_Usuario: {id: null}
         };
-
-
+        
+        
+        if($routeParams.id !== "undefined" && $routeParams.id !== "" && $routeParams.id){
+            $scope.ajaxDatoFactura.obj_Usuario.id = $scope.idUsu;
+            $scope.idUsuExist = true;
+            $http({
+                    method: 'GET',
+                    //withCredentials: true,
+                    url: 'json?ob=usuario&op=get&id=' + $scope.ajaxDatoFactura.obj_Usuario.id
+                }).then(function (response) {
+                    if (response.data.message !== null) {
+                        $scope.ajaxDatoFactura.obj_Usuario = response.data.message;
+                    } else {
+                        $scope.ajaxDatoFactura.obj_Usuario.nombre = "Error al acceder al usuario";
+                        $scope.ajaxDatoFactura.obj_Usuario.ape1 = "";
+                    }
+                }, function (response) {
+                    $scope.ajaxDatoFactura.obj_Usuario.nombre = "Error al acceder al usuario";
+                    $scope.ajaxDatoFactura.obj_Usuario.ape1 = "";
+                });
+        }else{
+            $scope.idUsuExist = false;
+        }
         $scope.guardar = function () {
             var json = {
                 id: null,

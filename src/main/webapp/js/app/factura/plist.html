@@ -37,10 +37,8 @@
             </nav>
         </div>
         <div class="col-3">
-            <a  href="{{ob}}/create/"> 
-                <button type="button" class="btn btn-info btn-sm" style="width: 100px; height:30px;">
-                    <i class="fas fa-file-invoice"> Crear</i>
-                </button>
+            <a  href="{{ob}}/create/" class="btn btn-info btn-sm" style="width: 100px; padding:7px;"> 
+                <i class="fas fa-file-invoice"> Crear</i>
             </a>
             <button type="button" class="btn btn-danger btn-sm" style="width: auto; height:30px;" ng-click="resetOrder()">
                 <i class="fas fa-toilet-paper"> Reset</i>
@@ -92,12 +90,6 @@
                 </th> 
                 <th>
                     LINEAS
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'asc')">
-                        <i class="fas fa-long-arrow-alt-up"></i>
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id_usuario', 'desc')">
-                        <i class="fas fa-long-arrow-alt-down"></i>
-                    </button>
                 </th> 
                 <th>
                     Acciones                
