@@ -1,51 +1,89 @@
 <header-component></header-component>
 <main role="main" class="container" style="margin-bottom: 100px;">
-
-    <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
+    
+    
     <div class="primeraParte"></div>
-    <a href="javascript:window.history.back();"> <button class="btn btn-success">Volver</button> </a>    
-    <form name="userForm" style="margin-bottom: 50px;" ng-show="!mensaje">
-        <h3 style="text-align: center">Crear Factura</h3>
-
-        <div class="form-group row">
-            <label for="fecha" class="col-2 col-form-label">Fecha</label>
-            <div class="col-8">
-                <input type="text" class="form-control" id="fecha" name="fecha" ng-model="fecha" ng-required="true" />
-            </div>
-            <div class="form-control col-2" style="border: 0px;" >
-                <button class="btn btn-primary" ng-click="oModal()" ><i class="fas fa-calendar"></i></button>                
-            </div>           
-            <md-datepicker ng-model="myDate" md-placeholder="Fecha"></md-datepicker>
+    <div class="row">
+        <div class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+            <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2"><i class="fas fa-file-invoice"></i> Lineas de la factura {{idFac}}</h1>
+                <h3 style="text-align: center">Crear</h3>
+                <a href="javascript:window.history.back();" class="btn btn-success">Volver</a> 
+            </div>     
         </div>
-
+    </div>
+       
+    <ng-form id="userForm" name="userForm" style="margin-bottom: 50px;" ng-show="!mensajeOK && !mensajeError">
+       
         <div class="form-group row">
-            <label for="iva" class="col-2 col-form-label">IVA</label>
-            <div class="col-10">
-                <input type="text" class="form-control " id="iva" name="iva" ng-model="iva" ng-required="true" />
-                <div ng-show="!userForm.iva.$valid" class="alert alert-danger" role="alert">
-                    Iva obligatorio
+            <label for="cantidad" class="col-3 col-form-label">Cantidad</label>
+            <div class="col-8">
+                <input type="text" class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.cantidad.$invalid && !userForm.cantidad.$pristine }" id="cantidad" 
+                       name="cantidad" ng-model="cantidad" ng-required="true" ng-pattern="/^[0-9]+$/"/>
+                <div ng-show="userForm.cantidad.$invalid && !userForm.cantidad.$pristine && !userForm.cantidad.$error.pattern" class="alert alert-danger" role="alert">
+                    cantidad obligatorio
+                </div>
+                <div ng-show="userForm.cantidad.$error.pattern" class="alert alert-danger" role="alert">
+                    cantidad no valido
                 </div>
             </div>
         </div>
+        
+        <!-- MODAL de producto -->
+        <producto-selection class="modal fade" id="cadd-location-modal" obj="ajaxDatoLinea.obj_producto" 
+                               on-producto-set="productoRefresh(this,false)"></producto-selection>
 
         <div class="form-group row">
-            <label for="id_usuario" class="col-2 col-form-label">Usuario</label>
+            <label for="obj_producto" class="col-3 col-form-label">producto</label>
+            <div class="col-2" ng-show="!idProdExist">          
+                <div class="input-group">
+                    <input ng-model="ajaxDatoLinea.obj_producto.id"
+                           ng-change="productoRefresh(this, true)"
+                           aria-describedby="basic-addon2"
+                           id="obj_producto"
+                           name="obj_producto"
+                           type="text"
+                           size="5"
+                           ng-model-options="{debounce: 1000}"
+                           maxlength="5" ng-required="true"
+                           class="form-control is-valid" 
+                           ng-class="{ 'is-invalid' : userForm.obj_producto.$invalid && !userForm.obj_producto.$pristine }"
+                    />
+                    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fas fa-search"
+                              data-toggle="modal"
+                              data-target="#cadd-location-modal">                                  
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group " style="width: auto; margin-left: 15px;" ng-show="userForm.obj_producto.$valid">
+                <a href="producto/view/{{ajaxDatoLinea.obj_producto.id}}" class="input-group-text" ng-disabled="link">
+                    Producto: {{ajaxDatoLinea.obj_producto.desc}}
+                </a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="obj_producto" class="col-3 col-form-label"></label>
             <div class="col-8">
-                <input type="text" class="form-control" id="login" name="id_usuario" ng-model="id_usuario" ng-required="true" />                                                   
-                <div ng-show="!userForm.id_usuario.$valid" class="alert alert-danger" role="alert">
-                    Usuario obligatorio
-                </div>                
+                <div ng-show="!userForm.obj_producto.$valid && !userForm.obj_producto.$pristine" class="alert alert-danger" style="width: auto;" role="alert">
+                    El producto es incorrecto.
+                </div>
             </div>
-            <div class="form-control col-2" style="border: 0px;" >
-                <button class="btn btn-primary" ng-click="oModal()" ><i class="fas fa-search"></i></button>                
-            </div>
-        </div>  
+        </div>
+        <!--   Fin modal de producto  -->
 
         <button ng-click="guardar()" type="button" class="btn btn-primary" ng-disabled="userForm.$invalid">Guardar</button>
-    </form>
-
-    <div class="alert alert-success" ng-show="mensaje">
-        Se ha creadola {{ob}} .
+    </ng-form>    
+    <div class="alert alert-success" ng-show="mensajeOK">
+        Datos actualizados correctamente del {{ob}} {{ajaxDatoLinea.id}}
     </div>
+    <div class="alert alert-success" ng-show="mensajeError">
+        Error de servidor al grabar el {{ob}} {{ajaxDatoLinea.id}}
+    </div>
+
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>
