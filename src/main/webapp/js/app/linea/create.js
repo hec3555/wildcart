@@ -50,7 +50,7 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
                 $scope.status = response.status;
                 $scope.mensajeOK = true;
             }, function (response) {
-                $scope.ajaxDatoLinea = response.message;
+                $scope.msgError = response.message;
                 $scope.status = response.status;
             });
         };
@@ -69,11 +69,11 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
                         $scope.ajaxDatoLinea.obj_producto = response.data.message;
                     } else {
                         form.userForm.obj_producto.$setValidity('valid', false);
-                        $scope.ajaxDatoLinea.obj_producto.id = "Error al acceder al usuario";
+                        $scope.msgError = "Error al acceder al usuario";
                     }
                 }, function (response) {
                     form.userForm.obj_producto.$setValidity('valid', false);
-                    $scope.ajaxDatoLinea.obj_producto.id = "Error al acceder al usuario";
+                    $scope.msgError = "Error al acceder al usuario";
                 });
             } else {
                 form.userForm.obj_producto.$setValidity('valid', true);

@@ -9,14 +9,14 @@
         </div>
     </div>
     <form name="userForm"  style="margin-top: 80px;" ng-show="formulario">
-        <div class="form-group row justify-content-md-center">            
+        <div class="form-group row justify-content-center">            
             <div class="col-sm-8 col-md-5">
                 <label for="login">Login</label>
                 <input type="text" class="form-control" id="login" placeholder="Introduce tu nombre de usuario" ng-model="login" ng-required="true" ng-keyup="$event.keyCode === 13 && log()">
                 <small id="emailHelp" class="form-text text-muted">Escribe correctamente tu nombre de usuario.</small>
             </div>
         </div>    
-        <div class="form-group row justify-content-md-center">            
+        <div class="form-group row justify-content-center">            
             <div class="col-sm-8 col-md-5">
                 <label for="pass">Password</label>
                 <input type="password" class="form-control" id="pass" placeholder="Introduce tu contraseña" ng-model="pass" ng-required="true" ng-keyup="$event.keyCode === 13 && log()">
@@ -27,7 +27,7 @@
             </div>
         </div>        
     </form>
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-center">
         <div class="col-sm-8 col-md-5">            
             <div class="alert alert-danger" role="alert" ng-show="errorLogin">
                 {{mensajeError}}
@@ -35,7 +35,7 @@
 
         </div>
     </div>
-    <div class="form-group row justify-content-md-center">
+    <div class="form-group row justify-content-center">
         <div class="col-sm-8 col-md-5">
             <div ng-show="yesLogin" style="margin-top: 80px">
                 <div class="alert alert-success" role="alert">
