@@ -6,6 +6,7 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
         $scope.ob = "producto";
+        $scope.msgModal = "prueba";
         // el orden lo dejo, por si posteriormente queremos ordenar por precio, por ejemplo
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -60,9 +61,11 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
                 for (var i = 0; i < response.data.message.length; i++) {
                     if (id === response.data.message[i].obj_Producto.id) {
                         $scope.ajaxDataCantidad = response.data.message[i].cantidad;
-
-                        if ($scope.ajaxDataCantidad === response.data.message[i].obj_Producto.existencias) {
-                            showAlert('Cuidado:', 'Ha agregado al carrito la cantidad de productos existentes');
+                        $scope.ajaxDataExistencias = response.data.message[i].obj_Producto.existencias;
+                        if ($scope.ajaxDataCantidad === $scope.ajaxDataExistencias) {
+                            $scope.msgModal = 'Ha agregado al carrito la cantidad de productos existentes';
+                        }else{
+                             $scope.msgModal = 'Agregado al carrito';
                         }
                     }
                 }
@@ -73,17 +76,7 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
                 $scope.error = $scope.status + " " + response.message || 'Request failed';
             });
         };
-        function showAlert(titulo, texto) {
-            alert = $mdDialog.alert({
-                title: titulo,
-                textContent: texto,
-                ok: 'Close'
-            });
-
-            $mdDialog.show(alert).finally(function () {
-                alert = undefined;
-            });
-        }
+        
         //getcount
         $http({
             method: 'GET',

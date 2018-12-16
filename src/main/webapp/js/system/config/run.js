@@ -12,13 +12,14 @@ wildcart.run(['$rootScope', 'sessionService', '$location', '$http', 'countcartSe
                     oSessionService.setSessionActive();
                     oSessionService.setUserName(response.data.message.nombre + " " + response.data.message.ape1);
                     oSessionService.setId(response.data.message.id);
+                    countcartService.updateCarrito();
                 } else {
                     oSessionService.setSessionInactive();
                     if (nextUrl != "/" && nextUrl != "/home" && nextUrl != "/usuario/login") {
                         $location.path("/home");
                     }
                 }
-                countcartService.updateCarrito();
+                
             }, function (response) {
                 oSessionService.setSessionInactive();
                 if (nextUrl != '/' && nextUrl != '/home' && nextUrl != '/usuario/login') {
