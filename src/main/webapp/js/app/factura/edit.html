@@ -24,9 +24,7 @@
 
         <div class="form-group row">
             <label for="fecha" class="col-3 col-form-label">Fecha</label>
-            <md-datepicker ng-model="dt" id="fecha" name="fecha" md-placeholder="Fecha" ng-required="true"
-               ng-class="{ 'is-invalid' : userForm.fecha.$invalid && !userForm.fecha.$pristine, 'is-valid': userForm.fecha.$valid && !userForm.fecha.$pristine}">
-                </md-datepicker>
+            <md-datepicker ng-model="dt" id="fecha" name="fecha" md-placeholder="Fecha"></md-datepicker>
                 <div ng-show="userForm.fecha.$invalid && !userForm.fecha.$pristine && !userForm.fecha.$error.pattern" class="alert alert-danger" role="alert">
                     Fecha no valida
                 </div>

@@ -136,7 +136,7 @@ public class ProductoBean {
         strColumns += existencias + ",";
         strColumns += precio + ",";
         strColumns += EncodingHelper.quotate(foto) + ",";
-        strColumns += id_tipoProducto + ",";
+        strColumns += id_tipoProducto;
         return strColumns;
     }
 
@@ -148,7 +148,7 @@ public class ProductoBean {
         strPairs += "existencias=" + existencias + ",";
         strPairs += "precio=" + precio + ",";
         strPairs += "foto=" + EncodingHelper.quotate(foto) + ",";
-        strPairs += "id_tipoProducto=" + id_tipoProducto + ",";
+        strPairs += "id_tipoProducto=" + id_tipoProducto;
         strPairs += " WHERE id=" + id;
         return strPairs;
     }
