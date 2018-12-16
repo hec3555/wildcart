@@ -64,17 +64,10 @@ moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$locati
             if (consulta) {
                 $http({
                     method: 'GET',
-                    //withCredentials: true,
                     url: 'json?ob=usuario&op=get&id=' + $scope.ajaxDatoFactura.obj_Usuario.id
                 }).then(function (response) {
-                    if (response.data.message != null) {
                         form.userForm.obj_usuario.$setValidity('valid', true);
                         $scope.ajaxDatoFactura.obj_Usuario = response.data.message;
-                    } else {
-                        form.userForm.obj_usuario.$setValidity('valid', false);
-                        $scope.ajaxDatoFactura.obj_Usuario.nombre = "Error al acceder al usuario";
-                        $scope.ajaxDatoFactura.obj_Usuario.ape1 = "";
-                    }
                 }, function (response) {
                     form.userForm.obj_usuario.$setValidity('valid', false);
                     $scope.ajaxDatoFactura.obj_Usuario.nombre = "Error al acceder al usuario";

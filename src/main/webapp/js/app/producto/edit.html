@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="descripcion" class="col-2 col-form-label">Descripción</label>
+            <label for="descripcion" class="col-2 col-form-label">Descripcion</label>
             <div class="col-10">
                 <input type="text" class="form-control " id="descripcion" name="descripcion" ng-model="ajaxDatoProducto.desc" ng-required="true" />
                 <div ng-show="!userForm.descripcion.$valid" class="alert alert-danger" role="alert">
@@ -46,7 +46,7 @@
         <div class="form-group row">
             <label for="existencias" class="col-2 col-form-label">Existencias</label>
             <div class="col-10">
-                <input type="text" class="form-control" id="existencias" name="existencias" ng-model="ajaxDatoProducto.existencias" ng-required="true"  ng-pattern="/^[0-9][0-9]*$/"/>
+                <input type="text" class="form-control" id="existencias" name="existencias" ng-model="ajaxDatoProducto.existencias" ng-required="true"  ng-pattern="/^[0-9]{0,9}$/"/>
                 <div ng-show="userForm.existencias.$invalid && !userForm.existencias.$pristine && !userForm.existencias.$error.pattern" class="alert alert-danger" role="alert">
                     Existencias obligatorio
                 </div>
@@ -101,7 +101,7 @@
             </div>
 
 
-            <div class="form-group" style="width: auto;">
+            <div class="form-group" style="width: auto;" ng-show="userForm.obj_tipoProducto.$valid">
                 <a href="tipoproducto/view/{{ajaxDatoProducto.obj_tipoProducto.id}}" class="input-group-text">
                     <span >Tipo de producto: {{ajaxDatoProducto.obj_tipoProducto.desc}}</span>
                 </a>
@@ -110,10 +110,10 @@
 
 
         <div class="row">
-            <label for="obj_tipoProducto" class="col-2 col-form-label"></label>
-            <div class="col-5">
+            <label for="obj_tipoProducto" class="col-3 col-form-label"></label>
+            <div class="col-8">
                 <div ng-show="!userForm.obj_tipoProducto.$valid" class="alert alert-danger" style="width: auto;" role="alert">
-                    El tipo de producto es incorrecto.. {{userForm.obj_tipoProducto.$valid}}
+                    El tipo de producto es incorrecto.
                 </div>
             </div>
 

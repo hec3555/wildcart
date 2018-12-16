@@ -25,7 +25,7 @@
         <div class="form-group row">
             <label for="descripcion" class="col-3 col-form-label">Descripcion</label>
             <div class="col-8">
-                <input type="text" class="form-control " id="descripcion" name="descripcion" ng-model="descripcion" ng-required="true" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/" />
+                <input type="text" class="form-control " id="descripcion" name="descripcion" ng-model="descripcion" ng-required="true" ng-pattern="/^[a-zA-ZÃ±Ã‘Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“Ãš\s]+$/" />
                 <div ng-show="userForm.descripcion.$invalid && !userForm.descripcion.$pristine && !userForm.descripcion.$error.pattern" class="alert alert-danger" role="alert">
                     Descripcion obligatoria
                 </div>

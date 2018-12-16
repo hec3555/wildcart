@@ -1,65 +1,89 @@
 <header-component></header-component>
 <main role="main" class="container" style="margin-bottom: 100px;">
-
-    <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
+    
+    
     <div class="primeraParte"></div>
     <div class="row">
-        <div class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+        <div class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><i class="fas fa-file-invoice"></i>Linea </h1>
-                <h3 style="text-align: center">Editar linea</h3>
-                <a href="javascript:window.history.back();"> <button class="btn btn-success">Volver</button> </a> 
+                <h1 class="h2"><i class="fas fa-file-invoice"></i> Linea {{idLin}}</h1>
+                <h3 style="text-align: center">editar linea</h3>
+                <a href="javascript:window.history.back();" class="btn btn-success">Volver</a> 
             </div>     
         </div>
-    </div>    
-    <form name="userForm" style="margin-bottom: 50px;" ng-show="!mensaje">
-        
-
-        <div class="form-group row">
-            <label for="id" class="col-2 col-form-label">ID</label>
-            <div class="col-10">
-                <input type="text" class="form-control" id="id" name="id" ng-disabled="true" ng-model="ajaxDatoLinea.id" />
-            </div>                
-        </div>   
-
-        <div class="form-group row">
-            <label for="cantidad" class="col-2 col-form-label">Cantidad</label>
-            <div class="col-10">
-                <input type="text" class="form-control" id="cantidad" name="cantidad" ng-model="ajaxDatoLinea.cantidad" ng-required="true" ng-pattern="/^[0-9][0-9]*$/"/>
-                <div ng-show="userForm.cantidad.$error.pattern" class="alert alert-danger" role="alert">
-                    Cantidad no valida
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="id_producto" class="col-2 col-form-label">Tipo Producto</label>
-            <div class="col-10">
-                <input type="text" class="form-control " id="id_producto" name="id_producto" ng-model="ajaxDatoLinea.obj_Producto.desc" ng-required="true" />
-                <div ng-show="!userForm.id_producto.$valid" class="alert alert-danger" role="alert">
-                    Producto obligatorio
-                </div>
-            </div>
-        </div>
-
+    </div>
+       
+    <ng-form id="userForm" name="userForm" style="margin-bottom: 50px;" ng-show="!mensajeOK && !mensajeError">
        
         <div class="form-group row">
-            <label for="id_factura" class="col-2 col-form-label">Tipo Factura</label>
+            <label for="cantidad" class="col-3 col-form-label">Cantidad</label>
             <div class="col-8">
-                <input type="text" class="form-control" id="id_factura" name="id_factura" ng-model="ajaxDatoLinea.obj_Factura.id" ng-required="true" />                                                   
-                <div ng-show="!userForm.id_factura.$valid" class="alert alert-danger" role="alert">
-                    Factura obligatorio
-                </div>                
+                <input type="text" class="form-control is-valid" ng-class="{ 'is-invalid' : userForm.cantidad.$invalid && !userForm.cantidad.$pristine }" id="cantidad" 
+                       name="cantidad" ng-model="ajaxDatoLinea.cantidad" ng-required="true" ng-pattern="/^[[0-9]{0,9}$/"/>
+                <div ng-show="userForm.cantidad.$invalid && !userForm.cantidad.$pristine && !userForm.cantidad.$error.pattern" class="alert alert-danger" role="alert">
+                    cantidad obligatorio
+                </div>
+                <div ng-show="userForm.cantidad.$error.pattern" class="alert alert-danger" role="alert">
+                    cantidad no valida
+                </div>
             </div>
-            <div class="form-control col-2" style="border: 0px;" >
-                <button class="btn btn-primary" ng-click="oModal()" ><i class="fas fa-search"></i></button>                
-            </div>
-        </div>        
-        <button ng-click="guardar()" type="button" class="btn btn-primary" ng-disabled="userForm.$invalid">Guardar</button>
-    </form>
+        </div>
+        
+        <!-- MODAL de producto -->
+        <producto-selection class="modal fade" id="cadd-location-modal" obj="ajaxDatoLinea.obj_Producto" 
+                               on-producto-set="productoRefresh(this,false)"></producto-selection>
 
-    <div class="alert alert-success" ng-show="mensaje">
+        <div class="form-group row">
+            <label for="obj_producto" class="col-3 col-form-label">producto</label>
+            <div class="col-2">          
+                <div class="input-group">
+                    <input ng-model="ajaxDatoLinea.obj_Producto.id"
+                           ng-change="productoRefresh(this, true)"
+                           aria-describedby="basic-addon2"
+                           id="obj_producto"
+                           name="obj_producto"
+                           type="text"
+                           size="5"
+                           ng-model-options="{debounce: 1000}"
+                           maxlength="5" ng-required="true"
+                           class="form-control is-valid" 
+                           ng-class="{ 'is-invalid' : userForm.obj_producto.$invalid && !userForm.obj_producto.$pristine }"
+                    />
+                    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fas fa-search"
+                              data-toggle="modal"
+                              data-target="#cadd-location-modal">                                  
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group " style="width: auto; margin-left: 15px;" ng-show="userForm.obj_producto.$valid">
+                <a href="producto/view/{{ajaxDatoLinea.obj_Producto.id}}" class="input-group-text" ng-disabled="link">
+                    Producto: {{ajaxDatoLinea.obj_Producto.desc}}
+                </a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="obj_producto" class="col-3 col-form-label"></label>
+            <div class="col-8">
+                <div ng-show="!userForm.obj_producto.$valid && !userForm.obj_producto.$pristine" class="alert alert-danger" style="width: auto;" role="alert">
+                    {{msgError}}
+                </div>
+            </div>
+        </div>
+        <!--   Fin modal de producto  -->
+
+        <button ng-click="guardar()" type="button" class="btn btn-primary" ng-disabled="userForm.$invalid">Guardar</button>
+    </ng-form>    
+    <div class="alert alert-success" ng-show="mensajeOK">
         Datos actualizados correctamente del {{ob}} {{ajaxDatoLinea.id}}
     </div>
+    <div class="alert alert-success" ng-show="mensajeError">
+        Error de servidor al grabar el {{ob}} {{ajaxDatoLinea.id}}
+    </div>
+
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

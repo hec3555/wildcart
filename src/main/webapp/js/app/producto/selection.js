@@ -6,7 +6,7 @@ moduleComponent.component('productoSelection', {
     bindings: {
         obj: '=',
         onProductoSet: '&'
-    },
+    }
 });
 
 function cController($http) {

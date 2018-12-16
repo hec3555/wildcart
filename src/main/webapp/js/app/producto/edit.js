@@ -4,6 +4,18 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', '$locati
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "producto";
+        
+        
+        $scope.ajaxDatoProducto = {
+            id: null,
+            codigo: null,
+            desc: null,
+            existencias: null,
+            precio: null,
+            foto: null,
+            obj_tipoProducto: {id: null}
+        };
+        
         $http({
             method: 'GET',
             url: '/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
