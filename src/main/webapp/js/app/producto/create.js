@@ -9,13 +9,18 @@ moduleProducto.controller('productoCreateController', ['$scope', '$http', '$loca
             desc: null
         };
         $scope.guardar = function () {
+            $scope.upload();
+            var foto = 'default.svg';
+            if ($scope.file !== undefined) {
+                foto = $scope.file.name;
+            }
             var json = {
                 id: null,
                 codigo: $scope.codigo,
                 desc: $scope.descripcion,
                 existencias: $scope.existencias,
                 precio: $scope.precio,
-                foto: $scope.foto,
+                foto: foto,
                 id_tipoProducto: $scope.ajaxDatoProducto.id
             };
             $http({
@@ -50,6 +55,37 @@ moduleProducto.controller('productoCreateController', ['$scope', '$http', '$loca
                 });
             } else {
                 form.userForm.id_tipoProducto.$setValidity('valid', true);
+            }
+        };
+        
+        $scope.upload = function () {
+            var file = $scope.file;
+            var oformData = new FormData();
+            oformData.append('file', file);
+
+            $http({
+                headers: {'Content-Type': undefined},
+                method: 'POST',
+                data: oformData,
+                url: 'json?ob=producto&op=addimage'
+            }).then(function (response) {
+                console.log(response);
+            }, function (response) {
+                console.log(response);
+            });
+        };
+    }]).directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function () {
+                    scope.$apply(function () {
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
             }
         };
     }]);

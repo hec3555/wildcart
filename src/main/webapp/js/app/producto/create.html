@@ -64,7 +64,8 @@
         <div class="form-group row">
             <label for="foto" class="col-3 col-form-label">Foto</label>
             <div class="col-8">
-                <input type="text" class="form-control" id="foto" name="foto" ng-model="ajaxDatoProducto.foto" />
+                <input type="file" name="file" class="form-control-file" id="file" file-model="file" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])"/>
+                <img id="output" src="images/default.svg" alt="default" style="width: 60px; height: 50px;"/>
             </div>
         </div>
         

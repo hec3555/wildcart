@@ -6,7 +6,7 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
         $scope.ob = "producto";
-        $scope.msgModal = "prueba";
+        
         // el orden lo dejo, por si posteriormente queremos ordenar por precio, por ejemplo
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -97,9 +97,6 @@ moduleProducto.controller('productoPlist_carritoController', ['$scope', '$http',
 
         $http({
             method: 'GET',
-//            header: {
-//                'Content-Type': 'application/json;charset=utf-8'
-//            },
             url: '/json?ob=' + $scope.ob + '&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;

@@ -4,7 +4,7 @@
     <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
     <div class="primeraParte"></div>
     <div class="row">
-        <div class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+        <div class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2"><i class="fas fa-box"></i> Productos</h1>
                 <h3 style="text-align: center">Editar</h3>
@@ -71,7 +71,8 @@
         <div class="form-group row">
             <label for="foto" class="col-2 col-form-label">Foto</label>
             <div class="col-10">
-                <input type="text" class="form-control" id="foto" name="foto" ng-model="ajaxDatoProducto.foto" />
+                <input type="file" name="file" class="form-control-file" id="file" file-model="file" ng-model="foto" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])"/>
+                <img id="output" src="images/{{ajaxDatoProducto.foto}}" alt="default" style="width: 60px; height: 50px;"/> 
             </div>
         </div>
 
