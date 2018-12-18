@@ -13,7 +13,6 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', '$locati
             existencias: null,
             precio: null,
             foto: "default.svg",
-            //foto: null,
             obj_tipoProducto: {id: null}
         };
         
