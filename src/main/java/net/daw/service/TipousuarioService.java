@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.HashMap;
-
-import net.daw.bean.ReplyBean;
-import net.daw.bean.TipousuarioBean;
+import net.daw.bean.specificimplementationbean.ReplyBean;
+import net.daw.bean.specificimplementationbean.TipousuarioBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
 import net.daw.dao.TipousuarioDao;

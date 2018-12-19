@@ -1,14 +1,13 @@
 package net.daw.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import net.daw.bean.specificimplementationbean.FacturaBean;
 
-import net.daw.bean.FacturaBean;
 import net.daw.helper.SqlBuilder;
 
 public class FacturaDao {
@@ -126,7 +125,7 @@ public class FacturaDao {
     public int update(FacturaBean oFacturaBean) throws Exception {
        int iResult = 0;
         String strSQL = "UPDATE " + ob + " SET ";
-        strSQL += oFacturaBean.getPairs(ob);
+        strSQL += oFacturaBean.getPairs();
         PreparedStatement oPreparedStatement = null;
         try {
             oPreparedStatement = oConnection.prepareStatement(strSQL);            

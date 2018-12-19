@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.daw.bean;
+package net.daw.bean.specificimplementationbean;
 
 import com.google.gson.annotations.Expose;
-import net.daw.dao.TipoproductoDao;
-import net.daw.helper.EncodingHelper;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import net.daw.bean.genericimplementationbean.BeanGeneric;
+import net.daw.bean.publicinterfacebean.BeanInterface;
+import net.daw.dao.TipoproductoDao;
+import net.daw.helper.EncodingHelper;
 
 /**
  *
- * @author a044531896d
+ * @author a004631408j
  */
-public class ProductoBean {
-
-    @Expose
-    private int id;
+public class ProductoBean extends BeanGeneric implements BeanInterface{
     @Expose
     private String codigo;
     @Expose
@@ -40,14 +39,6 @@ public class ProductoBean {
 
     public void setObj_tipoProducto(TipoproductoBean obj_tipoProducto) {
         this.obj_tipoProducto = obj_tipoProducto;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCodigo() {
@@ -116,6 +107,7 @@ public class ProductoBean {
 
     }
 
+    @Override
     public String getColumns() {
         String strColumns = "";
         strColumns += "id,";
@@ -128,6 +120,7 @@ public class ProductoBean {
         return strColumns;
     }
 
+    @Override
     public String getValues() {
         String strColumns = "";
         strColumns += "null,";
@@ -140,6 +133,7 @@ public class ProductoBean {
         return strColumns;
     }
 
+    @Override
     public String getPairs() {
         String strPairs = "";
         strPairs += "id=" + id + ",";
@@ -152,5 +146,4 @@ public class ProductoBean {
         strPairs += " WHERE id=" + id;
         return strPairs;
     }
-
 }

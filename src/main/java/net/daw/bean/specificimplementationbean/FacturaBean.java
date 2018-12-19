@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package net.daw.bean;
+
+package net.daw.bean.specificimplementationbean;
 
 import com.google.gson.annotations.Expose;
 import java.sql.Connection;
@@ -12,18 +8,17 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import net.daw.bean.genericimplementationbean.BeanGeneric;
+import net.daw.bean.publicinterfacebean.BeanInterface;
 import net.daw.dao.LineaDao;
 import net.daw.dao.UsuarioDao;
 import net.daw.helper.EncodingHelper;
 
 /**
  *
- * @author a044531896d
+ * @author a004631408j
  */
-public class FacturaBean {
-
-    @Expose
-    private int id;
+public class FacturaBean extends BeanGeneric implements BeanInterface{
     @Expose
     private Date fecha;
     @Expose
@@ -54,14 +49,6 @@ public class FacturaBean {
         this.obj_Usuario = obj_Usuario;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Date getFecha() {
         return fecha;
     }
@@ -85,7 +72,8 @@ public class FacturaBean {
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
     }
-
+    
+    @Override
     public FacturaBean fill(ResultSet oResultSet, Connection oConnection, Integer expand) throws Exception {
 
         this.setId(oResultSet.getInt("id"));
@@ -102,7 +90,8 @@ public class FacturaBean {
         return this;
     }
     
-    public String getPairs(String ob) {
+    @Override
+    public String getPairs() {
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
 
@@ -121,6 +110,7 @@ public class FacturaBean {
 
     }
 
+    @Override
     public String getColumns() {
         String strColumns = "";
         strColumns += "id,";
@@ -130,6 +120,7 @@ public class FacturaBean {
         return strColumns;
     }
 
+    @Override
     public String getValues() {
 
         ZoneId defaultZoneId = ZoneId.systemDefault();

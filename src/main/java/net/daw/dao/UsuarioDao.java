@@ -11,7 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.daw.bean.UsuarioBean;
+import net.daw.bean.specificimplementationbean.UsuarioBean;
+
 import net.daw.helper.SqlBuilder;
 
 /**
@@ -135,7 +136,7 @@ public class UsuarioDao {
     public int update(UsuarioBean oUsuarioBean) throws Exception {
         int iResult = 0;
         String strSQL = "UPDATE " + ob + " SET ";
-        strSQL += oUsuarioBean.getPairs(ob);
+        strSQL += oUsuarioBean.getPairs();
 
         PreparedStatement oPreparedStatement = null;
         try {

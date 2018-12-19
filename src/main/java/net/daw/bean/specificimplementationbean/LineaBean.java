@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.daw.bean;
+package net.daw.bean.specificimplementationbean;
 
 import com.google.gson.annotations.Expose;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import net.daw.bean.genericimplementationbean.BeanGeneric;
+import net.daw.bean.publicinterfacebean.BeanInterface;
 import net.daw.dao.FacturaDao;
 import net.daw.dao.ProductoDao;
 
 /**
  *
- * @author a044531896d
+ * @author a004631408j
  */
-public class LineaBean {
+public class LineaBean extends BeanGeneric implements BeanInterface {
 
-    @Expose
-    private int id;
     @Expose
     private int cantidad;
     @Expose(serialize = false)
@@ -46,14 +46,6 @@ public class LineaBean {
         this.obj_Factura = obj_Factura;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getCantidad() {
         return cantidad;
     }
@@ -78,6 +70,7 @@ public class LineaBean {
         this.id_factura = id_factura;
     }
 
+    @Override
     public LineaBean fill(ResultSet oResultSet, Connection oConnection, Integer expand) throws Exception {
 
         this.setId(oResultSet.getInt("id"));
@@ -99,4 +92,34 @@ public class LineaBean {
         return this;
     }
 
+    @Override
+    public String getColumns() {
+        String strColumns = "";
+        strColumns += "id,";
+        strColumns += "cantidad,";
+        strColumns += "id_producto,";
+        strColumns += "id_factura";
+        return strColumns;
+    }
+
+    @Override
+    public String getValues() {
+        String strColumns = "";
+        strColumns += "null,";
+        strColumns += cantidad + ",";
+        strColumns += id_producto + ",";
+        strColumns += id_factura;
+        return strColumns;
+    }
+
+    @Override
+    public String getPairs() {
+        String strPairs = "";
+        strPairs += "id=" + id + ",";
+        strPairs += "cantidad=" + cantidad + ",";
+        strPairs += "id_producto=" + id_producto + ",";
+        strPairs += "id_factura=" + id_factura;
+        strPairs += " WHERE id=" + id;
+        return strPairs;
+    }
 }

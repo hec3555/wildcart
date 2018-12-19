@@ -7,8 +7,8 @@ package net.daw.service;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import net.daw.bean.ProductoBean;
-import net.daw.bean.UsuarioBean;
+import net.daw.bean.specificimplementationbean.ProductoBean;
+import net.daw.bean.specificimplementationbean.UsuarioBean;
 
 /**
  *

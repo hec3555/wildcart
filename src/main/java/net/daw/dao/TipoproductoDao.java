@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.daw.bean.TipoproductoBean;
+import net.daw.bean.specificimplementationbean.TipoproductoBean;
 import net.daw.helper.SqlBuilder;
 
 /**
