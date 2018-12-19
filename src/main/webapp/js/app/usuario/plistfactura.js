@@ -124,8 +124,6 @@ moduleUsuario.controller('usuarioPlistFacturaController', ['$scope', 'toolServic
 
         $scope.isActive = toolService.isActive;
 
-
-
         $scope.pdf = function (id, fecha, iva) {
             pdfService.pdf(id, fecha, iva);
         };

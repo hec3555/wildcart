@@ -38,13 +38,14 @@ moduleService.service('pdfService', ['$http', function ($http) {
                         var productoCantidad = ajaxDatoLineaFactura[i].cantidad;
                         var productoCantidadTotal = ajaxDatoLineaFactura[i].cantidad + productoCantidadTotal;
                         var productoPrecio = ajaxDatoLineaFactura[i].obj_Producto.precio * productoCantidad;
-                        var productoPrecioUno = ajaxDatoLineaFactura[i].obj_Producto.precio;
+                        //var productoPrecioUno = ajaxDatoLineaFactura[i].obj_Producto.precio;
                         var productoPrecioTotal = ajaxDatoLineaFactura[i].obj_Producto.precio + productoPrecioTotal;
-                        doc.text(18, linea, productoCodigo);
-                        doc.text(46, linea, productoDesc);
-                        doc.text(126, linea, productoCantidad.toString());
-                        doc.text(132, linea, "  x  " + productoPrecioUno.toFixed(2));
-                        doc.text(170, linea, productoPrecio.toFixed(2).toString());
+                        doc.text(18, linea, productoCodigo.trim());
+                        doc.text(46, linea, productoDesc.trim());
+                        doc.text(126, linea, productoCantidad.toString().trim());
+                        // doc.text(132, linea, "  x  " + productoPrecioUno.toFixed(2));
+                        // Comento el precio unitario porque si la cantidad es muy grande se solapan los caracteres
+                        doc.text(170, linea, productoPrecio.toFixed(2).toString().trim());
                         linea += 10;
                     }
 

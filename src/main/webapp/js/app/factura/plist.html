@@ -117,7 +117,10 @@
                     </a> 
                     <a  href="{{ob}}/remove/{{fila.id}}" class="btn btn-danger accion"  id="borrar"> 
                         <i class="fa fa-trash-alt"></i>
-                    </a> 
+                    </a>
+                    <a ng-click="pdf(fila.id,fila.fecha, fila.iva)" class="btn btn-primary accion"  ng-class="{'disabled': {{fila.numLinea}} <= 0}">
+                              <i class="fas fa-file-download"></i>
+                    </a>
                 </td>                                  
             </tr>
         </table>

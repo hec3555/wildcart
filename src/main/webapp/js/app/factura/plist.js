@@ -1,7 +1,7 @@
 'use strict';
 
-moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'pdfService',
+    function ($scope, $http, $location, toolService, $routeParams, pdfService) {
 
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
@@ -108,8 +108,9 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
             }
         }
 
-
-        $scope.isActive = toolService.isActive;
-
+        $scope.pdf = function (id, fecha, iva) {
+            pdfService.pdf(id, fecha, iva);
+        };
+        
     }
 ]);
