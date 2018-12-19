@@ -70,7 +70,7 @@
                         <i>{{fila.numLinea}}</i>
                     </a>
                 </td>
-                <td class="acciones"> 
+                <td class="acciones" style="width: 20%;"> 
                         <a class="btn btn-info accion"  id="ver" href="factura/view/{{fila.id}}"> 
                             <i class="fa fa-eye"></i>
                         </a> 
@@ -80,6 +80,9 @@
                         <a class="btn btn-danger accion" id="borrar" href="factura/remove/{{fila.id}}"> 
                             <i class="fa fa-trash-alt"></i>
                         </a> 
+                        <a ng-click="pdf(fila.id,fila.fecha, fila.iva)" class="btn btn-primary accion"  ng-class="{'disabled': {{fila.numLinea}} <= 0}">
+                              <i class="fa fa-print" style="color:black"></i>
+                        </a>
                     </td>                        
             </tr>
 

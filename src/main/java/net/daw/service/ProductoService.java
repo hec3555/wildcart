@@ -49,7 +49,7 @@ public class ProductoService {
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             ProductoDao oProductoDao = new ProductoDao(oConnection, ob);
-            ProductoBean oProductoBean = oProductoDao.get(id,1);
+            ProductoBean oProductoBean = oProductoDao.get(id, 1);
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(oProductoBean));
         } catch (Exception ex) {
@@ -163,7 +163,7 @@ public class ProductoService {
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             ProductoDao oProductoDao = new ProductoDao(oConnection, ob);
-            ArrayList<ProductoBean> alProductoBean = oProductoDao.getpage(iRpp, iPage,hmOrder,1);
+            ArrayList<ProductoBean> alProductoBean = oProductoDao.getpage(iRpp, iPage, hmOrder, 1);
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(alProductoBean));
         } catch (Exception ex) {
@@ -182,15 +182,15 @@ public class ProductoService {
         Connection oConnection;
         RellenarService rellenar = new RellenarService();
         try {
-            Integer numero = Integer.parseInt(oRequest.getParameter("numero"));            
+            Integer numero = Integer.parseInt(oRequest.getParameter("numero"));
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             ProductoDao oProductoDao = new ProductoDao(oConnection, ob);
             ArrayList<ProductoBean> alProductoBean = rellenar.fillProducto(numero);
-            
-            for(ProductoBean productos : alProductoBean){
+
+            for (ProductoBean productos : alProductoBean) {
                 oProductoDao.create(productos);
-            }            
+            }
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(alProductoBean));
         } catch (Exception ex) {
@@ -201,10 +201,10 @@ public class ProductoService {
         }
         return oReplyBean;
     }
-    
+
     public ReplyBean addimage() throws Exception {
         String name = "";
-        ReplyBean oReplyBean;        
+        ReplyBean oReplyBean;
         HashMap<String, String> hash = new HashMap<>();
         if (ServletFileUpload.isMultipartContent(oRequest)) {
             try {
@@ -213,13 +213,15 @@ public class ProductoService {
                     if (!item.isFormField()) {
                         name = new File(item.getName()).getName();
                         item.write(new File(".//..//webapps//images//" + name));
+//                        item.write(new File(name));  // para comprobar cual es la raiz del tomcat, donde la sube
+
                     } else {
                         hash.put(item.getFieldName(), item.getString());
                     }
                 }
                 oReplyBean = new ReplyBean(200, EncodingHelper.quotate("File uploaded Successfully: " + name));
             } catch (Exception ex) {
-                oReplyBean = new ReplyBean(500, "Error while uploading file: " + name);
+                oReplyBean = new ReplyBean(500, "Error while uploading file: " + name + ex);
             }
         } else {
             oReplyBean = new ReplyBean(500, "Cant read image");

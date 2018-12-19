@@ -123,7 +123,7 @@ public class ProductoBean {
         strColumns += "desc,";
         strColumns += "existencias,";
         strColumns += "precio,";
-        strColumns += "foto";
+        strColumns += "foto,";
         strColumns += "id_tipoProducto";
         return strColumns;
     }
