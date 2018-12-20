@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import net.daw.bean.genericimplementationbean.BeanGeneric;
 import net.daw.bean.publicinterfacebean.BeanInterface;
-import net.daw.dao.TipoproductoDao;
+import net.daw.dao.specificimplementationdao.TipoproductoDao;
 import net.daw.helper.EncodingHelper;
 
 /**
@@ -99,7 +99,7 @@ public class ProductoBean extends BeanGeneric implements BeanInterface{
         this.setId_tipoProducto(oResultSet.getInt("id_tipoProducto"));
         if (expand > 0) {
             TipoproductoDao otipoproductoDao = new TipoproductoDao(oConnection, "tipoproducto");
-            this.setObj_tipoProducto(otipoproductoDao.get(oResultSet.getInt("id_tipoProducto"), expand - 1));
+            this.setObj_tipoProducto((TipoproductoBean) otipoproductoDao.get(oResultSet.getInt("id_tipoProducto"), expand - 1));
         } else {
             this.setId_tipoProducto(oResultSet.getInt("id_tipoProducto"));
         }
@@ -138,7 +138,7 @@ public class ProductoBean extends BeanGeneric implements BeanInterface{
         String strPairs = "";
         strPairs += "id=" + id + ",";
         strPairs += "codigo=" + EncodingHelper.quotate(codigo) + ",";
-        strPairs += "desc=" + EncodingHelper.quotate(desc) + ",";
+        strPairs += "`desc`=" + EncodingHelper.quotate(desc) + ",";
         strPairs += "existencias=" + existencias + ",";
         strPairs += "precio=" + precio + ",";
         strPairs += "foto=" + EncodingHelper.quotate(foto) + ",";

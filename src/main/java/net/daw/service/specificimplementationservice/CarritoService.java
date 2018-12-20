@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.daw.service;
+package net.daw.service.specificimplementationservice;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,35 +19,32 @@ import net.daw.bean.specificimplementationbean.LineaBean;
 import net.daw.bean.specificimplementationbean.ProductoBean;
 import net.daw.bean.specificimplementationbean.ReplyBean;
 import net.daw.bean.specificimplementationbean.UsuarioBean;
-
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
-import net.daw.dao.FacturaDao;
-import net.daw.dao.LineaDao;
-import net.daw.dao.ProductoDao;
+import net.daw.dao.specificimplementationdao.FacturaDao;
+import net.daw.dao.specificimplementationdao.LineaDao;
+import net.daw.dao.specificimplementationdao.ProductoDao;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
+import net.daw.service.genericimplementationservice.ServiceGeneric;
+import net.daw.service.publicinterfaceservice.ServiceInterface;
 
 /**
  *
- * @author usuario
+ * @author Usuario
  */
-public class CarritoService{
-
-    HttpServletRequest oRequest;
-    String ob = null;
+public class CarritoService extends ServiceGeneric implements ServiceInterface{
+    
     Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 //    Gson oGson = new Gson();
     ReplyBean oReplyBean;
     ArrayList<ItemBean> carrito = null;
     Connection oConnection = null;
-
-    public CarritoService(HttpServletRequest oRequest) {
-        super();
-        this.oRequest = oRequest;
-        ob = oRequest.getParameter("ob");
+    
+    public CarritoService(HttpServletRequest oRequest, String ob) {
+        super(oRequest, ob);
     }
-
+    
     public ReplyBean add() throws Exception {
         ConnectionInterface oConnectionPool = null;
         //Obtenemos la sesion actual
@@ -72,7 +69,7 @@ public class CarritoService{
             oConnection = oConnectionPool.newConnection();
             ProductoDao oProductoDao = new ProductoDao(oConnection, "producto");
             // creamos el producto
-            ProductoBean oProductoBean = oProductoDao.get(id, 1);
+            ProductoBean oProductoBean = (ProductoBean) oProductoDao.get(id, 1);
             //Recogemos las existencias que tiene dicho producto
             Integer existencias = oProductoBean.getExistencias();
 
@@ -195,6 +192,7 @@ public class CarritoService{
     }
 
 // ================ En principio un update no pinta nada ======================
+// (a no ser que quiera X productos especificos, tampoco estaria mal)
 //    public ReplyBean update() throws Exception {
 //
 //        ConnectionInterface oConnectionPool = null;
@@ -268,7 +266,7 @@ public class CarritoService{
             
             FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura");
             // y la creamos en la bbdd
-            FacturaBean oFacturaBeanCreada = oFacturaDao.create(oFacturaBean);
+            FacturaBean oFacturaBeanCreada = (FacturaBean) oFacturaDao.create(oFacturaBean);
             // obtenemos el id de la factura creada para meterle las lineas
             int id_factura = oFacturaBeanCreada.getId();
             
@@ -318,7 +316,7 @@ public class CarritoService{
             // si quiero que le llegue al cliente el id factura para luego hacerle
             // un view al crearla:
             // oReplyBean = new ReplyBean(200, oGson.toJson(id_factura));
-            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura n� " + id_factura + " creada con �xito"));
+            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nº " + id_factura + " creada con éxito"));
 
         } catch (Exception e) {
 
@@ -337,4 +335,5 @@ public class CarritoService{
 
     }
 
+    
 }

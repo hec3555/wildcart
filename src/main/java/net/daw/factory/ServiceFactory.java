@@ -3,13 +3,14 @@ package net.daw.factory;
 import javax.servlet.http.HttpServletRequest;
 
 import net.daw.bean.specificimplementationbean.ReplyBean;
-import net.daw.service.CarritoService;
-import net.daw.service.FacturaService;
-import net.daw.service.LineaService;
-import net.daw.service.ProductoService;
-import net.daw.service.TipoproductoService;
-import net.daw.service.TipousuarioService;
-import net.daw.service.UsuarioService;
+import net.daw.service.specificimplementationservice.CarritoService;
+import net.daw.service.specificimplementationservice.FacturaService;
+import net.daw.service.specificimplementationservice.LineaService;
+import net.daw.service.specificimplementationservice.ProductoService;
+import net.daw.service.specificimplementationservice.TipoproductoService;
+import net.daw.service.specificimplementationservice.TipousuarioService;
+import net.daw.service.specificimplementationservice.UsuarioService;
+
 
 public class ServiceFactory {
 
@@ -21,7 +22,7 @@ public class ServiceFactory {
 
         switch (ob) {
             case "tipousuario":
-                TipousuarioService oTipousuarioService = new TipousuarioService(oRequest);
+                TipousuarioService oTipousuarioService = new TipousuarioService(oRequest, ob);
                 switch (op) {
                     case "get":
                         oReplyBean = oTipousuarioService.get();
@@ -47,7 +48,7 @@ public class ServiceFactory {
                 }
                 break;
             case "carrito":
-                CarritoService oCarritoService = new CarritoService(oRequest);
+                CarritoService oCarritoService = new CarritoService(oRequest, ob);
                 switch (op) {
                     case "add":
                         oReplyBean = oCarritoService.add();
@@ -70,7 +71,7 @@ public class ServiceFactory {
                 }
                 break;
             case "usuario":
-                UsuarioService oUsuarioService = new UsuarioService(oRequest);
+                UsuarioService oUsuarioService = new UsuarioService(oRequest, ob);
                 switch (op) {
                     case "get":
                         oReplyBean = oUsuarioService.get();
@@ -108,7 +109,7 @@ public class ServiceFactory {
                 }
                 break;
             case "factura":
-                FacturaService oFacturaService = new FacturaService(oRequest);
+                FacturaService oFacturaService = new FacturaService(oRequest, ob);
                 switch (op) {
                     case "get":
                         oReplyBean = oFacturaService.get();
@@ -140,7 +141,7 @@ public class ServiceFactory {
                 }
                 break;
             case "linea":
-                LineaService oLineaService = new LineaService(oRequest);
+                LineaService oLineaService = new LineaService(oRequest, ob);
                 switch (op) {
                     case "get":
                         oReplyBean = oLineaService.get();
@@ -173,7 +174,7 @@ public class ServiceFactory {
                 break;
 
             case "producto":
-                ProductoService oProductoService = new ProductoService(oRequest);
+                ProductoService oProductoService = new ProductoService(oRequest, ob);
                 switch (op) {
                     case "get":
                         oReplyBean = oProductoService.get();
@@ -205,7 +206,7 @@ public class ServiceFactory {
                 }
                 break;
             case "tipoproducto":
-                TipoproductoService oTipoproductoService = new TipoproductoService(oRequest);
+                TipoproductoService oTipoproductoService = new TipoproductoService(oRequest, ob);
                 switch (op) {
                     case "get":
                         oReplyBean = oTipoproductoService.get();

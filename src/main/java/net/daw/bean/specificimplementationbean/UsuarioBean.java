@@ -10,8 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import net.daw.bean.genericimplementationbean.BeanGeneric;
 import net.daw.bean.publicinterfacebean.BeanInterface;
-import net.daw.dao.FacturaDao;
-import net.daw.dao.TipousuarioDao;
+import net.daw.dao.specificimplementationdao.FacturaDao;
+import net.daw.dao.specificimplementationdao.TipousuarioDao;
 import net.daw.helper.EncodingHelper;
 
 /**
@@ -144,7 +144,7 @@ public class UsuarioBean extends BeanGeneric implements BeanInterface {
         this.setNumFactura(oFacturaDao.getcountXusuario(this.id));
         if (expand > 0) {
             TipousuarioDao otipousuarioDao = new TipousuarioDao(oConnection, "tipousuario");
-            this.setObj_tipoUsuario(otipousuarioDao.get(oResultSet.getInt("id_tipoUsuario"), expand - 1));
+            this.setObj_tipoUsuario((TipousuarioBean) otipousuarioDao.get(oResultSet.getInt("id_tipoUsuario"), expand - 1));
         } else {
             this.setId_tipoUsuario(oResultSet.getInt("id_tipoUsuario"));
         }

@@ -66,7 +66,10 @@
                 <td>{{fila.fecha| date:'d-M-y'}}</td>
                 <td>{{fila.iva}}</td>                                                
                 <td>
-                    <a href="factura/plistlinea/{{fila.id}}/10/1" class="btn" ng-class="{'disabled': fila.numLinea == 0}">
+                    <a href="factura/plistlinea/{{fila.id}}/10/1" class="btn" ng-if="fila.numLinea >= 1">
+                        <i>{{fila.numLinea}}</i>
+                    </a>
+                    <a href="linea/create/{{fila.id}}" class="btn" ng-if="fila.numLinea == 0">
                         <i>{{fila.numLinea}}</i>
                     </a>
                 </td>

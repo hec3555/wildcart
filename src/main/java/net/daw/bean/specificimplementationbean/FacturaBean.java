@@ -10,8 +10,8 @@ import java.time.ZoneId;
 import java.util.Date;
 import net.daw.bean.genericimplementationbean.BeanGeneric;
 import net.daw.bean.publicinterfacebean.BeanInterface;
-import net.daw.dao.LineaDao;
-import net.daw.dao.UsuarioDao;
+import net.daw.dao.specificimplementationdao.LineaDao;
+import net.daw.dao.specificimplementationdao.UsuarioDao;
 import net.daw.helper.EncodingHelper;
 
 /**
@@ -83,7 +83,7 @@ public class FacturaBean extends BeanGeneric implements BeanInterface{
         this.setNumLinea(oLineaDao.getcountXfactura(this.id));
         if (expand > 0) {
             UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, "usuario");
-            this.setObj_Usuario(oUsuarioDao.get(oResultSet.getInt("id_usuario"), expand - 1));
+            this.setObj_Usuario((UsuarioBean) oUsuarioDao.get(oResultSet.getInt("id_usuario"), expand - 1));
         } else {
             this.setId_usuario(oResultSet.getInt("id_usuario"));
         }
