@@ -3,6 +3,7 @@ package net.daw.bean.publicinterfacebean;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import net.daw.bean.specificimplementationbean.UsuarioBean;
 
 /**
  *
@@ -13,7 +14,7 @@ public interface BeanInterface {
 
     public void setId(int id);
 
-    public BeanInterface fill(ResultSet oResultSet, Connection oConnection, Integer expand) throws Exception;
+    public BeanInterface fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean oUsuarioBeanSession) throws Exception;
 
     public String getColumns();
 

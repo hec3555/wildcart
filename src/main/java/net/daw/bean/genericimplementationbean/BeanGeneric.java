@@ -9,6 +9,7 @@ import com.google.gson.annotations.Expose;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import net.daw.bean.publicinterfacebean.BeanInterface;
+import net.daw.bean.specificimplementationbean.UsuarioBean;
 
 /**
  *
@@ -30,7 +31,7 @@ public class BeanGeneric implements BeanInterface{
     }
 
     @Override
-    public BeanInterface fill(ResultSet oResultSet, Connection oConnection, Integer expand) throws Exception {
+    public BeanInterface fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean oUsuarioBeanSession) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

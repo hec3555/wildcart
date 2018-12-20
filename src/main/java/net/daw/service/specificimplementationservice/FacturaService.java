@@ -40,7 +40,7 @@ public class FacturaService extends ServiceGeneric implements ServiceInterface {
             Integer idUsu = Integer.parseInt(oRequest.getParameter("idusu"));
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
+            FacturaDao oFacturaDao = new FacturaDao(oConnection, ob, oUsuarioBeanSession);
             int registros = oFacturaDao.getcountXusuario(idUsu);
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(registros));
@@ -65,7 +65,7 @@ public class FacturaService extends ServiceGeneric implements ServiceInterface {
             Integer idUsu = Integer.parseInt(oRequest.getParameter("idusu"));
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            FacturaDao oFacturaDao = new FacturaDao(oConnection, ob);
+            FacturaDao oFacturaDao = new FacturaDao(oConnection, ob, oUsuarioBeanSession);
             ArrayList<FacturaBean> alFacturaBean = oFacturaDao.getpageXusuario(iRpp, iPage, hmOrder, 1, idUsu);
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(alFacturaBean));

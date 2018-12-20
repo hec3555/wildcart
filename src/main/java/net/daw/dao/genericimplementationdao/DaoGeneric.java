@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.daw.bean.publicinterfacebean.BeanInterface;
+import net.daw.bean.specificimplementationbean.UsuarioBean;
 import net.daw.dao.publicinterfacedao.DaoInterface;
 import net.daw.factory.BeanFactory;
 import net.daw.helper.SqlBuilder;
@@ -24,6 +25,9 @@ public class DaoGeneric implements DaoInterface{
     
     protected Connection oConnection;
     protected String ob = null;
+    protected UsuarioBean oUsuarioBeanSession;
+    protected int idSessionUser;
+    protected int idSessionUserTipe;
     protected String strSQL_get;
     protected String strSQL_remove;
     protected String strSQL_getcount;
@@ -31,9 +35,14 @@ public class DaoGeneric implements DaoInterface{
     protected String strSQL_update;
     protected String strSQL_getpage;
     
-    public DaoGeneric(Connection oConnection, String ob) {
+    public DaoGeneric(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         this.oConnection = oConnection;
         this.ob = ob;
+        if (oUsuarioBeanSession != null) {
+            this.oUsuarioBeanSession = oUsuarioBeanSession;
+            this.idSessionUser = oUsuarioBeanSession.getId();
+            this.idSessionUserTipe = oUsuarioBeanSession.getId_tipoUsuario();
+        }
         //Sacadas todas las sentencias SQL de los metodos
         strSQL_get = "SELECT * FROM " + ob + " WHERE id=?";
         strSQL_remove = "DELETE FROM " + ob + " WHERE id=?";
@@ -54,7 +63,7 @@ public class DaoGeneric implements DaoInterface{
             oResultSet = oPreparedStatement.executeQuery();
             if (oResultSet.next()) {
                 oBean = BeanFactory.getBean(ob);
-                oBean.fill(oResultSet, oConnection, expand);
+                oBean.fill(oResultSet, oConnection, expand, oUsuarioBeanSession);
 
             } else {
                 oBean = null;
@@ -182,7 +191,7 @@ public class DaoGeneric implements DaoInterface{
                 alBean = new ArrayList<>();
                 while (oResultSet.next()) {
                     BeanInterface oBean = BeanFactory.getBean(ob);
-                    oBean.fill(oResultSet, oConnection, expand);
+                    oBean.fill(oResultSet, oConnection, expand, oUsuarioBeanSession);
                     alBean.add(oBean);
                 }
             } catch (SQLException e) {

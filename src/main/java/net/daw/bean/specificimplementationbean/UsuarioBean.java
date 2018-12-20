@@ -131,7 +131,7 @@ public class UsuarioBean extends BeanGeneric implements BeanInterface {
     }
 
     @Override
-    public UsuarioBean fill(ResultSet oResultSet, Connection oConnection, Integer expand) throws Exception {
+    public UsuarioBean fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean oUsuarioBeanSession) throws Exception {
 
         this.setId(oResultSet.getInt("id"));
         this.setDni(oResultSet.getString("dni"));
@@ -140,10 +140,10 @@ public class UsuarioBean extends BeanGeneric implements BeanInterface {
         this.setApe2(oResultSet.getString("ape2"));
         this.setLogin(oResultSet.getString("login"));
         this.setPass(oResultSet.getString("pass"));
-        FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura");
+        FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura", oUsuarioBeanSession);
         this.setNumFactura(oFacturaDao.getcountXusuario(this.id));
         if (expand > 0) {
-            TipousuarioDao otipousuarioDao = new TipousuarioDao(oConnection, "tipousuario");
+            TipousuarioDao otipousuarioDao = new TipousuarioDao(oConnection, "tipousuario", oUsuarioBeanSession);
             this.setObj_tipoUsuario((TipousuarioBean) otipousuarioDao.get(oResultSet.getInt("id_tipoUsuario"), expand - 1));
         } else {
             this.setId_tipoUsuario(oResultSet.getInt("id_tipoUsuario"));

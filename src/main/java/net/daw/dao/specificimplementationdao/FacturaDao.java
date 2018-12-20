@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.daw.bean.specificimplementationbean.FacturaBean;
+import net.daw.bean.specificimplementationbean.UsuarioBean;
 import net.daw.dao.genericimplementationdao.DaoGeneric;
 import net.daw.dao.publicinterfacedao.DaoInterface;
 import net.daw.helper.SqlBuilder;
@@ -24,8 +25,8 @@ public class FacturaDao extends DaoGeneric implements DaoInterface{
     
     
     
-    public FacturaDao(Connection oConnection, String ob) {
-        super(oConnection, ob);
+    public FacturaDao(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
+        super(oConnection, ob, oUsuarioBeanSession);
         
     }
     
@@ -51,7 +52,7 @@ public class FacturaDao extends DaoGeneric implements DaoInterface{
                 alFacturaBean = new ArrayList<>();
                 while (oResultSet.next()) {
                     FacturaBean oFacturaBean = new FacturaBean();
-                    oFacturaBean.fill(oResultSet, oConnection, expand);
+                    oFacturaBean.fill(oResultSet, oConnection, expand, oUsuarioBeanSession);
                     alFacturaBean.add(oFacturaBean);
                 }
             } catch (SQLException e) {

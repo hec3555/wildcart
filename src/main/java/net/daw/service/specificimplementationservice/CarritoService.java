@@ -40,6 +40,7 @@ public class CarritoService extends ServiceGeneric implements ServiceInterface{
     ReplyBean oReplyBean;
     ArrayList<ItemBean> carrito = null;
     Connection oConnection = null;
+    UsuarioBean oUsuarioBeanSession;
     
     public CarritoService(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
@@ -67,7 +68,7 @@ public class CarritoService extends ServiceGeneric implements ServiceInterface{
             
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            ProductoDao oProductoDao = new ProductoDao(oConnection, "producto");
+            ProductoDao oProductoDao = new ProductoDao(oConnection, "producto", oUsuarioBeanSession);
             // creamos el producto
             ProductoBean oProductoBean = (ProductoBean) oProductoDao.get(id, 1);
             //Recogemos las existencias que tiene dicho producto
@@ -264,7 +265,7 @@ public class CarritoService extends ServiceGeneric implements ServiceInterface{
             oFacturaBean.setIva(21.0f);
 
             
-            FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura");
+            FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura", oUsuarioBeanSession);
             // y la creamos en la bbdd
             FacturaBean oFacturaBeanCreada = (FacturaBean) oFacturaDao.create(oFacturaBean);
             // obtenemos el id de la factura creada para meterle las lineas
@@ -272,8 +273,8 @@ public class CarritoService extends ServiceGeneric implements ServiceInterface{
             
             LineaDao oLineaDao;
             LineaBean oLineaBean;
-            ProductoDao oProductoDao = new ProductoDao(oConnection, "producto");
-            oLineaDao = new LineaDao(oConnection, "linea");
+            ProductoDao oProductoDao = new ProductoDao(oConnection, "producto", oUsuarioBeanSession);
+            oLineaDao = new LineaDao(oConnection, "linea", oUsuarioBeanSession);
             ProductoBean oProductoBean;
 
             for (ItemBean ib : carrito) { // por cada item del carrito, generamos una linea

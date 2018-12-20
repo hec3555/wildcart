@@ -74,15 +74,15 @@ public class FacturaBean extends BeanGeneric implements BeanInterface{
     }
     
     @Override
-    public FacturaBean fill(ResultSet oResultSet, Connection oConnection, Integer expand) throws Exception {
+    public FacturaBean fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean oUsuarioBeanSession) throws Exception {
 
         this.setId(oResultSet.getInt("id"));
         this.setFecha(oResultSet.getDate("fecha"));
         this.setIva(oResultSet.getFloat("iva"));
-        LineaDao oLineaDao = new LineaDao(oConnection, "linea");
+        LineaDao oLineaDao = new LineaDao(oConnection, "linea", oUsuarioBeanSession);
         this.setNumLinea(oLineaDao.getcountXfactura(this.id));
         if (expand > 0) {
-            UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, "usuario");
+            UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, "usuario", oUsuarioBeanSession);
             this.setObj_Usuario((UsuarioBean) oUsuarioDao.get(oResultSet.getInt("id_usuario"), expand - 1));
         } else {
             this.setId_usuario(oResultSet.getInt("id_usuario"));

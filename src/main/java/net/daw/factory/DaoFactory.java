@@ -6,6 +6,7 @@
 package net.daw.factory;
 
 import java.sql.Connection;
+import net.daw.bean.specificimplementationbean.UsuarioBean;
 import net.daw.dao.publicinterfacedao.DaoInterface;
 import net.daw.dao.specificimplementationdao.FacturaDao;
 import net.daw.dao.specificimplementationdao.LineaDao;
@@ -20,26 +21,26 @@ import net.daw.dao.specificimplementationdao.UsuarioDao;
  */
 public class DaoFactory {
 
-    public static DaoInterface getDao(Connection oConnection, String ob) throws Exception {
+    public static DaoInterface getDao(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) throws Exception {
         DaoInterface oDao = null;
         switch (ob) {
             case "usuario":
-                oDao = new UsuarioDao(oConnection, ob);
+                oDao = new UsuarioDao(oConnection, ob, oUsuarioBeanSession);
                 break;
             case "tipousuario":
-                oDao = new TipousuarioDao(oConnection, ob);
+                oDao = new TipousuarioDao(oConnection, ob, oUsuarioBeanSession);
                 break;
             case "tipoproducto":
-                oDao = new TipoproductoDao(oConnection, ob);
+                oDao = new TipoproductoDao(oConnection, ob, oUsuarioBeanSession);
                 break;
             case "producto":
-                oDao = new ProductoDao(oConnection, ob);
+                oDao = new ProductoDao(oConnection, ob, oUsuarioBeanSession);
                 break;
             case "factura":
-                oDao = new FacturaDao(oConnection, ob);
+                oDao = new FacturaDao(oConnection, ob, oUsuarioBeanSession);
                 break;
             case "linea":
-                oDao = new LineaDao(oConnection, ob);
+                oDao = new LineaDao(oConnection, ob, oUsuarioBeanSession);
                 break;
             default:
                 throw new Exception("Operation doesn't exist " + ob);

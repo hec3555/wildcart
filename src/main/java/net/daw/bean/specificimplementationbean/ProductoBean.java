@@ -89,7 +89,7 @@ public class ProductoBean extends BeanGeneric implements BeanInterface{
         this.id_tipoProducto = id_tipoProducto;
     }
 
-    public ProductoBean fill(ResultSet oResultSet, Connection oConnection, Integer expand) throws Exception, Exception {
+    public ProductoBean fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean oUsuarioBeanSession) throws Exception, Exception {
         this.setId(oResultSet.getInt("id"));
         this.setCodigo(oResultSet.getString("codigo"));
         this.setDesc(oResultSet.getString("desc"));
@@ -98,7 +98,7 @@ public class ProductoBean extends BeanGeneric implements BeanInterface{
         this.setFoto(oResultSet.getString("foto"));
         this.setId_tipoProducto(oResultSet.getInt("id_tipoProducto"));
         if (expand > 0) {
-            TipoproductoDao otipoproductoDao = new TipoproductoDao(oConnection, "tipoproducto");
+            TipoproductoDao otipoproductoDao = new TipoproductoDao(oConnection, "tipoproducto", oUsuarioBeanSession);
             this.setObj_tipoProducto((TipoproductoBean) otipoproductoDao.get(oResultSet.getInt("id_tipoProducto"), expand - 1));
         } else {
             this.setId_tipoProducto(oResultSet.getInt("id_tipoProducto"));

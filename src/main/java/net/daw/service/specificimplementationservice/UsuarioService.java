@@ -45,7 +45,7 @@ public class UsuarioService extends ServiceGeneric implements ServiceInterface {
                 Integer numero = Integer.parseInt(oRequest.getParameter("numero"));
                 oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
                 oConnection = oConnectionPool.newConnection();
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob);
+                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob, oUsuarioBeanSession);
                 ArrayList<UsuarioBean> alUsuarioBean = rellenar.fillUsuario(numero);
 
                 for (UsuarioBean usuarios : alUsuarioBean) {
@@ -75,7 +75,7 @@ public class UsuarioService extends ServiceGeneric implements ServiceInterface {
         try {
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob);
+            UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, ob, oUsuarioBeanSession);
 
             UsuarioBean oUsuarioBean = oUsuarioDao.login(strLogin, strPassword);
             if (oUsuarioBean != null) {

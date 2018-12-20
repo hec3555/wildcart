@@ -45,7 +45,7 @@ public class ProductoService extends ServiceGeneric implements ServiceInterface 
             Integer numero = Integer.parseInt(oRequest.getParameter("numero"));
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            ProductoDao oProductoDao = new ProductoDao(oConnection, ob);
+            ProductoDao oProductoDao = new ProductoDao(oConnection, ob, oUsuarioBeanSession);
             ArrayList<ProductoBean> alProductoBean = rellenar.fillProducto(numero);
 
             for (ProductoBean productos : alProductoBean) {

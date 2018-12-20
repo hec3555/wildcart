@@ -40,7 +40,7 @@ public class LineaService extends ServiceGeneric implements ServiceInterface  {
                         Integer idFact = Integer.parseInt(oRequest.getParameter("idfact"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
-			LineaDao oLineaDao = new LineaDao(oConnection, ob);
+			LineaDao oLineaDao = new LineaDao(oConnection, ob, oUsuarioBeanSession);
 			int registros = oLineaDao.getcountXfactura(idFact);
 			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(registros));
@@ -67,7 +67,7 @@ public class LineaService extends ServiceGeneric implements ServiceInterface  {
                         Integer idFact = Integer.parseInt(oRequest.getParameter("idfact"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
-			LineaDao oLineaDao = new LineaDao(oConnection, ob);
+			LineaDao oLineaDao = new LineaDao(oConnection, ob, oUsuarioBeanSession);
 			ArrayList<LineaBean> alLineaBean = oLineaDao.getpageXfactura(iRpp, iPage,hmOrder,1,idFact);
 			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(alLineaBean));
