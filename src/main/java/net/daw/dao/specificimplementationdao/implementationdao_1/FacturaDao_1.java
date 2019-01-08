@@ -48,8 +48,7 @@ public class FacturaDao_1 extends DaoGeneric implements DaoInterface {
         return super.getcount();
     }
 
-//    un cliente debe poder crear su factura (pero al hacer un buy), habra que pensar
-//    como validar que la factura creada sea para el usuario que hay en sesion
+//    un cliente debe poder crear su factura (pero al hacer un buy).
     
 //    @Override
 //    public BeanInterface create(BeanInterface oBean) throws Exception {

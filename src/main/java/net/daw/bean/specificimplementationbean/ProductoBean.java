@@ -10,7 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import net.daw.bean.genericimplementationbean.BeanGeneric;
 import net.daw.bean.publicinterfacebean.BeanInterface;
-import net.daw.dao.specificimplementationdao.TipoproductoDao;
+import net.daw.dao.publicinterfacedao.DaoInterface;
+import net.daw.factory.DaoFactory;
 import net.daw.helper.EncodingHelper;
 
 /**
@@ -98,7 +99,7 @@ public class ProductoBean extends BeanGeneric implements BeanInterface{
         this.setFoto(oResultSet.getString("foto"));
         this.setId_tipoProducto(oResultSet.getInt("id_tipoProducto"));
         if (expand > 0) {
-            TipoproductoDao otipoproductoDao = new TipoproductoDao(oConnection, "tipoproducto", oUsuarioBeanSession);
+            DaoInterface otipoproductoDao = DaoFactory.getDao(oConnection, "tipoproducto", oUsuarioBeanSession);
             this.setObj_tipoProducto((TipoproductoBean) otipoproductoDao.get(oResultSet.getInt("id_tipoProducto"), expand - 1));
         } else {
             this.setId_tipoProducto(oResultSet.getInt("id_tipoProducto"));

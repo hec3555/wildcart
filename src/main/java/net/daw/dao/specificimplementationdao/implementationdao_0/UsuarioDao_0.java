@@ -55,7 +55,7 @@ public class UsuarioDao_0 extends DaoGeneric implements DaoInterface {
     }
 
     public UsuarioBean login(String strUserName, String strPassword) throws Exception {
-        if (oUsuarioBeanSession.getObj_tipoUsuario().getId() == 0) { // si es 0 es que no hay ningun usuario creado
+        
             String strSQL = "SELECT * FROM " + ob + " WHERE login = ? AND pass = ?";
             UsuarioBean oUsuarioBean;
             ResultSet oResultSet = null;
@@ -82,8 +82,5 @@ public class UsuarioDao_0 extends DaoGeneric implements DaoInterface {
                 }
             }
             return oUsuarioBean;
-        } else {
-            throw new Exception("Error en Dao login de " + ob + ": Ya has iniciado sesion");
-        }
     }
 }

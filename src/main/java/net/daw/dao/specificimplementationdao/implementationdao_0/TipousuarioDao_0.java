@@ -22,10 +22,7 @@ public class TipousuarioDao_0 extends DaoGeneric implements DaoInterface {
     }
 
     
-    @Override
-    public BeanInterface get(int id, Integer expand) throws Exception {
-        throw new Exception("Error en Dao get de " + ob + ": No autorizado");
-    }
+    
     
     @Override
     public int remove(int id) throws Exception {

@@ -25,6 +25,10 @@ public class FacturaDao_0 extends DaoGeneric implements DaoInterface{
         
     }
     
+    public int getcountXusuario(Integer idUsuario) throws Exception {
+        return this.getcount();
+    }
+    
     @Override
     public BeanInterface get(int id, Integer expand) throws Exception {
         throw new Exception("Error en Dao get de " + ob + ": No autorizado");
@@ -37,7 +41,10 @@ public class FacturaDao_0 extends DaoGeneric implements DaoInterface{
 
     @Override
     public int getcount() throws Exception {
-        throw new Exception("Error en Dao getcount de " + ob + ": No autorizado");
+        if (oUsuarioBeanSession != null) {
+            strSQL_getcount = "SELECT COUNT(id) FROM " + ob + " WHERE id_usuario=" + oUsuarioBeanSession.getId();
+        }
+        return super.getcount();
     }
 
     @Override
@@ -55,11 +62,7 @@ public class FacturaDao_0 extends DaoGeneric implements DaoInterface{
     public ArrayList<BeanInterface> getpage(int iRpp, int iPage, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         throw new Exception("Error en Dao getpage de " + ob + ": No autorizado");
 
-    }
-    public int getcountXusuario(Integer idUsuario) throws Exception {
-        throw new Exception("Error en Dao getcountXusuario de " + ob + ": No autorizado");
-    }
-    
+    }    
     
     public ArrayList<FacturaBean> getpageXusuario(int iRpp, int iPage, HashMap<String, String> hmOrder, Integer expand, Integer idUsuario) throws Exception {
         throw new Exception("Error en Dao update de " + ob + ": No autorizado");

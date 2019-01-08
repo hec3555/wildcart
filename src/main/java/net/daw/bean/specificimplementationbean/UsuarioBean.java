@@ -10,8 +10,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import net.daw.bean.genericimplementationbean.BeanGeneric;
 import net.daw.bean.publicinterfacebean.BeanInterface;
-import net.daw.dao.specificimplementationdao.FacturaDao;
-import net.daw.dao.specificimplementationdao.TipousuarioDao;
+import net.daw.dao.publicinterfacedao.DaoInterface;
+import net.daw.dao.specificimplementationdao.implementationdao_0.FacturaDao_0;
+import net.daw.dao.specificimplementationdao.implementationdao_1.FacturaDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_2.FacturaDao_2;
+import net.daw.factory.DaoFactory;
 import net.daw.helper.EncodingHelper;
 
 /**
@@ -140,10 +143,21 @@ public class UsuarioBean extends BeanGeneric implements BeanInterface {
         this.setApe2(oResultSet.getString("ape2"));
         this.setLogin(oResultSet.getString("login"));
         this.setPass(oResultSet.getString("pass"));
-        FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura", oUsuarioBeanSession);
-        this.setNumFactura(oFacturaDao.getcountXusuario(this.id));
+        DaoInterface oFacturaDao = DaoFactory.getDao(oConnection, "factura", oUsuarioBeanSession);
+         if (oFacturaDao != null) {
+            if (oFacturaDao.getClass() == FacturaDao_1.class) {
+                FacturaDao_1 oFacturaDao_1 = (FacturaDao_1) oFacturaDao;
+                this.setNumFactura(oFacturaDao_1.getcountXusuario(this.id));
+            } else if (oFacturaDao.getClass() == FacturaDao_2.class) {
+                FacturaDao_2 oFacturaDao_2 = (FacturaDao_2) oFacturaDao;
+                this.setNumFactura(oFacturaDao_2.getcountXusuario(this.id));
+            } else {
+                FacturaDao_0 oFacturaDao_0 = (FacturaDao_0) oFacturaDao;
+                this.setNumFactura(oFacturaDao_0.getcountXusuario(this.id));
+            }
+        }
         if (expand > 0) {
-            TipousuarioDao otipousuarioDao = new TipousuarioDao(oConnection, "tipousuario", oUsuarioBeanSession);
+            DaoInterface otipousuarioDao = DaoFactory.getDao(oConnection, "tipousuario", oUsuarioBeanSession);
             this.setObj_tipoUsuario((TipousuarioBean) otipousuarioDao.get(oResultSet.getInt("id_tipoUsuario"), expand - 1));
         } else {
             this.setId_tipoUsuario(oResultSet.getInt("id_tipoUsuario"));

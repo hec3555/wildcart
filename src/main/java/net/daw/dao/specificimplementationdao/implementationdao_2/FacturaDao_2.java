@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ADMINISTRADOR
  */
-package net.daw.dao.specificimplementationdao;
+package net.daw.dao.specificimplementationdao.implementationdao_2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,11 +19,11 @@ import net.daw.helper.SqlBuilder;
  *
  * @author a004631408j
  */
-public class FacturaDao extends DaoGeneric implements DaoInterface{
+public class FacturaDao_2 extends DaoGeneric implements DaoInterface{
     
     
     
-    public FacturaDao(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
+    public FacturaDao_2(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
         
     }

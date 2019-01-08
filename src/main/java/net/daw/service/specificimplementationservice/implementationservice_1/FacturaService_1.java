@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CLIENTE
  */
-package net.daw.service.specificimplementationservice;
+package net.daw.service.specificimplementationservice.implementationservice_1;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,7 +13,7 @@ import net.daw.bean.specificimplementationbean.FacturaBean;
 import net.daw.bean.specificimplementationbean.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
-import net.daw.dao.specificimplementationdao.FacturaDao;
+import net.daw.dao.specificimplementationdao.implementationdao_1.FacturaDao_1;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
 import net.daw.helper.ParameterCook;
@@ -26,9 +24,9 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  *
  * @author Usuario
  */
-public class FacturaService extends ServiceGeneric implements ServiceInterface {
+public class FacturaService_1 extends ServiceGeneric implements ServiceInterface {
     
-    public FacturaService(HttpServletRequest oRequest, String ob) {
+    public FacturaService_1(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
     
@@ -40,7 +38,7 @@ public class FacturaService extends ServiceGeneric implements ServiceInterface {
             Integer idUsu = Integer.parseInt(oRequest.getParameter("idusu"));
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            FacturaDao oFacturaDao = new FacturaDao(oConnection, ob, oUsuarioBeanSession);
+            FacturaDao_1 oFacturaDao = new FacturaDao_1(oConnection, ob, oUsuarioBeanSession);
             int registros = oFacturaDao.getcountXusuario(idUsu);
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(registros));
@@ -65,7 +63,7 @@ public class FacturaService extends ServiceGeneric implements ServiceInterface {
             Integer idUsu = Integer.parseInt(oRequest.getParameter("idusu"));
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            FacturaDao oFacturaDao = new FacturaDao(oConnection, ob, oUsuarioBeanSession);
+            FacturaDao_1 oFacturaDao = new FacturaDao_1(oConnection, ob, oUsuarioBeanSession);
             ArrayList<FacturaBean> alFacturaBean = oFacturaDao.getpageXusuario(iRpp, iPage, hmOrder, 1, idUsu);
             Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
             oReplyBean = new ReplyBean(200, oGson.toJson(alFacturaBean));

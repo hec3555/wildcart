@@ -10,8 +10,10 @@ import java.time.ZoneId;
 import java.util.Date;
 import net.daw.bean.genericimplementationbean.BeanGeneric;
 import net.daw.bean.publicinterfacebean.BeanInterface;
-import net.daw.dao.specificimplementationdao.LineaDao;
-import net.daw.dao.specificimplementationdao.UsuarioDao;
+import net.daw.dao.publicinterfacedao.DaoInterface;
+import net.daw.dao.specificimplementationdao.implementationdao_1.LineaDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_2.LineaDao_2;
+import net.daw.factory.DaoFactory;
 import net.daw.helper.EncodingHelper;
 
 /**
@@ -79,10 +81,16 @@ public class FacturaBean extends BeanGeneric implements BeanInterface{
         this.setId(oResultSet.getInt("id"));
         this.setFecha(oResultSet.getDate("fecha"));
         this.setIva(oResultSet.getFloat("iva"));
-        LineaDao oLineaDao = new LineaDao(oConnection, "linea", oUsuarioBeanSession);
-        this.setNumLinea(oLineaDao.getcountXfactura(this.id));
+        DaoInterface oLineaDao = DaoFactory.getDao(oConnection, "linea", oUsuarioBeanSession);
+        if (oLineaDao.getClass() == LineaDao_1.class) {
+            LineaDao_1 oLineaDao_1 = (LineaDao_1) oLineaDao;
+            this.setNumLinea(oLineaDao_1.getcountXfactura(this.id));
+        } else {
+            LineaDao_2 oLineaDao_2 = (LineaDao_2) oLineaDao;
+            this.setNumLinea(oLineaDao_2.getcountXfactura(this.id));
+        }
         if (expand > 0) {
-            UsuarioDao oUsuarioDao = new UsuarioDao(oConnection, "usuario", oUsuarioBeanSession);
+            DaoInterface oUsuarioDao = DaoFactory.getDao(oConnection, "usuario", oUsuarioBeanSession);
             this.setObj_Usuario((UsuarioBean) oUsuarioDao.get(oResultSet.getInt("id_usuario"), expand - 1));
         } else {
             this.setId_usuario(oResultSet.getInt("id_usuario"));

@@ -10,8 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import net.daw.bean.genericimplementationbean.BeanGeneric;
 import net.daw.bean.publicinterfacebean.BeanInterface;
-import net.daw.dao.specificimplementationdao.FacturaDao;
-import net.daw.dao.specificimplementationdao.ProductoDao;
+import net.daw.dao.publicinterfacedao.DaoInterface;
+import net.daw.factory.DaoFactory;
 
 /**
  *
@@ -77,13 +77,13 @@ public class LineaBean extends BeanGeneric implements BeanInterface {
         this.setCantidad(oResultSet.getInt("cantidad"));
 
         if (expand > 0) {
-            ProductoDao oProductoDao = new ProductoDao(oConnection, "producto", oUsuarioBeanSession);
+            DaoInterface oProductoDao = DaoFactory.getDao(oConnection, "producto", oUsuarioBeanSession);
             this.setObj_Producto((ProductoBean) oProductoDao.get(oResultSet.getInt("id_producto"), expand - 1));
         } else {
             this.setId_producto(oResultSet.getInt("id_producto"));
         }
         if (expand > 0) {
-            FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura", oUsuarioBeanSession);
+            DaoInterface oFacturaDao = DaoFactory.getDao(oConnection, "factura", oUsuarioBeanSession);
             this.setObj_Factura((FacturaBean) oFacturaDao.get(oResultSet.getInt("id_factura"), expand - 1));
         } else {
             this.setId_factura(oResultSet.getInt("id_factura"));

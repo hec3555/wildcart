@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CLIENTE
  */
-package net.daw.service.specificimplementationservice;
+package net.daw.service.specificimplementationservice.implementationservice_1;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,9 +19,9 @@ import net.daw.bean.specificimplementationbean.ReplyBean;
 import net.daw.bean.specificimplementationbean.UsuarioBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
-import net.daw.dao.specificimplementationdao.FacturaDao;
-import net.daw.dao.specificimplementationdao.LineaDao;
-import net.daw.dao.specificimplementationdao.ProductoDao;
+import net.daw.dao.specificimplementationdao.implementationdao_1.FacturaDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_1.LineaDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_1.ProductoDao_1;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
 import net.daw.service.genericimplementationservice.ServiceGeneric;
@@ -33,16 +31,15 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  *
  * @author Usuario
  */
-public class CarritoService extends ServiceGeneric implements ServiceInterface{
+public class CarritoService_1 extends ServiceGeneric implements ServiceInterface{
     
     Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 //    Gson oGson = new Gson();
     ReplyBean oReplyBean;
     ArrayList<ItemBean> carrito = null;
     Connection oConnection = null;
-    UsuarioBean oUsuarioBeanSession;
     
-    public CarritoService(HttpServletRequest oRequest, String ob) {
+    public CarritoService_1(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
     
@@ -52,8 +49,6 @@ public class CarritoService extends ServiceGeneric implements ServiceInterface{
         HttpSession sesion = oRequest.getSession();
 
         try {
-
-
             //Si no hay carrito en la sesion, lo creamos, si lo hay, lo recuperamos
             if (sesion.getAttribute("carrito") == null) {
                 carrito = new ArrayList<>();
@@ -68,7 +63,7 @@ public class CarritoService extends ServiceGeneric implements ServiceInterface{
             
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            ProductoDao oProductoDao = new ProductoDao(oConnection, "producto", oUsuarioBeanSession);
+            ProductoDao_1 oProductoDao = new ProductoDao_1(oConnection, "producto", oUsuarioBeanSession);
             // creamos el producto
             ProductoBean oProductoBean = (ProductoBean) oProductoDao.get(id, 1);
             //Recogemos las existencias que tiene dicho producto
@@ -265,16 +260,16 @@ public class CarritoService extends ServiceGeneric implements ServiceInterface{
             oFacturaBean.setIva(21.0f);
 
             
-            FacturaDao oFacturaDao = new FacturaDao(oConnection, "factura", oUsuarioBeanSession);
+            FacturaDao_1 oFacturaDao = new FacturaDao_1(oConnection, "factura", oUsuarioBeanSession);
             // y la creamos en la bbdd
             FacturaBean oFacturaBeanCreada = (FacturaBean) oFacturaDao.create(oFacturaBean);
             // obtenemos el id de la factura creada para meterle las lineas
             int id_factura = oFacturaBeanCreada.getId();
             
-            LineaDao oLineaDao;
+            LineaDao_1 oLineaDao;
             LineaBean oLineaBean;
-            ProductoDao oProductoDao = new ProductoDao(oConnection, "producto", oUsuarioBeanSession);
-            oLineaDao = new LineaDao(oConnection, "linea", oUsuarioBeanSession);
+            ProductoDao_1 oProductoDao = new ProductoDao_1(oConnection, "producto", oUsuarioBeanSession);
+            oLineaDao = new LineaDao_1(oConnection, "linea", oUsuarioBeanSession);
             ProductoBean oProductoBean;
 
             for (ItemBean ib : carrito) { // por cada item del carrito, generamos una linea

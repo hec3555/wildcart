@@ -46,8 +46,7 @@ public class LineaDao_1 extends DaoGeneric implements DaoInterface {
         throw new Exception("Error en Dao getcount de " + ob + ": No autorizado");
     }
 
-//    Un cliente debe poder crear lineas para una factura, pero habra que validar
-//    que la factura le pertenece a ese cliente...
+//    Un cliente debe poder crear lineas para una factura al hacer la compra.
     
 //    @Override 
 //    public BeanInterface create(BeanInterface oBean) throws Exception {
@@ -69,7 +68,7 @@ public class LineaDao_1 extends DaoGeneric implements DaoInterface {
 //  lo mismo, un cliente puede saber cuantas lineas tiene una factura, y verlas
 //  pero esa factura debe pertenecerle al cliente, de esta manera puede ver las
 //  lineas de cualquier factura que pertenecera a cualquier usuario, sea o no 
-//  el que hay en sesion
+//  el que hay en sesion (creo)
     
     public int getcountXfactura(Integer idFact) throws Exception {
         String strSQL = "SELECT COUNT(id) FROM " + ob + " WHERE id_factura = ?";

@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ADMINISTRADOR
  */
-package net.daw.service.specificimplementationservice;
+package net.daw.service.specificimplementationservice.implementationservice_2;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import net.daw.bean.specificimplementationbean.UsuarioBean;
  *
  * @author Usuario
  */
-public class RellenarService {
+public class RellenarService_2 {
     public ArrayList<ProductoBean> fillProducto(int numero) throws Exception {
         ArrayList<ProductoBean> alProdcutoBean = new ArrayList<>();
 

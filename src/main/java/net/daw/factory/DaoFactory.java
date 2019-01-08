@@ -8,12 +8,24 @@ package net.daw.factory;
 import java.sql.Connection;
 import net.daw.bean.specificimplementationbean.UsuarioBean;
 import net.daw.dao.publicinterfacedao.DaoInterface;
-import net.daw.dao.specificimplementationdao.FacturaDao;
-import net.daw.dao.specificimplementationdao.LineaDao;
-import net.daw.dao.specificimplementationdao.ProductoDao;
-import net.daw.dao.specificimplementationdao.TipoproductoDao;
-import net.daw.dao.specificimplementationdao.TipousuarioDao;
-import net.daw.dao.specificimplementationdao.UsuarioDao;
+import net.daw.dao.specificimplementationdao.implementationdao_0.FacturaDao_0;
+import net.daw.dao.specificimplementationdao.implementationdao_0.LineaDao_0;
+import net.daw.dao.specificimplementationdao.implementationdao_0.ProductoDao_0;
+import net.daw.dao.specificimplementationdao.implementationdao_0.TipoproductoDao_0;
+import net.daw.dao.specificimplementationdao.implementationdao_0.TipousuarioDao_0;
+import net.daw.dao.specificimplementationdao.implementationdao_0.UsuarioDao_0;
+import net.daw.dao.specificimplementationdao.implementationdao_1.FacturaDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_1.LineaDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_1.ProductoDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_1.TipoproductoDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_1.TipousuarioDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_1.UsuarioDao_1;
+import net.daw.dao.specificimplementationdao.implementationdao_2.FacturaDao_2;
+import net.daw.dao.specificimplementationdao.implementationdao_2.LineaDao_2;
+import net.daw.dao.specificimplementationdao.implementationdao_2.ProductoDao_2;
+import net.daw.dao.specificimplementationdao.implementationdao_2.TipoproductoDao_2;
+import net.daw.dao.specificimplementationdao.implementationdao_2.TipousuarioDao_2;
+import net.daw.dao.specificimplementationdao.implementationdao_2.UsuarioDao_2;
 
 /**
  *
@@ -23,27 +35,83 @@ public class DaoFactory {
 
     public static DaoInterface getDao(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) throws Exception {
         DaoInterface oDao = null;
-        switch (ob) {
-            case "usuario":
-                oDao = new UsuarioDao(oConnection, ob, oUsuarioBeanSession);
+        int idUsuario;
+        if (oUsuarioBeanSession != null) {
+            idUsuario = oUsuarioBeanSession.getObj_tipoUsuario().getId();
+        } else {
+            idUsuario = 0;
+        }
+
+        // En mi bbdd, el tipousuario 1 es cliente y el 2 es admin.
+        switch (idUsuario) {
+            case 0:
+                switch (ob) {
+                    case "usuario":
+                        oDao = new UsuarioDao_0(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "tipousuario":
+                        oDao = new TipousuarioDao_0(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "tipoproducto":
+                        oDao = new TipoproductoDao_0(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "producto":
+                        oDao = new ProductoDao_0(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "factura":
+                        oDao = new FacturaDao_0(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "linea":
+                        oDao = new LineaDao_0(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                }
                 break;
-            case "tipousuario":
-                oDao = new TipousuarioDao(oConnection, ob, oUsuarioBeanSession);
+            case 1:
+                switch (ob) {
+                    case "usuario":
+                        oDao = new UsuarioDao_1(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "tipousuario":
+                        oDao = new TipousuarioDao_1(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "tipoproducto":
+                        oDao = new TipoproductoDao_1(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "producto":
+                        oDao = new ProductoDao_1(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "factura":
+                        oDao = new FacturaDao_1(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "linea":
+                        oDao = new LineaDao_1(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                }
                 break;
-            case "tipoproducto":
-                oDao = new TipoproductoDao(oConnection, ob, oUsuarioBeanSession);
-                break;
-            case "producto":
-                oDao = new ProductoDao(oConnection, ob, oUsuarioBeanSession);
-                break;
-            case "factura":
-                oDao = new FacturaDao(oConnection, ob, oUsuarioBeanSession);
-                break;
-            case "linea":
-                oDao = new LineaDao(oConnection, ob, oUsuarioBeanSession);
+            case 2:
+                switch (ob) {
+                    case "usuario":
+                        oDao = new UsuarioDao_2(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "tipousuario":
+                        oDao = new TipousuarioDao_2(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "tipoproducto":
+                        oDao = new TipoproductoDao_2(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "producto":
+                        oDao = new ProductoDao_2(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "factura":
+                        oDao = new FacturaDao_2(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                    case "linea":
+                        oDao = new LineaDao_2(oConnection, ob, oUsuarioBeanSession);
+                        break;
+                }
                 break;
             default:
-                throw new Exception("Operation doesn't exist " + ob);
+                throw new Exception("Error en Dao factory de " + ob);
         }
 
         return oDao;

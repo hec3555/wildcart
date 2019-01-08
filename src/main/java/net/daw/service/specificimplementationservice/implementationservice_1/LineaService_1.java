@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CLIENTE
  */
-package net.daw.service.specificimplementationservice;
+package net.daw.service.specificimplementationservice.implementationservice_1;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,7 +13,7 @@ import net.daw.bean.specificimplementationbean.LineaBean;
 import net.daw.bean.specificimplementationbean.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
-import net.daw.dao.specificimplementationdao.LineaDao;
+import net.daw.dao.specificimplementationdao.implementationdao_1.LineaDao_1;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
 import net.daw.helper.ParameterCook;
@@ -26,9 +24,9 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  *
  * @author Usuario
  */
-public class LineaService extends ServiceGeneric implements ServiceInterface  {
+public class LineaService_1 extends ServiceGeneric implements ServiceInterface  {
     
-    public LineaService(HttpServletRequest oRequest, String ob) {
+    public LineaService_1(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
     
@@ -40,7 +38,7 @@ public class LineaService extends ServiceGeneric implements ServiceInterface  {
                         Integer idFact = Integer.parseInt(oRequest.getParameter("idfact"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
-			LineaDao oLineaDao = new LineaDao(oConnection, ob, oUsuarioBeanSession);
+			LineaDao_1 oLineaDao = new LineaDao_1(oConnection, ob, oUsuarioBeanSession);
 			int registros = oLineaDao.getcountXfactura(idFact);
 			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(registros));
@@ -67,7 +65,7 @@ public class LineaService extends ServiceGeneric implements ServiceInterface  {
                         Integer idFact = Integer.parseInt(oRequest.getParameter("idfact"));
 			oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
 			oConnection = oConnectionPool.newConnection();
-			LineaDao oLineaDao = new LineaDao(oConnection, ob, oUsuarioBeanSession);
+			LineaDao_1 oLineaDao = new LineaDao_1(oConnection, ob, oUsuarioBeanSession);
 			ArrayList<LineaBean> alLineaBean = oLineaDao.getpageXfactura(iRpp, iPage,hmOrder,1,idFact);
 			Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 			oReplyBean = new ReplyBean(200, oGson.toJson(alLineaBean));

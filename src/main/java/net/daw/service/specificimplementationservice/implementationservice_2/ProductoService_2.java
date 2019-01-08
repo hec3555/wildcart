@@ -1,10 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ADMINISTRADOR
  */
-package net.daw.service.specificimplementationservice;
+package net.daw.service.specificimplementationservice.implementationservice_2;
 
+import net.daw.service.specificimplementationservice.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.File;
@@ -17,7 +16,7 @@ import net.daw.bean.specificimplementationbean.ProductoBean;
 import net.daw.bean.specificimplementationbean.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.constant.ConnectionConstants;
-import net.daw.dao.specificimplementationdao.ProductoDao;
+import net.daw.dao.specificimplementationdao.implementationdao_2.ProductoDao_2;
 import net.daw.factory.ConnectionFactory;
 import net.daw.helper.EncodingHelper;
 import net.daw.service.genericimplementationservice.ServiceGeneric;
@@ -30,9 +29,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author Usuario
  */
-public class ProductoService extends ServiceGeneric implements ServiceInterface  {
+public class ProductoService_2 extends ServiceGeneric implements ServiceInterface  {
     
-    public ProductoService(HttpServletRequest oRequest, String ob) {
+    public ProductoService_2(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
     
@@ -40,12 +39,12 @@ public class ProductoService extends ServiceGeneric implements ServiceInterface 
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
         Connection oConnection;
-        RellenarService rellenar = new RellenarService();
+        RellenarService_2 rellenar = new RellenarService_2();
         try {
             Integer numero = Integer.parseInt(oRequest.getParameter("numero"));
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
-            ProductoDao oProductoDao = new ProductoDao(oConnection, ob, oUsuarioBeanSession);
+            ProductoDao_2 oProductoDao = new ProductoDao_2(oConnection, ob, oUsuarioBeanSession);
             ArrayList<ProductoBean> alProductoBean = rellenar.fillProducto(numero);
 
             for (ProductoBean productos : alProductoBean) {
