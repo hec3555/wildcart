@@ -13,7 +13,7 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  * @author Usuario
  */
 public class TipousuarioDao_2 extends DaoGeneric implements DaoInterface {
-    
+
     public TipousuarioDao_2(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
     }

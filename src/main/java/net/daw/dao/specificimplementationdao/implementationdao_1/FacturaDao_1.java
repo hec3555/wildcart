@@ -49,12 +49,10 @@ public class FacturaDao_1 extends DaoGeneric implements DaoInterface {
     }
 
 //    un cliente debe poder crear su factura (pero al hacer un buy).
-    
 //    @Override
 //    public BeanInterface create(BeanInterface oBean) throws Exception {
 //        throw new Exception("Error en Dao create de " + ob + ": No autorizado");
 //    }
-
     @Override
     public int update(BeanInterface oBean) throws Exception {
         throw new Exception("Error en Dao update de " + ob + ": No autorizado");

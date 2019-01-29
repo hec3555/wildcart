@@ -14,6 +14,7 @@ import net.daw.bean.publicinterfacebean.BeanInterface;
  * @author a004631408j
  */
 public interface DaoInterface {
+
     public BeanInterface get(int id, Integer expand) throws Exception;
 
     public int remove(int id) throws Exception;

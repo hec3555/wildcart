@@ -19,6 +19,7 @@ import net.daw.bean.specificimplementationbean.UsuarioBean;
  * @author a004631408j
  */
 public class BeanFactory {
+
     public static BeanInterface getBean(String ob) {
         BeanInterface oBean = null;
         switch (ob) {

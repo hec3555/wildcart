@@ -27,12 +27,12 @@ public class UsuarioService_0 extends ServiceGeneric implements ServiceInterface
         this.oRequest = oRequest;
         this.ob = ob;
     }
-    
+
     @Override
     public ReplyBean get() throws Exception {
         throw new Exception("Error en Service get de " + ob + ": No autorizado");
     }
-    
+
     @Override
     public ReplyBean remove() throws Exception {
         throw new Exception("Error en Service remove de " + ob + ": No autorizado");
@@ -47,12 +47,12 @@ public class UsuarioService_0 extends ServiceGeneric implements ServiceInterface
     public ReplyBean create() throws Exception {
         throw new Exception("Error en Service create de " + ob + ": No autorizado");
     }
-    
+
     @Override
     public ReplyBean update() throws Exception {
         throw new Exception("Error en Service update de " + ob + ": No autorizado");
     }
-    
+
     @Override
     public ReplyBean getpage() throws Exception {
         throw new Exception("Error en Service getpage de " + ob + ": No autorizado");
@@ -73,11 +73,11 @@ public class UsuarioService_0 extends ServiceGeneric implements ServiceInterface
             UsuarioBean oUsuarioBean = oUsuarioDao.login(strLogin, strPassword);
             UsuarioBean oUsuarioBean2 = oUsuarioBean;
             if (oUsuarioBean != null) {
-                if(oUsuarioBean.getId() > 0){
-                oRequest.getSession().setAttribute("user", oUsuarioBean);
-                Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
-                oReplyBean = new ReplyBean(200, oGson.toJson(oUsuarioBean));
-                }else{
+                if (oUsuarioBean.getId() > 0) {
+                    oRequest.getSession().setAttribute("user", oUsuarioBean);
+                    Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
+                    oReplyBean = new ReplyBean(200, oGson.toJson(oUsuarioBean));
+                } else {
                     oReplyBean = new ReplyBean(401, "jajaj tus muertos");
                 }
             } else {

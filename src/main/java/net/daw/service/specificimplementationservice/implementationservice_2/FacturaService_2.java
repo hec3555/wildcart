@@ -3,7 +3,6 @@
  */
 package net.daw.service.specificimplementationservice.implementationservice_2;
 
-import net.daw.service.specificimplementationservice.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.sql.Connection;
@@ -26,11 +25,11 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  * @author Usuario
  */
 public class FacturaService_2 extends ServiceGeneric implements ServiceInterface {
-    
+
     public FacturaService_2(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
-    
+
     public ReplyBean getcountXusuario() throws Exception {
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
@@ -78,5 +77,5 @@ public class FacturaService_2 extends ServiceGeneric implements ServiceInterface
         return oReplyBean;
 
     }
-    
+
 }

@@ -28,7 +28,8 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  *
  * @author Usuario
  */
-public class ServiceGeneric implements ServiceInterface{
+public class ServiceGeneric implements ServiceInterface {
+
     protected HttpServletRequest oRequest;
     protected String ob = null;
     protected UsuarioBean oUsuarioBeanSession;

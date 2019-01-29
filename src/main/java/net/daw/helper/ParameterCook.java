@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author kevin
+ * @author a003631408j
  */
 public class ParameterCook {
 

@@ -13,8 +13,8 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  * @author hec3555
  */
 public class UsuarioDao_2 extends DaoGeneric implements DaoInterface {
-    
+
     public UsuarioDao_2(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
-        super(oConnection,ob, oUsuarioBeanSession);
+        super(oConnection, ob, oUsuarioBeanSession);
     }
 }

@@ -21,8 +21,8 @@ import net.daw.helper.SqlBuilder;
  *
  * @author a004631408j
  */
-public class DaoGeneric implements DaoInterface{
-    
+public class DaoGeneric implements DaoInterface {
+
     protected Connection oConnection;
     protected String ob = null;
     protected UsuarioBean oUsuarioBeanSession;
@@ -34,7 +34,7 @@ public class DaoGeneric implements DaoInterface{
     protected String strSQL_create;
     protected String strSQL_update;
     protected String strSQL_getpage;
-    
+
     public DaoGeneric(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         this.oConnection = oConnection;
         this.ob = ob;
@@ -122,7 +122,7 @@ public class DaoGeneric implements DaoInterface{
                 oPreparedStatement.close();
             }
         }
-        return res;        
+        return res;
     }
 
     @Override
@@ -209,5 +209,5 @@ public class DaoGeneric implements DaoInterface{
         }
         return alBean;
     }
-    
+
 }

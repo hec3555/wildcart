@@ -17,7 +17,7 @@ import net.daw.helper.EncodingHelper;
  * @author a004631408j
  */
 public class TipousuarioBean extends BeanGeneric implements BeanInterface {
-    
+
     @Expose
     private String desc;
 
@@ -35,7 +35,7 @@ public class TipousuarioBean extends BeanGeneric implements BeanInterface {
         this.setDesc(oResultSet.getString("desc"));
         return this;
     }
-    
+
     @Override
     public String getColumns() {
         String strColumns = "";

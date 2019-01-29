@@ -25,11 +25,11 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  * @author Usuario
  */
 public class FacturaService_1 extends ServiceGeneric implements ServiceInterface {
-    
+
     public FacturaService_1(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
-    
+
     public ReplyBean getcountXusuario() throws Exception {
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
@@ -77,5 +77,5 @@ public class FacturaService_1 extends ServiceGeneric implements ServiceInterface
         return oReplyBean;
 
     }
-    
+
 }

@@ -11,7 +11,8 @@ import com.google.gson.annotations.Expose;
  *
  * @author a004631408j
  */
-public class ItemBean{
+public class ItemBean {
+
     @Expose
     private int cantidad;
     @Expose

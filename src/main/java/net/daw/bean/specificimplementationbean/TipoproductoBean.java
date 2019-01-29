@@ -17,6 +17,7 @@ import net.daw.helper.EncodingHelper;
  * @author a004631408j
  */
 public class TipoproductoBean extends BeanGeneric implements BeanInterface {
+
     @Expose
     private String desc;
 
@@ -34,7 +35,7 @@ public class TipoproductoBean extends BeanGeneric implements BeanInterface {
         this.setDesc(oResultSet.getString("desc"));
         return this;
     }
-    
+
     @Override
     public String getColumns() {
         String strColumns = "";
@@ -55,7 +56,7 @@ public class TipoproductoBean extends BeanGeneric implements BeanInterface {
     public String getPairs() {
         String strPairs = "";
         strPairs += "id=" + id + ",";
-        strPairs += "tipoproducto.desc="+ EncodingHelper.quotate(desc);
+        strPairs += "tipoproducto.desc=" + EncodingHelper.quotate(desc);
         strPairs += " WHERE id=" + id;
         return strPairs;
     }

@@ -11,10 +11,10 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  *
  * @author Usuario
  */
-public class TipoproductoService_1 extends ServiceGeneric implements ServiceInterface  {
-    
+public class TipoproductoService_1 extends ServiceGeneric implements ServiceInterface {
+
     public TipoproductoService_1(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
-    
+
 }

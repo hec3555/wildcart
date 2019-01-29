@@ -22,6 +22,7 @@ import net.daw.helper.EncodingHelper;
  * @author a004631408j
  */
 public class UsuarioBean extends BeanGeneric implements BeanInterface {
+
     @Expose
     private String dni;
 
@@ -48,7 +49,7 @@ public class UsuarioBean extends BeanGeneric implements BeanInterface {
 
     @Expose(deserialize = false)
     private TipousuarioBean obj_tipoUsuario;
-    
+
     @Expose
     private int numFactura;
 
@@ -59,7 +60,6 @@ public class UsuarioBean extends BeanGeneric implements BeanInterface {
     public void setNumFactura(int numFactura) {
         this.numFactura = numFactura;
     }
-    
 
     public TipousuarioBean getObj_tipoUsuario() {
         return obj_tipoUsuario;
@@ -144,7 +144,7 @@ public class UsuarioBean extends BeanGeneric implements BeanInterface {
         this.setLogin(oResultSet.getString("login"));
         this.setPass(oResultSet.getString("pass"));
         DaoInterface oFacturaDao = DaoFactory.getDao(oConnection, "factura", oUsuarioBeanSession);
-         if (oFacturaDao != null) {
+        if (oFacturaDao != null) {
             if (oFacturaDao.getClass() == FacturaDao_1.class) {
                 FacturaDao_1 oFacturaDao_1 = (FacturaDao_1) oFacturaDao;
                 this.setNumFactura(oFacturaDao_1.getcountXusuario(this.id));

@@ -17,11 +17,11 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  * @author Usuario
  */
 public class TipousuarioDao_1 extends DaoGeneric implements DaoInterface {
-    
+
     public TipousuarioDao_1(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
     }
-    
+
     @Override
     public BeanInterface get(int id, Integer expand) throws Exception {
         if (id == oUsuarioBeanSession.getObj_tipoUsuario().getId()) {

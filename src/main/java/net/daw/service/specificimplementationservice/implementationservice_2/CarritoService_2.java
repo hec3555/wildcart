@@ -31,26 +31,25 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  *
  * @author Usuario
  */
-public class CarritoService_2 extends ServiceGeneric implements ServiceInterface{
-    
+public class CarritoService_2 extends ServiceGeneric implements ServiceInterface {
+
     Gson oGson = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().create();
 //    Gson oGson = new Gson();
     ReplyBean oReplyBean;
     ArrayList<ItemBean> carrito = null;
     Connection oConnection = null;
     UsuarioBean oUsuarioBeanSession;
-    
+
     public CarritoService_2(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
-    
+
     public ReplyBean add() throws Exception {
         ConnectionInterface oConnectionPool = null;
         //Obtenemos la sesion actual
         HttpSession sesion = oRequest.getSession();
 
         try {
-
 
             //Si no hay carrito en la sesion, lo creamos, si lo hay, lo recuperamos
             if (sesion.getAttribute("carrito") == null) {
@@ -63,7 +62,7 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
             Integer id = Integer.parseInt(oRequest.getParameter("producto"));
             // y la cantidad
             Integer cant = Integer.parseInt(oRequest.getParameter("cantidad"));
-            
+
             oConnectionPool = ConnectionFactory.getConnection(ConnectionConstants.connectionPool);
             oConnection = oConnectionPool.newConnection();
             ProductoDao_2 oProductoDao = new ProductoDao_2(oConnection, "producto", oUsuarioBeanSession);
@@ -169,11 +168,11 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
                 if (id == carrito.get(i).getObj_Producto().getId()) {
                     contenedor = carrito.get(i).getCantidad();
                     resta = contenedor - cantidad;
-                    if (resta == 0) { 
-                    // si la resta es 0, significa que quiere cantidad 0 de ese producto, ergo lo eliminamos del carrito.
+                    if (resta == 0) {
+                        // si la resta es 0, significa que quiere cantidad 0 de ese producto, ergo lo eliminamos del carrito.
                         carrito.remove(i);
                     } else {
-                    // si no, se hace la reduccion
+                        // si no, se hace la reduccion
                         carrito.get(i).setCantidad(resta);
                     }
                     break;
@@ -238,7 +237,6 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
 //        return oReplyBean;
 //    }
 // =============================================================================
-
     public ReplyBean buy() throws Exception {
 
         ConnectionInterface oConnectionPool = null;
@@ -254,7 +252,7 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
             oConnection.setAutoCommit(false);
             int id = ((UsuarioBean) sesion.getAttribute("user")).getId();
             carrito = (ArrayList<ItemBean>) sesion.getAttribute("carrito");
-            
+
             // creamos el bean de factura
             FacturaBean oFacturaBean = new FacturaBean();
             Date fechaHoraAhora = new Date();
@@ -262,13 +260,12 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
             oFacturaBean.setFecha(fechaHoraAhora);
             oFacturaBean.setIva(21.0f);
 
-            
             FacturaDao_2 oFacturaDao = new FacturaDao_2(oConnection, "factura", oUsuarioBeanSession);
             // y la creamos en la bbdd
             FacturaBean oFacturaBeanCreada = (FacturaBean) oFacturaDao.create(oFacturaBean);
             // obtenemos el id de la factura creada para meterle las lineas
             int id_factura = oFacturaBeanCreada.getId();
-            
+
             LineaDao_2 oLineaDao;
             LineaBean oLineaBean;
             ProductoDao_2 oProductoDao = new ProductoDao_2(oConnection, "producto", oUsuarioBeanSession);
@@ -279,7 +276,7 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
 
                 //CREAMOS LA L�NEA
                 int cant = ib.getCantidad();
-                
+
                 // instanciamos el bean de linea para que se vacie 
                 // (aunque con los set ya modificariamos sus valores, no hace falta)
                 oLineaBean = new LineaBean();
@@ -288,7 +285,7 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
                 oLineaBean.setId_factura(id_factura);
                 oLineaBean.setId_producto(ib.getObj_Producto().getId());
                 oLineaBean.setCantidad(cant);
-                
+
                 // y creamos la linea en la bbdd
                 oLineaDao.create(oLineaBean);
 
@@ -296,19 +293,18 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
                 oProductoBean = new ProductoBean();
 
                 oProductoBean.setId(ib.getObj_Producto().getId());
-                
 
                 oProductoBean = ib.getObj_Producto();
                 // Le restamos la cantidad comprada a las existencias del producto
                 oProductoBean.setExistencias(oProductoBean.getExistencias() - cant);
-                
+
                 // y actualizamos la info en la bbdd
                 oProductoDao.update(oProductoBean);
 
             }
             // Ejecutamos toda la transaccion
             oConnection.commit();
-            
+
             // vaciamos el carrito tras la compra
             carrito.clear();
             sesion.setAttribute("carrito", carrito);
@@ -334,5 +330,4 @@ public class CarritoService_2 extends ServiceGeneric implements ServiceInterface
 
     }
 
-    
 }

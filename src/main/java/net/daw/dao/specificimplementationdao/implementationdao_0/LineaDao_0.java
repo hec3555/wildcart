@@ -17,17 +17,16 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  * @author Usuario
  */
 public class LineaDao_0 extends DaoGeneric implements DaoInterface {
-    
+
     public LineaDao_0(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
     }
-   
-   
+
     @Override
     public BeanInterface get(int id, Integer expand) throws Exception {
         throw new Exception("Error en Dao get de " + ob + ": No autorizado");
     }
-    
+
     @Override
     public int remove(int id) throws Exception {
         throw new Exception("Error en Dao remove de " + ob + ": No autorizado");
@@ -42,13 +41,13 @@ public class LineaDao_0 extends DaoGeneric implements DaoInterface {
     public BeanInterface create(BeanInterface oBean) throws Exception {
         throw new Exception("Error en Dao create de " + ob + ": No autorizado");
     }
-    
+
     // kevin lo tenia comentao el update, no deberia estar comentado. Si falla, probar a comentarlo.
     @Override
     public int update(BeanInterface oBean) throws Exception {
         throw new Exception("Error en Dao update de " + ob + ": No autorizado");
     }
-    
+
     @Override
     public ArrayList<BeanInterface> getpage(int iRpp, int iPage, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         throw new Exception("Error en Dao getpage de " + ob + ": No autorizado");
@@ -63,6 +62,4 @@ public class LineaDao_0 extends DaoGeneric implements DaoInterface {
         throw new Exception("Error en Dao getpageXfactura de " + ob + ": No autorizado");
     }
 
-    
-    
 }

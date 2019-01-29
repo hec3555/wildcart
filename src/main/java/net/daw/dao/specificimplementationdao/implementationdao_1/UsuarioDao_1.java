@@ -4,9 +4,6 @@
 package net.daw.dao.specificimplementationdao.implementationdao_1;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.daw.bean.publicinterfacebean.BeanInterface;
@@ -19,11 +16,11 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  * @author hec3555
  */
 public class UsuarioDao_1 extends DaoGeneric implements DaoInterface {
-    
+
     public UsuarioDao_1(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
-        super(oConnection,ob, oUsuarioBeanSession);
+        super(oConnection, ob, oUsuarioBeanSession);
     }
-    
+
     @Override
     public BeanInterface get(int id, Integer expand) throws Exception {
         if (id == oUsuarioBeanSession.getId()) {

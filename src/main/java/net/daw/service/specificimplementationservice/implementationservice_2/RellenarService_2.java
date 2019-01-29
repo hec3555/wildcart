@@ -13,6 +13,7 @@ import net.daw.bean.specificimplementationbean.UsuarioBean;
  * @author Usuario
  */
 public class RellenarService_2 {
+
     public ArrayList<ProductoBean> fillProducto(int numero) throws Exception {
         ArrayList<ProductoBean> alProdcutoBean = new ArrayList<>();
 
@@ -27,7 +28,7 @@ public class RellenarService_2 {
             oProductoBean.setCodigo(codigo[numeroAleatorio(codigo.length)]);
             oProductoBean.setDesc(descUno[numeroAleatorio(descUno.length)] + " " + descDos[numeroAleatorio(descDos.length)] + " " + descTres[numeroAleatorio(descTres.length)]);
             oProductoBean.setExistencias(numeroAleatorio(5) + 1);
-            oProductoBean.setFoto("fotoProducto");            
+            oProductoBean.setFoto("fotoProducto");
             oProductoBean.setPrecio((float) (Math.round((Math.random() * 100) * 100) / 100.0 + 1));
             oProductoBean.setId_tipoProducto((int) Math.random() * 5 + 1);
             alProdcutoBean.add(oProductoBean);
@@ -41,9 +42,9 @@ public class RellenarService_2 {
         String[] ape1 = {"Dominguez", "Rodriguez", "Segundo", "Martinez", "Garcia"};
         String[] ape2 = {"Lopez", "Fernandez", "Gonzalez", "Mohamed", "Sanchez"};
         String[] login = {"jauan", "tuuiy", "tupa", "aatr", "fdf"};
-        String[] pass = {"1111", "2222", "3333", "4444", "5555"};        
+        String[] pass = {"1111", "2222", "3333", "4444", "5555"};
 
-        ArrayList<UsuarioBean> alUsuarioBean = new ArrayList<>();        
+        ArrayList<UsuarioBean> alUsuarioBean = new ArrayList<>();
         for (int i = 0; i < numero; i++) {
             UsuarioBean oUsuarioBean = new UsuarioBean();
 //            TipousuarioBean oTipousuarioBean = new TipousuarioBean();

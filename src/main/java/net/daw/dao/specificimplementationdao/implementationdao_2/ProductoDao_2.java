@@ -12,10 +12,10 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  *
  * @author Usuario
  */
-public class ProductoDao_2 extends DaoGeneric implements DaoInterface{
-    
+public class ProductoDao_2 extends DaoGeneric implements DaoInterface {
+
     public ProductoDao_2(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
     }
-    
+
 }

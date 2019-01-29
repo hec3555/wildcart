@@ -13,18 +13,17 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  *
  * @author Usuario
  */
-public class ProductoDao_1 extends DaoGeneric implements DaoInterface{
-    
+public class ProductoDao_1 extends DaoGeneric implements DaoInterface {
+
     public ProductoDao_1(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
     }
-    
 
     @Override
     public int remove(int id) throws Exception {
         throw new Exception("Error en Dao remove de " + ob + ": No autorizado");
     }
-    
+
     @Override
     public BeanInterface create(BeanInterface oBean) throws Exception {
         throw new Exception("Error en Dao create de " + ob + ": No autorizado");

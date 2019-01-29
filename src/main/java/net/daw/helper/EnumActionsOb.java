@@ -10,5 +10,5 @@ package net.daw.helper;
  * @author jesus
  */
 public enum EnumActionsOb {
-    tipousuario,factura,linea,producto,tipoproducto,usuario;
+    tipousuario, factura, linea, producto, tipoproducto, usuario;
 }

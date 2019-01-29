@@ -18,7 +18,8 @@ import net.daw.helper.EncodingHelper;
  *
  * @author a004631408j
  */
-public class ProductoBean extends BeanGeneric implements BeanInterface{
+public class ProductoBean extends BeanGeneric implements BeanInterface {
+
     @Expose
     private String codigo;
     @Expose
@@ -104,7 +105,7 @@ public class ProductoBean extends BeanGeneric implements BeanInterface{
         } else {
             this.setId_tipoProducto(oResultSet.getInt("id_tipoProducto"));
         }
-        return this;        
+        return this;
 
     }
 

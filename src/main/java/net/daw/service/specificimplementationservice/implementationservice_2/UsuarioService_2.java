@@ -3,7 +3,6 @@
  */
 package net.daw.service.specificimplementationservice.implementationservice_2;
 
-import net.daw.service.specificimplementationservice.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.sql.Connection;
@@ -24,16 +23,16 @@ import net.daw.service.publicinterfaceservice.ServiceInterface;
  * @author Usuario
  */
 public class UsuarioService_2 extends ServiceGeneric implements ServiceInterface {
-    
+
     public UsuarioService_2(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
-    
+
     protected Boolean checkPermission(String strMethodName) {
         UsuarioBean oUsuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("user");
         return oUsuarioBean != null;
     }
-    
+
     public ReplyBean cargarUsuarios() throws Exception {
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
@@ -65,7 +64,6 @@ public class UsuarioService_2 extends ServiceGeneric implements ServiceInterface
     }
 
 // Es un administrador ya logeado, no puede hacer login    
-    
 //    public ReplyBean login() throws Exception {
 //        ReplyBean oReplyBean;
 //        ConnectionInterface oConnectionPool = null;
@@ -95,7 +93,6 @@ public class UsuarioService_2 extends ServiceGeneric implements ServiceInterface
 //
 //        return oReplyBean;
 //    }
-
     public ReplyBean logout() throws Exception {
         oRequest.getSession().invalidate();
         return new ReplyBean(200, EncodingHelper.quotate("OK"));

@@ -3,7 +3,6 @@
  */
 package net.daw.service.specificimplementationservice.implementationservice_2;
 
-import net.daw.service.specificimplementationservice.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.File;
@@ -29,12 +28,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author Usuario
  */
-public class ProductoService_2 extends ServiceGeneric implements ServiceInterface  {
-    
+public class ProductoService_2 extends ServiceGeneric implements ServiceInterface {
+
     public ProductoService_2(HttpServletRequest oRequest, String ob) {
         super(oRequest, ob);
     }
-    
+
     public ReplyBean cargarProductos() throws Exception {
         ReplyBean oReplyBean;
         ConnectionInterface oConnectionPool = null;
@@ -87,5 +86,5 @@ public class ProductoService_2 extends ServiceGeneric implements ServiceInterfac
         }
         return oReplyBean;
     }
-    
+
 }

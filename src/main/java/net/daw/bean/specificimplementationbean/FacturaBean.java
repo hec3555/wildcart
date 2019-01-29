@@ -1,4 +1,3 @@
-
 package net.daw.bean.specificimplementationbean;
 
 import com.google.gson.annotations.Expose;
@@ -20,7 +19,8 @@ import net.daw.helper.EncodingHelper;
  *
  * @author a004631408j
  */
-public class FacturaBean extends BeanGeneric implements BeanInterface{
+public class FacturaBean extends BeanGeneric implements BeanInterface {
+
     @Expose
     private Date fecha;
     @Expose
@@ -74,7 +74,7 @@ public class FacturaBean extends BeanGeneric implements BeanInterface{
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
     }
-    
+
     @Override
     public FacturaBean fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean oUsuarioBeanSession) throws Exception {
 
@@ -97,7 +97,7 @@ public class FacturaBean extends BeanGeneric implements BeanInterface{
         }
         return this;
     }
-    
+
     @Override
     public String getPairs() {
 
@@ -140,7 +140,7 @@ public class FacturaBean extends BeanGeneric implements BeanInterface{
         String strColumns = "";
         strColumns += "null,";
         strColumns += EncodingHelper.quotate(localDate.toString()) + ",";
-        strColumns += iva + ",";        
+        strColumns += iva + ",";
         if (getObj_Usuario() != null) {
             strColumns += this.getObj_Usuario().getId();
         } else {

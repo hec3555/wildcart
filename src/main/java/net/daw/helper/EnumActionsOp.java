@@ -10,5 +10,5 @@ package net.daw.helper;
  * @author jesus
  */
 public enum EnumActionsOp {
-    get,getpage,remove,getcount,create,update;
+    get, getpage, remove, getcount, create, update;
 }

@@ -19,24 +19,20 @@ import net.daw.helper.SqlBuilder;
  *
  * @author a004631408j
  */
-public class FacturaDao_2 extends DaoGeneric implements DaoInterface{
-    
-    
-    
+public class FacturaDao_2 extends DaoGeneric implements DaoInterface {
+
     public FacturaDao_2(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
-        
+
     }
-    
-    
+
     public int getcountXusuario(Integer idUsuario) throws Exception {
         strSQL_getcount = "SELECT COUNT(id) FROM " + ob + " WHERE id_usuario=" + idUsuario;
         return super.getcount();
     }
-    
-    
+
     public ArrayList<FacturaBean> getpageXusuario(int iRpp, int iPage, HashMap<String, String> hmOrder, Integer expand, Integer idUsuario) throws Exception {
-        String strSQL = "SELECT * FROM " + ob +" WHERE id_usuario = ?";
+        String strSQL = "SELECT * FROM " + ob + " WHERE id_usuario = ?";
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<FacturaBean> alFacturaBean;
         if (iRpp > 0 && iRpp < 100000 && iPage > 0 && iPage < 100000000) {
@@ -45,7 +41,7 @@ public class FacturaDao_2 extends DaoGeneric implements DaoInterface{
             PreparedStatement oPreparedStatement = null;
             try {
                 oPreparedStatement = oConnection.prepareStatement(strSQL);
-                oPreparedStatement.setInt(1,idUsuario);
+                oPreparedStatement.setInt(1, idUsuario);
                 oResultSet = oPreparedStatement.executeQuery();
                 alFacturaBean = new ArrayList<>();
                 while (oResultSet.next()) {
@@ -69,12 +65,5 @@ public class FacturaDao_2 extends DaoGeneric implements DaoInterface{
         return alFacturaBean;
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

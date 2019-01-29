@@ -15,11 +15,11 @@ import net.daw.bean.specificimplementationbean.UsuarioBean;
  *
  * @author a004631408j
  */
-public class BeanGeneric implements BeanInterface{
-    
+public class BeanGeneric implements BeanInterface {
+
     @Expose
     protected int id;
-    
+
     @Override
     public int getId() {
         return id;
@@ -49,5 +49,5 @@ public class BeanGeneric implements BeanInterface{
     public String getPairs() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

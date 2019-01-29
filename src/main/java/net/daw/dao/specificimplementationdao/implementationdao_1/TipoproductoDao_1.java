@@ -14,11 +14,11 @@ import net.daw.dao.publicinterfacedao.DaoInterface;
  * @author Usuario
  */
 public class TipoproductoDao_1 extends DaoGeneric implements DaoInterface {
-    
+
     public TipoproductoDao_1(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
-        super(oConnection,ob, oUsuarioBeanSession);
+        super(oConnection, ob, oUsuarioBeanSession);
     }
-    
+
     @Override
     public int remove(int id) throws Exception {
         throw new Exception("Error en Dao remove de " + ob + ": No autorizado");
@@ -34,5 +34,4 @@ public class TipoproductoDao_1 extends DaoGeneric implements DaoInterface {
         throw new Exception("Error en Dao update de " + ob + ": No autorizado");
     }
 
-    
 }

@@ -71,7 +71,7 @@ public class LineaBean extends BeanGeneric implements BeanInterface {
     }
 
     @Override
-    public LineaBean fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean  oUsuarioBeanSession) throws Exception {
+    public LineaBean fill(ResultSet oResultSet, Connection oConnection, Integer expand, UsuarioBean oUsuarioBeanSession) throws Exception {
 
         this.setId(oResultSet.getInt("id"));
         this.setCantidad(oResultSet.getInt("cantidad"));

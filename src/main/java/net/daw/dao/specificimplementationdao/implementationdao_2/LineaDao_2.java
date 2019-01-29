@@ -20,12 +20,11 @@ import net.daw.helper.SqlBuilder;
  * @author Usuario
  */
 public class LineaDao_2 extends DaoGeneric implements DaoInterface {
-    
+
     public LineaDao_2(Connection oConnection, String ob, UsuarioBean oUsuarioBeanSession) {
         super(oConnection, ob, oUsuarioBeanSession);
     }
-   
-   
+
     public int getcountXfactura(Integer idFact) throws Exception {
         String strSQL = "SELECT COUNT(id) FROM " + ob + " WHERE id_factura = ?";
         int res = 0;
@@ -50,8 +49,7 @@ public class LineaDao_2 extends DaoGeneric implements DaoInterface {
         }
         return res;
     }
-    
-    
+
     public ArrayList<LineaBean> getpageXfactura(int iRpp, int iPage, HashMap<String, String> hmOrder, Integer expand, Integer idFact) throws Exception {
         String strSQL = "SELECT * FROM " + ob + " WHERE id_factura = ?";
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
@@ -87,6 +85,5 @@ public class LineaDao_2 extends DaoGeneric implements DaoInterface {
         return alLineaBean;
 
     }
-    
-    
+
 }
